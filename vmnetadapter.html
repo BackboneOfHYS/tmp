@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VirtualBox 네트워크 어댑터 모드 요약</title>
+  <style>
+    :root { color-scheme: light; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", sans-serif; line-height: 1.5; margin: 24px; }
+    h1 { font-size: 20px; margin: 0 0 12px; }
+    h2 { font-size: 16px; margin: 18px 0 8px; }
+    .note { margin: 8px 0 16px; color: #444; }
+    .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .card { border: 1px solid #ddd; border-radius: 12px; padding: 12px 14px; }
+    .tag { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; border: 1px solid #ddd; margin-left: 6px; color: #444; }
+    ul { margin: 8px 0 0 18px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+    th { background: #f6f6f6; }
+    .ok { font-weight: 700; }
+    .no { color: #777; }
+    .warn { color: #8a5a00; font-weight: 600; }
+    .recommend li { margin: 4px 0; }
+    code { background: #f6f6f6; padding: 1px 6px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <h1>VirtualBox 네트워크 어댑터 모드 간단 정리</h1>
+  <p class="note">기준: “VM↔VM / VM↔호스트 / VM→외부 / 외부→VM”</p>
+
+  <section class="grid">
+    <div class="card">
+      <h2>NAT <span class="tag">가장 간단</span></h2>
+      <ul>
+        <li><span class="ok">VM → 외부 인터넷 ⭕</span></li>
+        <li><span class="no">외부 → VM ❌</span> (포트포워딩 필요)</li>
+        <li><span class="no">VM끼리 직접 통신 ❌</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>어댑터 브리지(Bridged) <span class="tag">실제 LAN 참여</span></h2>
+      <ul>
+        <li><span class="ok">VM ↔ 외부 ⭕</span></li>
+        <li><span class="ok">외부 ↔ VM ⭕</span></li>
+        <li>VM이 “진짜 PC 한 대”처럼 보임</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>내부 네트워크(Internal Network) <span class="tag">완전 격리</span></h2>
+      <ul>
+        <li><span class="ok">VM ↔ VM ⭕</span></li>
+        <li><span class="no">VM ↔ 호스트 ❌</span></li>
+        <li><span class="no">VM ↔ 외부 ❌</span></li>
+        <li>VM들만 연결된 가상 스위치</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>호스트 전용(Host-only) <span class="tag">관리/접속</span></h2>
+      <ul>
+        <li><span class="ok">VM ↔ 호스트 ⭕</span></li>
+        <li><span class="ok">VM ↔ VM ⭕</span></li>
+        <li><span class="no">VM ↔ 외부 ❌</span> (기본)</li>
+        <li>호스트에서 VM SSH/관리하기 좋음</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>일반 드라이버(Generic Driver) <span class="tag">특수 목적</span></h2>
+      <ul>
+        <li><span class="warn">실험/연구용 옵션(UDP 터널, VDE 등)</span></li>
+        <li>일반 학습/운영에서는 거의 사용 안 함</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>NAT 네트워크(NAT Network) <span class="tag">여러 VM + 인터넷</span></h2>
+      <ul>
+        <li><span class="ok">VM ↔ VM ⭕</span></li>
+        <li><span class="ok">VM → 외부 ⭕</span></li>
+        <li><span class="no">외부 → VM ❌</span> (포트포워딩 필요)</li>
+        <li>DHCP/네트워크 단위로 관리 가능</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>한 눈에 비교</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>모드</th>
+          <th>VM↔VM</th>
+          <th>VM↔호스트</th>
+          <th>VM→외부</th>
+          <th>외부→VM</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>NAT</td>
+          <td class="no">❌</td>
+          <td class="no">❌</td>
+          <td class="ok">⭕</td>
+          <td class="no">❌</td>
+        </tr>
+        <tr>
+          <td>브리지</td>
+          <td class="ok">⭕</td>
+          <td class="ok">⭕</td>
+          <td class="ok">⭕</td>
+          <td class="ok">⭕</td>
+        </tr>
+        <tr>
+          <td>내부 네트워크</td>
+          <td class="ok">⭕</td>
+          <td class="no">❌</td>
+          <td class="no">❌</td>
+          <td class="no">❌</td>
+        </tr>
+        <tr>
+          <td>호스트 전용</td>
+          <td class="ok">⭕</td>
+          <td class="ok">⭕</td>
+          <td class="no">❌</td>
+          <td class="no">❌</td>
+        </tr>
+        <tr>
+          <td>NAT 네트워크</td>
+          <td class="ok">⭕</td>
+          <td class="no">❌</td>
+          <td class="ok">⭕</td>
+          <td class="no">❌</td>
+        </tr>
+        <tr>
+          <td>일반 드라이버</td>
+          <td class="warn">⚠️</td>
+          <td class="warn">⚠️</td>
+          <td class="warn">⚠️</td>
+          <td class="warn">⚠️</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>목적별 추천</h2>
+    <ul class="recommend">
+      <li><code>인터넷만</code> 필요 → <strong>NAT</strong></li>
+      <li><code>실제 LAN에 참여</code> (서버처럼 보이게) → <strong>브리지</strong></li>
+      <li><code>라우터/VRRP/클러스터</code> 같은 격리 실습 → <strong>내부 네트워크</strong></li>
+      <li><code>호스트에서 VM 접속/관리</code> → <strong>호스트 전용</strong></li>
+      <li><code>여러 VM + 인터넷</code> 동시에 → <strong>NAT 네트워크</strong></li>
+    </ul>
+  </section>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>금융권 인프라 용어 정리</title>
+  <style>
+    :root { --bg:#0b0f19; --card:#121a2a; --text:#e8eefc; --muted:#a9b4cf; --line:#24314d; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", Arial, sans-serif;
+           background: var(--bg); color: var(--text); }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 28px 18px 48px; }
+    h1 { margin: 0 0 14px; font-size: 24px; }
+    .sub { color: var(--muted); margin-bottom: 18px; line-height: 1.5; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 14px 12px; }
+    .term { display:flex; align-items: baseline; gap: 10px; margin: 0 0 8px; }
+    .term b { font-size: 16px; }
+    .tag { font-size: 12px; color: var(--muted); border: 1px solid var(--line); padding: 2px 8px; border-radius: 999px; }
+    p { margin: 0; color: var(--text); line-height: 1.55; }
+    .muted { color: var(--muted); }
+    .section { margin-top: 18px; }
+    .flow { background: #0f172a; border: 1px dashed var(--line); border-radius: 14px; padding: 14px; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .small { font-size: 12px; color: var(--muted); margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>금융권 인프라 용어 정리 (대화 기준)</h1>
+    <div class="sub">
+      채널/계정계 구조, AP·미들웨어, DB 연결/트랜잭션, 배치 관점에서 자주 나오는 단어들을
+      <b>실무식 한 줄 설명</b>으로 정리.
+    </div>
+
+    <div class="section flow">
+      <div class="term">
+        <b>전형적인 흐름</b>
+        <span class="tag">큰 그림</span>
+      </div>
+      <p><code>채널계 → WEB → AP → 미들웨어(Tuxedo/연계) → 계정계(DB)</code></p>
+      <p class="small">실시간(Online) 거래와 배치(Batch)가 동시에 존재하며, “돈이 움직이는” 구간은 계정계 중심으로 엄격하게 보호됨.</p>
+    </div>
+
+    <div class="section">
+      <div class="grid">
+        <div class="card">
+          <div class="term"><b>채널계</b><span class="tag">Front</span></div>
+          <p>고객 접점 시스템(모바일/인터넷/ATM/콜센터). 트래픽 많고 UX 중심.</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>계정계</b><span class="tag">Core Banking</span></div>
+          <p>잔액·이체·입출금·대출·이자 등 “돈”을 직접 처리하는 핵심 시스템. 무결성 최우선.</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>정보계</b><span class="tag">Analytics</span></div>
+          <p>조회/통계/리포트 중심. 읽기 위주이며 실시간성 요구가 상대적으로 낮음.</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>WEB 서버</b><span class="tag">Edge</span></div>
+          <p>HTTP 요청 수신, 정적 리소스 처리, 리버스 프록시/게이트 역할. AP 앞단.</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>AP (Application Server)</b><span class="tag">Logic</span></div>
+          <p>비즈니스 로직 실행 및 DB 접근. 트랜잭션 시작/종료 지점이 되는 경우가 많음.</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>미들웨어</b><span class="tag">Middle</span></div>
+          <p>시스템 간 연결/라우팅/장애 격리/표준화 계층. 금융권 인프라의 “완충지대”.</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>Tuxedo</b><span class="tag">TP Monitor</span></div>
+          <p>초고성능 트랜잭션 미들웨어. 계정계 중심에서 서비스 분배/트랜잭션/고가용성 관리.</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>연계 미들웨어(“뉘우스” 계열)</b><span class="tag">Integration</span></div>
+          <p>AP ↔ 타시스템/외부기관 연동 표준화. 직접 호출을 막고, 라우팅·로그·격리 제공.</p>
+          <p class="muted small">※ 회사/현장에 따라 이름이 NEWS/NUS 등으로 다르게 불릴 수 있음(사내 명칭인 경우 많음).</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>트랜잭션</b><span class="tag">ACID</span></div>
+          <p>작업의 최소 단위. “전부 성공/전부 실패” 보장(계정계에서 특히 중요).</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>커넥션</b><span class="tag">DB Link</span></div>
+          <p>AP ↔ DB 연결 1개. 생성/인증 비용이 크고 자원 제한이 존재.</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>커넥션 풀</b><span class="tag">Pool</span></div>
+          <p>미리 만든 커넥션을 재사용하는 구조. 성능/안정성 핵심이며 고갈 시 장애로 직결.</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>커넥션 릭(Connection Leak)</b><span class="tag">Incident</span></div>
+          <p>커넥션이 반납되지 않아 풀이 점점 고갈되는 상태. 타임아웃/서비스 멈춤 원인.</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>External Procedure Call</b><span class="tag">DB→OS</span></div>
+          <p>DB/PLSQL이 외부 프로그램(C/C++ 등)을 호출. 가능하지만 보안·안정성 리스크가 큼.</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>배치(Batch)</b><span class="tag">Scheduled</span></div>
+          <p>정해진 시간/조건에 대량 처리(이자·정산·마감). 계정계에서 필수 구성.</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>실시간(Online)</b><span class="tag">Realtime</span></div>
+          <p>고객 요청에 즉시 처리(이체/출금/승인). 응답시간과 동시성 관리가 핵심.</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>EOD / BOD</b><span class="tag">Day Cycle</span></div>
+          <p><b>EOD</b>: 하루 마감 배치(정산/확정). <b>BOD</b>: 업무 시작 전 초기화/기준 데이터 준비.</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>장애 격리</b><span class="tag">Resilience</span></div>
+          <p>한 구간 장애가 전체로 번지는 걸 차단. 미들웨어/풀/트랜잭션 설계의 중요한 목표.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section flow">
+      <div class="term">
+        <b>빠른 암기</b>
+        <span class="tag">요약</span>
+      </div>
+      <p>WEB은 “받고”, AP는 “처리하고”, 미들웨어는 “연결·격리하고”, 계정계는 “돈을 확정”한다.</p>
+    </div>
+  </div>
+</body>
+</html>
