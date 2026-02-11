@@ -206,7 +206,12 @@
 
         <div class="card">
           <div class="term"><b>SMB</b><span class="tag">Server Message Block<span></span></div>
-          <p>네트워크에 폴더가 항상 열려 있음, 여러 사람이 동시에 접근 가능, 실시간 수정/저장, 회사 파일서버 = 거의 이 구조<p>
+          <p>네트워크에 폴더가 항상 열려 있음, 여러 사람이 동시에 접근 가능, 실시간 수정/저장, 회사 파일서버 = 거의 이 구조, 주로 Windows<p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>NFS</b><span class="tag"><span>Network File System</span></div>
+          <p>파일 공유 프로토콜, 주로 UNIX, Linux. </p>
         </div>
 
         <div class="card">
@@ -215,13 +220,63 @@
         </div>
         
         <div class="card">
+          <div class="term"><b>스토리지 풀</b><span class="tag">storage pool<span></span></div>
+          <p>다수의 RAID를 하나의 그룹으로 묶은 것</p>
+        </div>
+
+        <div class="card">
           <div class="term"><b>RAID</b><span class="tag"><span>Redundant Array of Independent Disks</span></div>
           <p>다량의 디스크를 한 번에 합치고 이를 분산저장함. RAID 레벨(뒤 숫자)에 그 유형이 구분됨. 0, 1, 5, 10순으로 striping, mirroring, striping + parity, 1+0</p>
         </div>
 
         <div class="card">
           <div class="term"><b>LUN</b><span class="tag"><span>Logical Unit Number</span></div>
-          <p>물리 디스크, RAID, Storage Pool, LUN 생성</p>
+          <p>storage pool에서 수도꼭지 느낌. 스토리지 풀에서 외부에 제공하는 논리 블록 장치. 풀 안의 모든 LUN은 RAID 자원 공유</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>SAN</b><span class="tag"><span>Storage Area Network</span></div>
+          <p>서버와 스토리지 장치를 고속 네트워크로 연결, 블록 수준 데이터 엑세스 제공, 디스크 공간 자체를 제공</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>NAS</b><span class="tag"><span>Network Attached Storage</span></div>
+          <p>SAN과는 다르게 디스크 공간이 아닌 파일, 폴더를 제공. 파일시스템을 스토리지에서 직접 구성함</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>파일시스템</b><span class="tag"><span>file system</span></div>
+          <p>파일 포맷이 아닌 디스크의 폴더, 파일 간 구조를 규정함</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>VFS</b><span class="tag"><span>Virtual File System</span></div>
+          <p>리눅스 커널 안의 계층으로 파일시스템의 통합 인터페이스</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>VDI</b><span class="tag"><span>Virtual Disk Image</span></div>
+          <p>가상 머신의 하드 디스크로 사용하는 가상화 파일 포맷</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>LVM</b><span class="tag"><span>Logical Volume Manager</span></div>
+          <p>스토리지 가상화 기술로 물리 디스크를 추상화하여 논리 불륨으로 유연하게 관리하는 리눅스 기술, 커널 2.4버전부터 default.</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>PV</b><span class="tag"><span>Physical Volume</span></div>
+          <p>LVM에서의 물리 볼륨</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>VG</b><span class="tag"><span>Volume Group</span></div>
+          <p>LVM에서의 볼륨 그룹으로 하나의 VG는 다수의 PV를 하나로 본다. </p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>LV</b><span class="tag"><span>Logical Volume</span></div>
+          <p>VG 안의 전체 공간에서 일부를 할당받는다.</p>
         </div>
 
       </div>
