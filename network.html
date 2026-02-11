@@ -36,6 +36,18 @@
     </section>
 
     <section class="card">
+      <h2>📡 네트워크 상태 변경<h2>
+      <ul>
+        <li><code>nmcli con show</code> - 연결 프로파일 확인</li>
+        <li><code>nmcli con mod 연결 프로파일 이름</code> - 기본</li>
+        <li><code>ipv4.method manual | auto</code> — 정적 할당 | DHCP 사용</li>
+        <li><code>ipv4.addresses 192.168.56.10/24</code> — ipv4 주소 설정</li>
+        <li><code>ipv4.gateway 192.168.56.1</code> — 게이트웨이 설정</li>
+        <li><code>ipv4.dns 8.8.8.8</code> — 도메인 설정</li>
+      </ul>
+    </section>
+
+    <section class="card">
       <h2>🧭 라우팅 / 게이트웨이</h2>
       <ul>
         <li><code>ip route</code> — 라우팅 테이블 (default gateway 확인)</li>
