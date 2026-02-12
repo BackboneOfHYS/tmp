@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>메모리 페이지 관리 점검 명령어</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f4f6f8;
+      line-height: 1.6;
+      color: #1f2a37;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    .section {
+      background: #ffffff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    code {
+      background: #eef2f7;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.95em;
+    }
+    pre {
+      background: #eef2f7;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+    ul {
+      margin-left: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #e5e7eb;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f9fafb;
+    }
+  </style>
+</head>
+<body>
+
+<h1>메모리 페이지 관리 점검 명령어 (Linux)</h1>
+
+<div class="section">
+  <h2>1) 페이지 사용 현황 확인</h2>
+
+  <h3>/proc/meminfo</h3>
+  <pre><code>cat /proc/meminfo</code></pre>
+  <ul>
+    <li>Active / Inactive</li>
+    <li>AnonPages</li>
+    <li>Mapped</li>
+    <li>Dirty</li>
+    <li>Writeback</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>2) 페이지 교체 및 스왑 활동</h2>
+
+  <h3>vmstat</h3>
+  <pre><code>vmstat 1</code></pre>
+  <ul>
+    <li>si → swap in (디스크 → 메모리)</li>
+    <li>so → swap out (메모리 → 디스크)</li>
+  </ul>
+
+  <h3>sar (설치 시)</h3>
+  <pre><code>sar -B 1 5</code></pre>
+  <ul>
+    <li>pgpgin/s → 페이지 인</li>
+    <li>pgpgout/s → 페이지 아웃</li>
+    <li>pgfault/s → 페이지 폴트</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>3) 페이지 폴트 확인</h2>
+
+  <h3>vmstat</h3>
+  <pre><code>vmstat -s | grep fault</code></pre>
+
+  <h3>sar</h3>
+  <pre><code>sar -B</code></pre>
+</div>
+
+<div class="section">
+  <h2>4) 프로세스별 페이지 사용</h2>
+
+  <h3>pmap</h3>
+  <pre><code>pmap -x PID</code></pre>
+  <ul>
+    <li>Address Space 확인</li>
+    <li>Private / Shared 페이지 확인</li>
+  </ul>
+
+  <h3>/proc</h3>
+  <pre><code>cat /proc/PID/smaps</code></pre>
+</div>
+
+<div class="section">
+  <h2>5) 페이지 캐시 확인</h2>
+
+  <pre><code>cat /proc/meminfo | grep -E 'Cached|Buffers'</code></pre>
+  <ul>
+    <li>Cached → 페이지 캐시</li>
+    <li>Buffers → 버퍼 캐시</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>6) Dirty 페이지 상태</h2>
+
+  <pre><code>cat /proc/meminfo | grep Dirty</code></pre>
+  <ul>
+    <li>Dirty → 아직 디스크에 기록되지 않은 페이지</li>
+    <li>Writeback → 디스크 기록 중</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>핵심 점검 포인트</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>항목</th>
+        <th>확인 내용</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Swap 활동</td>
+        <td>si/so 증가 여부</td>
+      </tr>
+      <tr>
+        <td>Page Fault</td>
+        <td>pgfault 급증 여부</td>
+      </tr>
+      <tr>
+        <td>Dirty</td>
+        <td>과도하게 높지 않은지</td>
+      </tr>
+      <tr>
+        <td>Inactive</td>
+        <td>회수 가능한 페이지 여부</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

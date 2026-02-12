@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Linux Kernel Structure</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 40px;
+            background-color: #f4f6f8;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        ul {
+            margin-left: 20px;
+        }
+        .diagram {
+            background: #eef2f7;
+            padding: 15px;
+            font-family: monospace;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>리눅스 커널 구조</h1>
+
+    <div class="section">
+        <h2>1. 시스템 콜 인터페이스 (System Call Interface)</h2>
+        <p>사용자 프로그램이 커널 기능을 요청하는 통로</p>
+        <ul>
+            <li>open()</li>
+            <li>read()</li>
+            <li>write()</li>
+            <li>fork()</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>2. 프로세스 관리 (Process Management)</h2>
+        <ul>
+            <li><a href="./serverInspection/process_management/CPUSchedule.html">CPU 스케줄링</a></li>
+            <li><a href="./serverInspection/process_management/process.html">프로세스 생성 및 종료</a></li>
+            <li><a href="./serverInspection/process_management/contextSwitch.html">컨텍스트 스위칭</a></li>
+            <li><a href="./serverInspection/process_management/priority.html">우선순위 관리</a></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>3. 메모리 관리 (Memory Management)</h2>
+        <ul>
+            <li><a href="./serverInspection/memory_management/virtualMemory.html">가상 메모리</a></li>
+            <li><a href="./serverInspection/memory_management/page.html">페이지 관리</a></li>
+            <li><a href="./serverInspection/memory_management/swap.html">스왑 처리</a></li>
+            <li><a href="./serverInspection/memory_management/memoryProtect.html">메모리 보호</a></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>4. 스토리지 스택</h2>
+        <p>사용자 -> VFS -> real FS -> LVM -> 블록 디바이스 -> 물리 디스크</p>
+        <p>다양한 파일 시스템을 하나의 인터페이스로 통합</p>
+        <ul>
+            <li><a href="./serverInspection/storage_stack/VFS.html">VFS</a></li>
+            <li><a href="./serverInspection/storage_stack/LVM.html">LVM</a></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>5. 디바이스 드라이버 (Device Drivers)</h2>
+        <ul>
+            <li>디스크 드라이버</li>
+            <li>네트워크 카드</li>
+            <li>USB 장치</li>
+            <li>GPU</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>6. 네트워크 스택 (Network Stack)</h2>
+        <ul>
+            <li>TCP/IP 처리</li>
+            <li>소켓 관리</li>
+            <li>패킷 라우팅</li>
+            <li>방화벽 처리</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>구조 계층도</h2>
+        <div class="diagram">
+[ User Application ]
+        ↓
+[ System Call Interface ]
+        ↓
+--------------------------------
+| Process Management           |
+| Memory Management            |
+| VFS                          |
+| Network Stack                |
+| Device Drivers               |
+--------------------------------
+        ↓
+[ Hardware ]
+        </div>
+    </div>
+
+</body>
+</html>

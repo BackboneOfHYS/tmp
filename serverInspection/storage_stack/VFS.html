@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>VFS(가상 파일 시스템) 점검 명령어</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f4f6f8;
+      line-height: 1.6;
+      color: #1f2a37;
+    }
+    h1, h2, h3 { color: #2c3e50; }
+    .section {
+      background: #ffffff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    code {
+      background: #eef2f7;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.95em;
+    }
+    pre {
+      background: #eef2f7;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+    ul { margin-left: 20px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #e5e7eb;
+      padding: 8px;
+      text-align: left;
+    }
+    th { background-color: #f9fafb; }
+  </style>
+</head>
+<body>
+
+<h1>VFS (Virtual File System) 점검 명령어</h1>
+
+<div class="section">
+  <h2>1) 파일시스템 마운트 상태 확인</h2>
+
+  <h3>mount</h3>
+  <pre><code>mount</code></pre>
+
+  <h3>/proc/mounts</h3>
+  <pre><code>cat /proc/mounts</code></pre>
+
+  <h3>findmnt</h3>
+  <pre><code>findmnt</code></pre>
+
+  <ul>
+    <li>읽기전용(ro) 여부</li>
+    <li>파일시스템 타입(ext4, xfs 등)</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>2) 디스크 사용률 확인</h2>
+
+  <h3>df</h3>
+  <pre><code>df -h</code></pre>
+
+  <h3>inode 사용률</h3>
+  <pre><code>df -i</code></pre>
+
+  <ul>
+    <li>디스크 용량 100%</li>
+    <li>inode 100%</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>3) 파일시스템 타입 확인</h2>
+
+  <pre><code>cat /proc/filesystems</code></pre>
+</div>
+
+<div class="section">
+  <h2>4) 파일 접근/권한 점검</h2>
+
+  <h3>ls</h3>
+  <pre><code>ls -l</code></pre>
+
+  <h3>stat</h3>
+  <pre><code>stat filename</code></pre>
+</div>
+
+<div class="section">
+  <h2>5) 파일시스템 오류 확인</h2>
+
+  <h3>dmesg</h3>
+  <pre><code>dmesg | grep -i error</code></pre>
+
+  <h3>journalctl</h3>
+  <pre><code>journalctl -k | grep -i ext4
+journalctl -k | grep -i xfs</code></pre>
+</div>
+
+<div class="section">
+  <h2>6) 파일시스템 체크(오프라인)</h2>
+
+  <h3>ext 계열</h3>
+  <pre><code>fsck /dev/sdX</code></pre>
+
+  <h3>xfs</h3>
+  <pre><code>xfs_repair /dev/sdX</code></pre>
+</div>
+
+<div class="section">
+  <h2>7) 파일 핸들/열린 파일 확인</h2>
+
+  <h3>lsof</h3>
+  <pre><code>lsof | grep deleted</code></pre>
+
+  <h3>파일 디스크립터 수</h3>
+  <pre><code>cat /proc/sys/fs/file-nr</code></pre>
+</div>
+
+<div class="section">
+  <h2>핵심 점검 포인트</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>항목</th>
+        <th>확인 내용</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>마운트 상태</td>
+        <td>읽기전용(ro) 여부</td>
+      </tr>
+      <tr>
+        <td>용량</td>
+        <td>df -h 100% 여부</td>
+      </tr>
+      <tr>
+        <td>inode</td>
+        <td>df -i 100% 여부</td>
+      </tr>
+      <tr>
+        <td>파일 오류</td>
+        <td>dmesg / journalctl 에러 기록</td>
+      </tr>
+      <tr>
+        <td>열린 파일</td>
+        <td>삭제된 파일이 열린 상태인지</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>RPM 옵션 정리</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f6f8;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        .section {
+            background: #ffffff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        code {
+            background: #eef2f7;
+            padding: 4px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        ul {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>RPM 주요 옵션 정리</h1>
+
+<div class="section">
+    <h2>1. 설치 관련 옵션</h2>
+
+    <h3>-i (install)</h3>
+    <p>새 패키지 설치</p>
+    <code>rpm -ivh package.rpm</code>
+    <ul>
+        <li>-v : verbose (상세 출력)</li>
+        <li>-h : 해시바 표시</li>
+    </ul>
+
+    <h3>-U (upgrade)</h3>
+    <p>기존 버전이 있으면 업그레이드, 없으면 설치</p>
+    <code>rpm -Uvh package.rpm</code>
+
+    <h3>-F (freshen)</h3>
+    <p>이미 설치된 경우에만 업그레이드</p>
+    <code>rpm -Fvh package.rpm</code>
+</div>
+
+<div class="section">
+    <h2>2. 삭제 옵션</h2>
+
+    <h3>-e (erase)</h3>
+    <p>패키지 삭제 (파일명이 아니라 패키지명 사용)</p>
+    <code>rpm -e nginx</code>
+</div>
+
+<div class="section">
+    <h2>3. 조회(Query) 옵션</h2>
+
+    <h3>-qa</h3>
+    <p>전체 설치 패키지 목록</p>
+    <code>rpm -qa</code>
+
+    <h3>-qi</h3>
+    <p>패키지 상세 정보</p>
+    <code>rpm -qi nginx</code>
+
+    <h3>-ql</h3>
+    <p>설치 파일 목록</p>
+    <code>rpm -ql nginx</code>
+
+    <h3>-qf</h3>
+    <p>특정 파일이 속한 패키지 확인</p>
+    <code>rpm -qf /usr/sbin/nginx</code>
+
+    <h3>-qR</h3>
+    <p>의존성 확인</p>
+    <code>rpm -qR nginx</code>
+
+    <h3>-qV</h3>
+    <p>파일 변경 여부 확인</p>
+    <code>rpm -qV nginx</code>
+</div>
+
+<div class="section">
+    <h2>4. 검증 옵션</h2>
+
+    <h3>-V</h3>
+    <p>설치된 파일 무결성 검사</p>
+    <code>rpm -V nginx</code>
+</div>
+
+<div class="section">
+    <h2>5. 강제 옵션 (주의)</h2>
+
+    <h3>--nodeps</h3>
+    <p>의존성 무시</p>
+    <code>rpm -ivh --nodeps package.rpm</code>
+
+    <h3>--replacefiles</h3>
+    <p>파일 충돌 무시</p>
+    <code>rpm -ivh --replacefiles package.rpm</code>
+
+    <h3>--force</h3>
+    <p>기존 패키지 강제 덮어쓰기</p>
+    <code>rpm -ivh --force package.rpm</code>
+</div>
+
+<div class="section">
+    <h2>6. RPM 데이터베이스 관리</h2>
+
+    <p>메타정보 저장 위치:</p>
+    <code>/var/lib/rpm/</code>
+
+    <p>DB 재구성:</p>
+    <code>rpm --rebuilddb</code>
+</div>
+
+<div class="section">
+    <h2>7. RPM 파일 보기 명령</h2>
+
+    <p>내부 파일 보기:</p>
+    <code>rpm  -qpl nginx.rpm</code>
+
+    <p>패키지 정보 보기</p>
+    <code>rpm -qpi nginx.rpm</code>
+
+    <p>의존성 보기</p>
+    <code>rpm -qpR nginx.rpm</code>
+</div>
+
+<div class="section">
+    <h2>면접용 한 줄 정리</h2>
+    <p>
+        RPM은 -i(설치), -U(업그레이드), -e(삭제), -q(조회), -V(검증) 옵션을 중심으로
+        동작하며, /var/lib/rpm 경로의 데이터베이스에 패키지 메타정보를 저장해 관리한다.
+    </p>
+</div>
+
+</body>
+</html>

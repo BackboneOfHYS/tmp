@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>DNF 옵션 정리</title>
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background:#f4f6f8;
+      line-height:1.6;
+      color:#1f2a37;
+    }
+    h1,h2,h3{ color:#2c3e50; margin-top: 0.6em; }
+    .section{
+      background:#fff;
+      padding:20px;
+      margin-bottom:18px;
+      border-radius:10px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.06);
+    }
+    code{
+      background:#eef2f7;
+      padding:3px 6px;
+      border-radius:4px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 0.95em;
+    }
+    pre{
+      background:#eef2f7;
+      padding:12px;
+      border-radius:8px;
+      overflow:auto;
+      margin:10px 0 0 0;
+    }
+    ul{ margin: 8px 0 0 20px; }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:10px;
+      background:#fff;
+      overflow:hidden;
+      border-radius:10px;
+    }
+    th,td{
+      border:1px solid #e5e7eb;
+      padding:10px;
+      text-align:left;
+      vertical-align:top;
+    }
+    th{ background:#f9fafb; }
+    .pill{
+      display:inline-block;
+      padding:2px 8px;
+      border-radius:999px;
+      background:#eef2ff;
+      color:#3730a3;
+      font-size: 0.85em;
+      margin-left:6px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>DNF 주요 옵션(명령) 정리</h1>
+
+  <div class="section">
+    <h2>1) 설치 / 삭제</h2>
+
+    <h3>설치 <span class="pill">install</span></h3>
+    <pre><code>dnf install nginx</code></pre>
+
+    <h3>여러 개 설치</h3>
+    <pre><code>dnf install nginx httpd git</code></pre>
+
+    <h3>삭제 <span class="pill">remove</span></h3>
+    <pre><code>dnf remove nginx</code></pre>
+
+    <h3>재설치 <span class="pill">reinstall</span></h3>
+    <pre><code>dnf reinstall nginx</code></pre>
+
+    <h3>자동 제거(불필요 의존성 정리) <span class="pill">autoremove</span></h3>
+    <pre><code>dnf autoremove</code></pre>
+  </div>
+
+  <div class="section">
+    <h2>2) 검색 / 조회</h2>
+
+    <h3>검색 <span class="pill">search</span></h3>
+    <pre><code>dnf search nginx</code></pre>
+
+    <h3>패키지 정보 <span class="pill">info</span></h3>
+    <pre><code>dnf info nginx</code></pre>
+
+    <h3>목록 조회 <span class="pill">list</span></h3>
+    <pre><code>dnf list installed
+dnf list available
+dnf list all</code></pre>
+
+    <h3>파일을 제공하는 패키지 찾기 <span class="pill">provides</span></h3>
+    <pre><code>dnf provides /usr/sbin/nginx</code></pre>
+    <p>※ <code>rpm -qf</code>에 해당하는 상위 개념(Repo까지 포함해서 검색 가능)</p>
+  </div>
+
+  <div class="section">
+    <h2>3) 업데이트 관련</h2>
+
+    <h3>전체 업데이트 <span class="pill">update / upgrade</span></h3>
+    <pre><code>dnf update
+dnf upgrade</code></pre>
+
+    <h3>업데이트 가능 목록 확인 <span class="pill">check-update</span></h3>
+    <pre><code>dnf check-update</code></pre>
+
+    <h3>특정 패키지만 업데이트</h3>
+    <pre><code>dnf update nginx</code></pre>
+  </div>
+
+  <div class="section">
+    <h2>4) Repo(저장소) 관련</h2>
+
+    <h3>활성 Repo 확인 <span class="pill">repolist</span></h3>
+    <pre><code>dnf repolist</code></pre>
+
+    <h3>전체 Repo 확인</h3>
+    <pre><code>dnf repolist all</code></pre>
+
+    <h3>캐시 삭제 <span class="pill">clean</span></h3>
+    <pre><code>dnf clean all</code></pre>
+
+    <h3>특정 Repo만 사용 <span class="pill">--enablerepo / --disablerepo</span></h3>
+    <pre><code>dnf --enablerepo=repo이름 install nginx
+dnf --disablerepo=* --enablerepo=myrepo install nginx</code></pre>
+  </div>
+
+  <div class="section">
+    <h2>5) 의존성 / 문제 해결</h2>
+
+    <h3>의존성 확인 <span class="pill">deplist</span></h3>
+    <pre><code>dnf deplist nginx</code></pre>
+
+    <h3>시스템 점검 <span class="pill">check</span></h3>
+    <pre><code>dnf check</code></pre>
+  </div>
+
+  <div class="section">
+    <h2>6) 다운로드만 (설치 안 함)</h2>
+    <pre><code>dnf download nginx</code></pre>
+  </div>
+
+  <div class="section">
+    <h2>7) 자주 쓰는 옵션 조합</h2>
+
+    <h3>자동 yes <span class="pill">-y</span></h3>
+    <pre><code>dnf -y install nginx</code></pre>
+
+    <h3>특정 버전 설치(가능한 경우)</h3>
+    <pre><code>dnf install nginx-1.20.1</code></pre>
+
+    <h3>Repo 캐시 재생성(문제 해결)</h3>
+    <pre><code>dnf clean all
+dnf makecache</code></pre>
+  </div>
+
+  <div class="section">
+    <h2>DNF vs RPM 차이 핵심</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>DNF</th>
+          <th>RPM</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Repo 기반 설치/업데이트</td>
+          <td>로컬 <code>.rpm</code> 파일 중심 설치/조회/삭제</td>
+        </tr>
+        <tr>
+          <td>의존성 자동 해결</td>
+          <td>의존성 수동(강제 옵션 사용 시 위험)</td>
+        </tr>
+        <tr>
+          <td>상위 관리자(실무 기본)</td>
+          <td>저수준 관리자(기초/검증/특수 상황)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>면접용 한 줄</h2>
+    <p>
+      DNF는 RPM을 기반으로 동작하는 상위 패키지 관리자로,
+      <code>install</code>, <code>remove</code>, <code>update</code>, <code>search</code>,
+      <code>repolist</code> 등의 명령을 통해 저장소 기반 설치와 의존성 자동 처리를 수행한다.
+    </p>
+  </div>
+
+</body>
+</html>

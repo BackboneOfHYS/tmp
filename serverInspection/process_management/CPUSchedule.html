@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>CPU 스케줄링 체크 명령어</title>
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background:#f4f6f8;
+      line-height:1.6;
+      color:#1f2a37;
+    }
+    h1,h2,h3{ color:#2c3e50; margin-top: 0.8em; }
+    .section{
+      background:#fff;
+      padding:20px;
+      margin-bottom:18px;
+      border-radius:10px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.06);
+    }
+    code{
+      background:#eef2f7;
+      padding:3px 6px;
+      border-radius:4px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 0.95em;
+    }
+    pre{
+      background:#eef2f7;
+      padding:12px;
+      border-radius:8px;
+      overflow:auto;
+      margin:10px 0 0 0;
+    }
+    ul{ margin: 8px 0 0 20px; }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:10px;
+      background:#fff;
+      overflow:hidden;
+      border-radius:10px;
+    }
+    th,td{
+      border:1px solid #e5e7eb;
+      padding:10px;
+      text-align:left;
+      vertical-align:top;
+    }
+    th{ background:#f9fafb; }
+    .pill{
+      display:inline-block;
+      padding:2px 8px;
+      border-radius:999px;
+      background:#eef2ff;
+      color:#3730a3;
+      font-size: 0.85em;
+      margin-left:6px;
+    }
+    .hint{
+      color:#4b5563;
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>CPU 스케줄링 체크 명령어 (Linux)</h1>
+
+  <div class="section">
+    <h2>1) 전체적인 스케줄링 상태 확인</h2>
+
+    <h3><span class="pill">uptime</span> Load Average 확인</h3>
+    <pre><code>uptime</code></pre>
+    <p class="hint">
+      Load Average는 실행 대기(Runnable) + I/O 대기(Task) 수를 반영합니다.
+      코어 수보다 높게 지속되면 스케줄링 압박을 의심합니다.
+    </p>
+
+    <h3><span class="pill">top</span> 실시간 CPU/Load 확인</h3>
+    <pre><code>top</code></pre>
+    <ul>
+      <li><code>%us</code>: user CPU</li>
+      <li><code>%sy</code>: system CPU</li>
+      <li><code>%wa</code>: I/O wait</li>
+      <li><code>load average</code>: 스케줄링 압박 지표</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>2) Run Queue 확인 (핵심)</h2>
+
+    <h3><span class="pill">vmstat</span> 실행 대기/블록 상태 확인</h3>
+    <pre><code>vmstat 1</code></pre>
+    <ul>
+      <li><code>r</code>: 실행 대기 프로세스 수 (run queue)</li>
+      <li><code>b</code>: I/O 대기(블록) 프로세스 수</li>
+    </ul>
+    <p class="hint">
+      <code>r</code> 값이 CPU 코어 수보다 지속적으로 크면 스케줄링 과부하를 의심합니다.
+      <code>b</code>가 크면 I/O 병목 가능성이 큽니다.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>3) CPU 코어별 상태</h2>
+
+    <h3><span class="pill">mpstat</span> 코어별 사용률 확인</h3>
+    <pre><code>mpstat -P ALL 1</code></pre>
+    <p class="hint">
+      특정 코어에 부하가 몰리는지, 코어별 idle/wa가 비정상인지 확인합니다.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>4) 프로세스 상태 확인</h2>
+
+    <h3><span class="pill">ps</span> CPU 상위 프로세스 + 상태 확인</h3>
+    <pre><code>ps -eo pid,ppid,cmd,state,%cpu --sort=-%cpu</code></pre>
+
+    <table>
+      <thead>
+        <tr>
+          <th>State</th>
+          <th>의미</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>R</code></td><td>Running / Runnable (CPU 경쟁 가능)</td></tr>
+        <tr><td><code>S</code></td><td>Sleeping</td></tr>
+        <tr><td><code>D</code></td><td>I/O Wait (블록 상태, I/O 병목 의심)</td></tr>
+        <tr><td><code>Z</code></td><td>Zombie</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>5) 컨텍스트 스위칭 확인</h2>
+
+    <h3><span class="pill">vmstat</span> Context Switch 확인</h3>
+    <pre><code>vmstat 1</code></pre>
+    <p class="hint">
+      출력의 <code>cs</code>는 초당 컨텍스트 스위칭 수입니다.
+      값이 과도하면 스케줄링 오버헤드(쓰레드 폭증 등)를 의심합니다.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>6) 스케줄러 정책 확인(실시간 우선순위 등)</h2>
+
+    <h3><span class="pill">chrt</span> 프로세스 스케줄 정책 확인</h3>
+    <pre><code>chrt -p PID</code></pre>
+    <p class="hint">
+      SCHED_OTHER / SCHED_FIFO / SCHED_RR 등 정책 확인에 사용합니다.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>7) 커널 스케줄링 관련 /proc 정보</h2>
+
+    <pre><code>cat /proc/schedstat
+cat /proc/loadavg</code></pre>
+    <p class="hint">
+      커널 레벨의 스케줄링/로드 정보를 확인할 수 있습니다.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>실무에서 가장 많이 쓰는 4개</h2>
+    <pre><code>uptime
+top
+vmstat 1
+mpstat -P ALL 1</code></pre>
+  </div>
+
+  <div class="section">
+    <h2>상황별 간단 해석</h2>
+    <ul>
+      <li><strong>Load 높음 + CPU 높음</strong> → CPU 바쁨(연산 과부하 가능)</li>
+      <li><strong>Load 높음 + CPU 낮음</strong> → I/O wait 의심(<code>b</code> 값 확인)</li>
+      <li><strong>r 값 지속 증가</strong> → Run queue 밀림(스케줄링 압박)</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>면접용 한 줄</h2>
+    <p>
+      CPU 스케줄링 상태는 <code>uptime</code>의 load average,
+      <code>vmstat</code>의 run queue(<code>r</code>),
+      <code>mpstat</code>의 코어별 사용률,
+      <code>ps</code>의 프로세스 상태 등을 통해 확인할 수 있습니다.
+    </p>
+  </div>
+
+</body>
+</html>

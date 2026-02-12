@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>LVM 점검 명령어</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f4f6f8;
+      line-height: 1.6;
+      color: #1f2a37;
+    }
+    h1, h2, h3 { color: #2c3e50; }
+    .section {
+      background: #ffffff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    code {
+      background: #eef2f7;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.95em;
+    }
+    pre {
+      background: #eef2f7;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+    ul { margin-left: 20px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #e5e7eb;
+      padding: 8px;
+      text-align: left;
+    }
+    th { background-color: #f9fafb; }
+  </style>
+</head>
+<body>
+
+<h1>LVM (Logical Volume Manager) 점검 명령어</h1>
+
+<div class="section">
+  <h2>1) Physical Volume (PV) 점검</h2>
+
+  <h3>요약 정보</h3>
+  <pre><code>pvs</code></pre>
+
+  <h3>상세 정보</h3>
+  <pre><code>pvdisplay</code></pre>
+
+  <ul>
+    <li>PV Size</li>
+    <li>Free PE</li>
+    <li>PV 상태</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>2) Volume Group (VG) 점검</h2>
+
+  <h3>요약 정보</h3>
+  <pre><code>vgs</code></pre>
+
+  <h3>상세 정보</h3>
+  <pre><code>vgdisplay</code></pre>
+
+  <ul>
+    <li>VG Size</li>
+    <li>VG Free</li>
+    <li>VG 상태</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>3) Logical Volume (LV) 점검</h2>
+
+  <h3>요약 정보</h3>
+  <pre><code>lvs</code></pre>
+
+  <h3>상세 정보</h3>
+  <pre><code>lvdisplay</code></pre>
+
+  <ul>
+    <li>LV Size</li>
+    <li>LV Path</li>
+    <li>Snapshot 여부</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>4) 매핑 관계 확인</h2>
+
+  <pre><code>lsblk</code></pre>
+  <pre><code>lsblk -f</code></pre>
+
+  <ul>
+    <li>PV → VG → LV 구조 확인</li>
+    <li>파일시스템 타입 확인</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>5) 디바이스 매퍼 상태 확인</h2>
+
+  <pre><code>dmsetup ls</code></pre>
+  <pre><code>dmsetup status</code></pre>
+</div>
+
+<div class="section">
+  <h2>6) LVM 메타데이터 백업 확인</h2>
+
+  <pre><code>ls /etc/lvm/backup/</code></pre>
+</div>
+
+<div class="section">
+  <h2>7) 확장 가능 여부 확인</h2>
+
+  <pre><code>vgs</code></pre>
+  <ul>
+    <li>VG Free 공간 확인</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>핵심 점검 포인트</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>항목</th>
+        <th>확인 내용</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>PV 상태</td>
+        <td>디스크 손상 여부</td>
+      </tr>
+      <tr>
+        <td>VG Free</td>
+        <td>확장 가능 공간</td>
+      </tr>
+      <tr>
+        <td>LV 사용량</td>
+        <td>df -h와 비교</td>
+      </tr>
+      <tr>
+        <td>Snapshot</td>
+        <td>용량 부족 여부</td>
+      </tr>
+      <tr>
+        <td>dm 상태</td>
+        <td>device-mapper 이상 여부</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

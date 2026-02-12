@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>메모리 보호 점검 명령어</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f4f6f8;
+      line-height: 1.6;
+      color: #1f2a37;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    .section {
+      background: #ffffff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    code {
+      background: #eef2f7;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.95em;
+    }
+    pre {
+      background: #eef2f7;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+    ul {
+      margin-left: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #e5e7eb;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f9fafb;
+    }
+  </style>
+</head>
+<body>
+
+<h1>메모리 보호(Memory Protection) 점검 명령어</h1>
+
+<div class="section">
+  <h2>1) 프로세스 메모리 권한 확인</h2>
+
+  <h3>pmap</h3>
+  <pre><code>pmap -x PID</code></pre>
+  <ul>
+    <li>메모리 영역별 권한(rwx)</li>
+    <li>Private / Shared 구분</li>
+  </ul>
+
+  <h3>/proc 메모리 맵</h3>
+  <pre><code>cat /proc/PID/maps</code></pre>
+  <ul>
+    <li>r → read</li>
+    <li>w → write</li>
+    <li>x → execute</li>
+    <li>p → private</li>
+    <li>s → shared</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>2) ASLR(Address Space Layout Randomization) 확인</h2>
+
+  <pre><code>cat /proc/sys/kernel/randomize_va_space</code></pre>
+  <ul>
+    <li>0 → 비활성화</li>
+    <li>1 → 일부 랜덤화</li>
+    <li>2 → 전체 랜덤화(권장)</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>3) NX(Execute Disable) 비트 확인</h2>
+
+  <pre><code>grep nx /proc/cpuinfo</code></pre>
+  <ul>
+    <li>nx 표시 → 실행 불가 영역 지원</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>4) SELinux 상태 확인</h2>
+
+  <pre><code>sestatus</code></pre>
+  <pre><code>getenforce</code></pre>
+  <ul>
+    <li>Enforcing / Permissive / Disabled</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>5) 메모리 잠금(Memory Lock) 확인</h2>
+
+  <pre><code>ulimit -l</code></pre>
+  <ul>
+    <li>mlock 가능 메모리 크기</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>6) 커널 OOM 보호 설정 확인</h2>
+
+  <pre><code>cat /proc/PID/oom_score</code></pre>
+  <pre><code>cat /proc/PID/oom_score_adj</code></pre>
+  <ul>
+    <li>OOM 발생 시 종료 우선순위</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>7) 커널 보호 관련 설정</h2>
+
+  <pre><code>sysctl kernel.kptr_restrict
+sysctl kernel.dmesg_restrict
+sysctl vm.mmap_min_addr</code></pre>
+</div>
+
+<div class="section">
+  <h2>핵심 점검 포인트</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>항목</th>
+        <th>확인 내용</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>ASLR</td>
+        <td>randomize_va_space 값</td>
+      </tr>
+      <tr>
+        <td>NX 지원</td>
+        <td>cpuinfo에 nx 존재 여부</td>
+      </tr>
+      <tr>
+        <td>메모리 권한</td>
+        <td>/proc/PID/maps 권한 확인</td>
+      </tr>
+      <tr>
+        <td>SELinux</td>
+        <td>Enforcing 상태 여부</td>
+      </tr>
+      <tr>
+        <td>OOM 설정</td>
+        <td>oom_score_adj 값</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

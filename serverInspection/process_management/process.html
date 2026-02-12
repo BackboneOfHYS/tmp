@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>프로세스 생성 및 종료 체크 명령어</title>
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background:#f4f6f8;
+      line-height:1.6;
+      color:#1f2a37;
+    }
+    h1,h2,h3{ color:#2c3e50; margin-top: 0.8em; }
+    .section{
+      background:#fff;
+      padding:20px;
+      margin-bottom:18px;
+      border-radius:10px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.06);
+    }
+    code{
+      background:#eef2f7;
+      padding:3px 6px;
+      border-radius:4px;
+      font-family: monospace;
+      font-size: 0.95em;
+    }
+    pre{
+      background:#eef2f7;
+      padding:12px;
+      border-radius:8px;
+      overflow:auto;
+      margin:10px 0 0 0;
+    }
+    ul{ margin: 8px 0 0 20px; }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:10px;
+      background:#fff;
+    }
+    th,td{
+      border:1px solid #e5e7eb;
+      padding:10px;
+      text-align:left;
+    }
+    th{ background:#f9fafb; }
+  </style>
+</head>
+<body>
+
+<h1>프로세스 생성 및 종료 체크 명령어 (Linux)</h1>
+
+<div class="section">
+  <h2>1) 현재 실행 중인 프로세스 확인</h2>
+
+  <h3>전체 프로세스 보기</h3>
+  <pre><code>ps -ef</code></pre>
+
+  <h3>트리 구조 확인</h3>
+  <pre><code>pstree -p</code></pre>
+
+  <p>
+    ✔ 부모-자식 관계 확인 가능<br>
+    ✔ 특정 서비스가 어떤 프로세스를 생성했는지 파악
+  </p>
+</div>
+
+<div class="section">
+  <h2>2) 실시간 프로세스 생성/종료 확인</h2>
+
+  <h3>top</h3>
+  <pre><code>top</code></pre>
+
+  <h3>htop (설치 시)</h3>
+  <pre><code>htop</code></pre>
+
+  <p>
+    ✔ 새로 생성되는 프로세스 관찰<br>
+    ✔ 종료되는 프로세스 확인
+  </p>
+</div>
+
+<div class="section">
+  <h2>3) 특정 프로세스 생성 확인</h2>
+
+  <h3>프로세스 검색</h3>
+  <pre><code>pgrep nginx
+ps -ef | grep nginx</code></pre>
+
+  <p>
+    ✔ 서비스 시작 시 프로세스가 정상 생성되었는지 확인
+  </p>
+</div>
+
+<div class="section">
+  <h2>4) 프로세스 상태 확인</h2>
+
+  <pre><code>ps -eo pid,ppid,cmd,state</code></pre>
+
+  <table>
+    <thead>
+      <tr>
+        <th>State</th>
+        <th>의미</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>R</td><td>Running (실행 중)</td></tr>
+      <tr><td>S</td><td>Sleeping (대기 중)</td></tr>
+      <tr><td>D</td><td>I/O 대기</td></tr>
+      <tr><td>Z</td><td>Zombie (종료 후 부모가 수거 안 함)</td></tr>
+      <tr><td>T</td><td>정지 상태</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section">
+  <h2>5) 좀비 프로세스 확인</h2>
+
+  <pre><code>ps -ef | grep defunct</code></pre>
+
+  <p>
+    ✔ 좀비(Z) 상태 프로세스가 많으면 부모 프로세스 문제 의심
+  </p>
+</div>
+
+<div class="section">
+  <h2>6) 프로세스 종료</h2>
+
+  <h3>정상 종료 요청</h3>
+  <pre><code>kill PID</code></pre>
+
+  <h3>강제 종료</h3>
+  <pre><code>kill -9 PID</code></pre>
+
+  <h3>이름으로 종료</h3>
+  <pre><code>pkill nginx
+killall nginx</code></pre>
+</div>
+
+<div class="section">
+  <h2>7) 프로세스 생성 로그 확인</h2>
+
+  <pre><code>journalctl -xe
+dmesg</code></pre>
+
+  <p>
+    ✔ OOM으로 프로세스 종료되었는지 확인 가능<br>
+    ✔ 서비스 재시작 기록 확인
+  </p>
+</div>
+
+<div class="section">
+  <h2>면접용 한 줄</h2>
+  <p>
+    프로세스 생성 및 종료는 <code>ps</code>, <code>pstree</code>, <code>pgrep</code>,
+    <code>top</code> 등을 통해 확인하며, 상태(State) 값과 좀비 여부를 함께 점검합니다.
+  </p>
+</div>
+
+</body>
+</html>

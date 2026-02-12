@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>커널 우선순위 관리 점검 명령어</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f4f6f8;
+      line-height: 1.6;
+      color: #1f2a37;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    .section {
+      background: #ffffff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    code {
+      background: #eef2f7;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.95em;
+    }
+    pre {
+      background: #eef2f7;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+    ul {
+      margin-left: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #e5e7eb;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f9fafb;
+    }
+  </style>
+</head>
+<body>
+
+<h1>커널 우선순위 관리 점검 명령어 (Linux)</h1>
+
+<div class="section">
+  <h2>1) 프로세스 우선순위 확인</h2>
+
+  <h3>ps로 PRI / NI 확인</h3>
+  <pre><code>ps -eo pid,comm,pri,ni,cls --sort=-pri</code></pre>
+  <ul>
+    <li><strong>PRI</strong> → 실제 커널 우선순위</li>
+    <li><strong>NI</strong> → nice 값 (-20 ~ 19)</li>
+    <li><strong>CLS</strong> → 스케줄링 클래스</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>2) 실시간 우선순위 정책 확인</h2>
+
+  <h3>chrt</h3>
+  <pre><code>chrt -p PID</code></pre>
+  <ul>
+    <li>SCHED_OTHER</li>
+    <li>SCHED_FIFO</li>
+    <li>SCHED_RR</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>3) top에서 우선순위 확인</h2>
+  <pre><code>top</code></pre>
+  <ul>
+    <li><strong>PR</strong> → Priority</li>
+    <li><strong>NI</strong> → Nice 값</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>4) nice 값 변경 (우선순위 조정)</h2>
+
+  <h3>새 프로세스 실행 시</h3>
+  <pre><code>nice -n 10 command</code></pre>
+
+  <h3>실행 중 프로세스 변경</h3>
+  <pre><code>renice -n 5 -p PID</code></pre>
+</div>
+
+<div class="section">
+  <h2>5) 스케줄러 정책 전체 확인</h2>
+
+  <h3>프로세스별 정책 조회</h3>
+  <pre><code>ps -eo pid,comm,policy,rtprio</code></pre>
+  <ul>
+    <li><strong>policy</strong> → 스케줄링 정책</li>
+    <li><strong>rtprio</strong> → 실시간 우선순위</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>6) /proc에서 직접 확인</h2>
+  <pre><code>cat /proc/PID/sched</code></pre>
+  <ul>
+    <li>prio</li>
+    <li>policy</li>
+    <li>nr_switches</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>우선순위 개념 요약</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>구분</th>
+        <th>설명</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>nice 값 (NI)</td>
+        <td>-20 (높음) ~ 19 (낮음)</td>
+      </tr>
+      <tr>
+        <td>PRI</td>
+        <td>커널 내부 계산 우선순위</td>
+      </tr>
+      <tr>
+        <td>실시간 우선순위</td>
+        <td>1~99 (SCHED_FIFO / SCHED_RR)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
