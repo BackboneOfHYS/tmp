@@ -163,6 +163,34 @@ dnf --disablerepo=* --enablerepo=myrepo install nginx</code></pre>
 dnf makecache</code></pre>
   </div>
 
+
+  <div class="section">
+    <h2>8) dnf 관련 파일 경로</h2>
+    <ul>
+      <li>
+        <code>/etc/yum.repos.d/</code><br>
+        → 개별 .repo 저장소 설정 파일들이 위치하는 디렉터리
+      </li>
+      <li>
+        <code>/etc/dnf/</code><br>
+        → dnf 패키지 매니저의 전역 설정 파일이 위치하는 디렉터리
+      </li>
+      <li>
+        <code>/etc/pki/rpm-gpg/</code><br>
+        → 패키지 무결성 검증에 사용하는 GPG 키 파일 저장 위치
+      </li>
+      <li>
+        <code>/var/cache/dnf/</code><br>
+        → dnf가 다운로드한 메타데이터 및 패키지 캐시 저장 위치
+      </li>
+      <li>
+        <code>/var/cache/yum/</code><br>
+        → yum이 다운로드한 메타데이터 및 패키지 캐시 저장 위치
+      </li>
+    </ul>
+
+
+  </div>
   <div class="section">
     <h2>DNF vs RPM 차이 핵심</h2>
     <table>
