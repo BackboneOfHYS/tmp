@@ -185,100 +185,191 @@
         </div>
 
         <div class="card">
-          <div class="term"><b>매트릭스</b><span class="tag">matrix<span></div>
+          <div class="term"><b>매트릭스</b><span class="tag">matrix</span></div>
           <p>시스템 상태 수치 지표<p>
         </div>
 
         <div class="card">
-          <div class="term"><b>AD 서버</b><span class="tag">Active Directory 서버<span></div>
+          <div class="term"><b>AD 서버</b><span class="tag">Active Directory 서버</span></div>
           <p>마이크로소프트(Windows Server)의 중앙 인증·권한 관리 시스템</p>
         </div>
 
         <div class="card">
-          <div class="term"><b>LDAP</b><span class="tag">Light Directory Access Protocol<span></span></div>
+          <div class="term"><b>LDAP</b><span class="tag">Light Directory Access Protocol</span></div>
           <p>가벼운 계정/정보 디렉터리에 접근하기 위한 통신 규약<p>
         </div>
 
         <div class="card">
-          <div class="term"><b>samba</b><span class="tag">SMB<span></span></div>
+          <div class="term"><b>samba</b><span class="tag">SMB</span></div>
           <p>SMB 프로토콜을 리눅스에서 쓰게 해주는 소프트웨어 이름<p>
         </div>
 
         <div class="card">
-          <div class="term"><b>SMB</b><span class="tag">Server Message Block<span></span></div>
+          <div class="term"><b>SMB</b><span class="tag">Server Message Block</span></div>
           <p>네트워크에 폴더가 항상 열려 있음, 여러 사람이 동시에 접근 가능, 실시간 수정/저장, 회사 파일서버 = 거의 이 구조, 주로 Windows<p>
         </div>
 
         <div class="card">
-          <div class="term"><b>NFS</b><span class="tag"><span>Network File System</span></div>
+          <div class="term"><b>NFS</b><span class="tag">Network File System</span></div>
           <p>파일 공유 프로토콜, 주로 UNIX, Linux. </p>
         </div>
 
         <div class="card">
-          <div class="term"><b>스토리지</b><span class="tag">storage<span></span></div>
+          <div class="term"><b>스토리지</b><span class="tag">storage</span></div>
           <p>물리 디스크, RAID, Storage Pool, LUN 생성</p>
         </div>
         
         <div class="card">
-          <div class="term"><b>스토리지 풀</b><span class="tag">storage pool<span></span></div>
+          <div class="term"><b>스토리지 풀</b><span class="tag">storage pool</span></div>
           <p>다수의 RAID를 하나의 그룹으로 묶은 것</p>
         </div>
 
         <div class="card">
-          <div class="term"><b>RAID</b><span class="tag"><span>Redundant Array of Independent Disks</span></div>
+          <div class="term"><b>RAID</b><span class="tag">Redundant Array of Independent Disks</span></div>
           <p>다량의 디스크를 한 번에 합치고 이를 분산저장함. RAID 레벨(뒤 숫자)에 그 유형이 구분됨. 0, 1, 5, 10순으로 striping, mirroring, striping + parity, 1+0</p>
         </div>
 
         <div class="card">
-          <div class="term"><b>LUN</b><span class="tag"><span>Logical Unit Number</span></div>
+          <div class="term"><b>LUN</b><span class="tag">Logical Unit Number</span></div>
           <p>storage pool에서 수도꼭지 느낌. 스토리지 풀에서 외부에 제공하는 논리 블록 장치. 풀 안의 모든 LUN은 RAID 자원 공유</p>
         </div>
 
         <div class="card">
-          <div class="term"><b>SAN</b><span class="tag"><span>Storage Area Network</span></div>
+          <div class="term"><b>SAN</b><span class="tag">torage Area Network</span></div>
           <p>서버와 스토리지 장치를 고속 네트워크로 연결, 블록 수준 데이터 엑세스 제공, 디스크 공간 자체를 제공</p>
         </div>
 
         <div class="card">
-          <div class="term"><b>NAS</b><span class="tag"><span>Network Attached Storage</span></div>
+          <div class="term"><b>NAS</b><span class="tag">Network Attached Storage</span></div>
           <p>SAN과는 다르게 디스크 공간이 아닌 파일, 폴더를 제공. 파일시스템을 스토리지에서 직접 구성함</p>
         </div>
 
         <div class="card">
-          <div class="term"><b>파일시스템</b><span class="tag"><span>file system</span></div>
+          <div class="term"><b>파일시스템</b><span class="tag">file system</span></div>
           <p>파일 포맷이 아닌 디스크의 폴더, 파일 간 구조를 규정함</p>
         </div>
 
         <div class="card">
-          <div class="term"><b>VFS</b><span class="tag"><span>Virtual File System</span></div>
+          <div class="term"><b>VFS</b><span class="tag">Virtual File System</span></div>
           <p>리눅스 커널 안의 계층으로 파일시스템의 통합 인터페이스</p>
         </div>
 
         <div class="card">
-          <div class="term"><b>VDI</b><span class="tag"><span>Virtual Disk Image</span></div>
+          <div class="term"><b>VDI</b><span class="tag">Virtual Disk Image</span></div>
           <p>가상 머신의 하드 디스크로 사용하는 가상화 파일 포맷</p>
         </div>
 
         <div class="card">
-          <div class="term"><b>LVM</b><span class="tag"><span>Logical Volume Manager</span></div>
+          <div class="term"><b>LVM</b><span class="tag">Logical Volume Manager</span></div>
           <p>스토리지 가상화 기술로 물리 디스크를 추상화하여 논리 불륨으로 유연하게 관리하는 리눅스 기술, 커널 2.4버전부터 default.</p>
         </div>
 
         <div class="card">
-          <div class="term"><b>PV</b><span class="tag"><span>Physical Volume</span></div>
+          <div class="term"><b>PV</b><span class="tag">Physical Volume</span></div>
           <p>LVM에서의 물리 볼륨</p>
         </div>
 
         <div class="card">
-          <div class="term"><b>VG</b><span class="tag"><span>Volume Group</span></div>
+          <div class="term"><b>VG</b><span class="tag">Volume Group</span></div>
           <p>LVM에서의 볼륨 그룹으로 하나의 VG는 다수의 PV를 하나로 본다. </p>
         </div>
 
         <div class="card">
-          <div class="term"><b>LV</b><span class="tag"><span>Logical Volume</span></div>
+          <div class="term"><b>LV</b><span class="tag">Logical Volume</span></div>
           <p>VG 안의 전체 공간에서 일부를 할당받는다.</p>
         </div>
 
+        <div class="card">
+          <div class="term"><b>AIX</b><span class="tag">Advanced Interactive eXecute</span></div>
+          <p>IBM이 만든 서버용 유닉스 OS, IBM 파워 전용</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>EDR</b><span class="tag">Endpoint Detection & Response</span></div>
+          <p>보안위협 탐지, 대응 솔루션, 백신보다 강함</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>Micro-Segmentation</b></div>
+          <p>내부망 통신 최소 허용, 통신보안전략</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>SCA</b><span class="tag">Software Composition Analysis</span></div>
+          <p>오픈소스 라이브러리 취약점 분석 도구, Synk, Black Duck, OWASP Dependency-Check 등이 있음</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>iLO</b><span class="tag">Integrated Lights-Out</span></div>
+          <p>원격 서버 관리 기능, HP 서버에 탑재되는 관리 칩셋</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>iDRAC</b><span class="tag">Integrated Dell Remote Access Controller</span></div>
+          <p>Dell 서버 내장된 원격 관리 전용 컨트롤러 </p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>DMZ</b></div>
+          <p>외부망과 내부망 사이 위치한 중간 네트워크 구역</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>FEP</b><span class="tag">Front End Processor</span></div>
+          <p>대외 채널(ATM, 카드사 등)에서 들어오는 거래를 1차로 처리하는 중게서버</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>DDP</b><span class="tag">Data Detection & Protection</span></div>
+          <p>데이터 유출 탐지 & 보호 솔루션</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>RVTools</b><span class="tag">Rob de Veij, 개발자명</span></div>
+          <p>VMWare 접속 유틸리티 </p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>EMC</b></div>
+          <p>스토리지 전문 회사, 현재 DELL에 인수</p>
+        </div>
+        
+        <div class="card">
+          <div class="term"><b>Veritas</b></div>
+          <p>백업, 복구, HA 전문 SW 기업</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>OMSA</b><span class="tag">OpenManage Server Administrator</span></div>
+          <p>Dell 서버 내부 하드웨어 상태 관리/모니터링</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>grafana</b></div>
+          <p>서버 데이터 시각화 SW</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>VM hang</b></div>
+          <p>가상머신이 멈춰서 응답이 없는 상태</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>ping down</b></div>
+          <p>ICMP 응답이 안 되는 상태</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>HBA</b><span class="tag">Host Bus Adapter</span></div>
+          <p>서버를 스토리지 네트워크(SAN)에 연결해주는 어댑터 카드</p>
+        </div>
+
+        <div class="card">
+          <div class="term"><b>FC</b><span class="tag">Fibre Channel</span></div>
+          <p>SAN 네트워크 유형</p>
+        </div>
+
+        
       </div>
     </div>
 
@@ -289,6 +380,8 @@
       </div>
       <p>WEB은 “받고”, AP는 “처리하고”, 미들웨어는 “연결·격리하고”, 계정계는 “돈을 확정”한다.</p>
     </div>
+
+
   </div>
 </body>
 </html>
