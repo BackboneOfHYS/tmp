@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Oracle Linux 네트워크 명령어 요약</title>
+  <style>
+    :root { --fg:#111; --muted:#666; --bg:#fff; --card:#f7f7f8; --line:#e6e6e9; }
+    body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
+    h1 { font-size: 20px; margin: 0 0 12px; }
+    p  { margin: 0 0 18px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .card h2 { font-size: 15px; margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; line-height: 1.35; }
+    code { background: #fff; border: 1px solid var(--line); padding: 2px 6px; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+    .quick { margin-top: 14px; }
+    pre { margin: 8px 0 0; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: #fff; overflow: auto; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Oracle Linux (RHEL 계열) 네트워크 명령어 리스트</h1>
+  <p>“네트워크 확인/트러블슈팅 때 바로 쓰는 명령어”만 간단히 정리</p>
+
+  <div class="grid">
+    <section class="card">
+      <h2>리눅스 네트워크 내부 구조</h2>
+      <ul>
+        <li><code>User Command</code> — 사용자 명령어</li>
+        <li><code>libnl</code> — 유저공간 라이브러리</li>
+        <li><code>netlink socket (IPC)</code> — IPC</li>
+        <li><code>Kernel netlink handlers</code> — 커널 핸들러</li>
+        <li><code>Kernel Network Tables</code> — 커널 네트워크 테이블</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>간단 용어 정리</h2>
+      <ul>
+        <li><code>family</code>리눅스 네트워크 서브시스템의 분류 기준</li>
+        <li><code>IPC</code>Inter-Process Communication, 프로세스 간 통신</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>User Command</h2>
+      <ul>
+        <li><code>ip</code> </li>
+        <li><code>ss</code> </li>
+        <li><code>tc</code> </li>
+        <li><code>bridge</code> </li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>libnl</h2>
+      <div class="note">netlink를 쓰기 쉽게 만든 사용자 공간 라이브러리</div>
+    </section>
+  
+    <section class="card">
+      <h2>netlink</h2>
+      <div class="note">유저와 커널 사이 네트워크 전용 IPC</div>
+    </section>
+
+    <section class="card">
+      <h2>Kernel netlink handlers</h2>
+      <div class="note">family별로 handler 함수가 등록되므로 family별로 함수 분기 진행</div>
+    </section>
+
+    <section class="card">
+      <h2>Kernel Network Tables</h2>
+      <div class="note">netlink를 통해서만 조회/수정 가능한 네트워크 설정 테이블</div>
+    </section>
+</div>
+</body>
+</html>
