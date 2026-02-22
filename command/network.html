@@ -30,6 +30,7 @@
       <ul>
         <li><code>ip addr</code> — 인터페이스 IP 확인 (ifconfig 대체)</li>
         <li><code>ip link</code> — NIC up/down 상태, MAC 주소</li>
+        <li><code>ip link up</code> — </li>
         <li><code>nmcli device status</code> — NetworkManager 장치 상태 요약</li>
         <li><code>ethtool eth0</code> — 링크 속도/duplex/케이블 연결 여부</li>
       </ul>
@@ -38,8 +39,11 @@
     <section class="card">
       <h2>📡 네트워크 상태 변경</h2>
       <ul>
-        <li><code>nmcli con show</code> - 연결 프로파일 확인</li>
+        <li><code>nmcli con show</code> - 연결 설정 프로파일 확인</li>
+        <li><code>nmcli device show</code> - 장비 상태 확인</li>
         <li><code>nmcli con mod 연결 프로파일 이름</code> - 기본</li>
+        <li><code>nmcli con up 연결 프로파일 이름</code> - 커넥션 on</li>
+        <li><code>nmcli con down 연결 프로파일 이름</code> - 커넥션 off</li>
         <li><code>ipv4.method manual | auto</code> — 정적 할당 | DHCP 사용</li>
         <li><code>ipv4.addresses 192.168.56.10/24</code> — ipv4 주소 설정</li>
         <li><code>ipv4.gateway 192.168.56.1</code> — 게이트웨이 설정</li>
@@ -69,6 +73,18 @@
       <h2>🔍 포트 / 소켓 확인</h2>
       <ul>
         <li><code>ss -lntup</code> — 열린 TCP/UDP 포트 + 프로세스</li>
+          <ul>
+            <li><code>-t</code> — tcp 포트</li>
+            <li><code>-t</code> — udp 포트</li>
+            <li><code>-l</code> — listen 포트</li>
+            <li><code>-n</code> — DNS/서비스명 변환 안 함(숫자 그대로)</li>
+            <li><code>-a</code> — listen 포함 모든 소캣</li>
+            <li><code>-p</code> — pid/프로세스 표시</li>
+            <li><code>-s</code> — 요약 통계</li>
+            <li><code>-m</code> — 메모리 사용량 표시</li>
+            <li><code>-i</code> — tcp 내부 정보 표시</li>
+            <li><code>-o</code> — 타이머 정보 표시</li>
+          </ul>
         <li><code>netstat -lntup</code> — 구버전(있으면 참고)</li>
       </ul>
     </section>

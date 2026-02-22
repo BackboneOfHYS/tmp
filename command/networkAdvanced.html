@@ -41,6 +41,8 @@
       <ul>
         <li><code>family</code>리눅스 네트워크 서브시스템의 분류 기준</li>
         <li><code>IPC</code>Inter-Process Communication, 프로세스 간 통신</li>
+        <li><code>D-Bus</code>유저 공간 프로그램끼리 말하게 해주는 메시지 버스</li>
+        <li><code>libnm</code>D-Bus로 NetworkManager와 D-Bus로 쉽게 통신하도록 해주는 API</li>
       </ul>
     </section>
 
@@ -57,11 +59,14 @@
     <section class="card">
       <h2>libnl</h2>
       <div class="note">netlink를 쓰기 쉽게 만든 사용자 공간 라이브러리</div>
+      <div class="note">nmcli로 Networkmanager를 다루고 NetworkManager가 이 계층을 다룸</div>
     </section>
   
     <section class="card">
       <h2>netlink</h2>
       <div class="note">유저와 커널 사이 네트워크 전용 IPC</div>
+      <div class="note">ip 명령어는 netlink를 직접 사용</div>
+      <div class="note">ss 명령어는 netlink를 직접 사용</div>
     </section>
 
     <section class="card">
