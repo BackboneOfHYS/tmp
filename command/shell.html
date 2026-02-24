@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Linux bash shell 명령어 요약</title>
+  <style>
+    :root { --fg:#111; --muted:#666; --bg:#fff; --card:#f7f7f8; --line:#e6e6e9; }
+    body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
+    h1 { font-size: 20px; margin: 0 0 12px; }
+    p  { margin: 0 0 18px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .card h2 { font-size: 15px; margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; line-height: 1.35; }
+    code { background: #fff; border: 1px solid var(--line); padding: 2px 6px; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+    .quick { margin-top: 14px; }
+    pre { margin: 8px 0 0; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: #fff; overflow: auto; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Linux bash shell 기본 문법</h1>
+
+  <div class="grid">
+    <section class="card">
+      <h2>참고지식</h2>
+      <ul>
+        <li><code>FD</code> — 프로세스에서 접근(열기)한 모든 파일에 대한 색인, 0, 1, 2는 각각 stdin, stdout, stderr가 기본</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>입출력</h2>
+      <ul>
+        <li><code>read -r 변수명</code> — 입력, -r옵션은 \를 이스케이프로 인식하지 않음</li>
+        <li><code>echo/prinf "$변수명"</code> — </li>
+      </ul>
+    </section>
+</body>
+</html>

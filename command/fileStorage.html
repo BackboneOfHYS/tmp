@@ -26,6 +26,13 @@
 
   <div class="grid">
     <section class="card">
+      <h2>참고지식</h2>
+      <ul>
+        <li><code>VFS</code> — 가상 파일 시스템, 파티션뿐만 아닌 모든 것을 파일로 다룸</li>
+      </ul>
+    </section>
+
+    <section class="card">
       <h2>기본 명령어 흐름</h2>
       <ul>
         <li><code>lsblk</code> — 디스크 구조 전체 트리 확인</li>
@@ -33,9 +40,61 @@
         <li><code>mount / findmnt</code> — 마운트 상태 확인</li>
         <li><code>df -h</code> — 파일시스템 사용률 점검</li>
         <li><code>du -h</code> — 특정 파일 시스템 내부 점검</li>
-        <li><code>lsof</code> — </li>
+        <li><code>lsof</code> — 열려 있는 모든 파일 확인</li>
         <li><code>df -i</code> — inode 사용량 확인</li>
       </ul>
     </section>
+
+    <section class="card">
+      <h2>VFS 기반 가상 파일시스템</h2>
+      <ul>
+        <li><code>proc</code> — 커널과 프로세스 정보 제공, /proc</li>
+        <li><code>sysfs</code> — 커널 장치/드라이버 정보, 하드웨어 제어용 인터페이스, /sys</li>
+        <li><code>tmpfs</code> — RAM 기반 파일시스템, 재부팅시 소멸, 빠름, /dev/shm, /run</li>
+        <li><code>devtmpfs</code> — 장치 파일 저장, 커널이 자동 생성, /dev</li>
+        <li><code>cgroup, cgroup2</code> — 프로세스 자원 제어(CPU, MEM), 컨테이너 환경에서 매우 중요</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>네트워크 파일시스템</h2>
+      <ul>
+        <li><code>nfs</code> — NAS 기반, 리눅스 간 공유</li>
+        <li><code>cifs</code> — Samba 기반, 윈도우 파일 공유</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>특수목적 파일시스템</h2>
+      <ul>
+        <li><code>overlay</code> — 여러 파일시스템을 겹쳐서 하나처럼 사용, 컨테이너에서 사용</li>
+        <li><code>squashfs</code> — 읽기 전용 압축 파일시스템</li>
+        <li><code>autofs</code> — 자동 마운트 시스템, 접근 시 자동으로 마운트</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>pseudo filesystem</h2>
+      <ul>
+        <li><code>mqueue</code> — POSIX 메시지 큐</li>
+        <li><code>hugetlbfs</code> — HugePage 메모리</li>
+        <li><code>debugfs</code> — 커널 디버깅</li>
+        <li><code>tracefs</code> — 커널 트레이싱</li>
+        <li><code>securityfs</code> — 보안 모듈 인터페이스</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>du 옵션 정리</h2>
+      <ul>
+        <li><code>-s</code> — 각 항목 합계만 출력</li>
+        <li><code>-h</code> — 사람이 읽기 좋은 단위</li>
+        <li><code>-k</code> — KB 단위</li>
+        <li><code>-g</code> — GB 단위</li>
+        <li><code>--max-depth=n</code> — n단계 디렉터리만</li>
+        <li><code>--exclude</code> — 특정 파일시스템 제외</li>
+      </ul>
+    </section>
+  </div>
 </body>
 </html>
