@@ -95,6 +95,20 @@
         <li><code>--exclude</code> — 특정 파일시스템 제외</li>
       </ul>
     </section>
+
+    <section class="card">
+      <h2>lsvg, vgs 옵션 정리</h2>
+      <ul>
+        <li><code>null</code> — VG 목록</li>
+        <li><code>VG이름</code> — VG 상세 정보</li>
+        <li><code>-l</code> — VG 안의 LV 목록</li>
+        <li><code>-p</code> — VG 안의 PV 목록</li>
+        <li><code>-o</code> — vgs는 컬럼 선택, lsvg는 활성화 상태 vg 출력</li>
+        <li><code>-i</code> — lsvg는 표준입출력 파이프라인으로 사용함, lsvg -o | lsvg -i와 같이</li>
+        <li><code>stale</code> — 디스크가 2개 이상 미러돼 있을 때 한쪽에 쓰기가 제대로 반영되지 않은 상태, lsvg -l에서 발생</li>
+        <li><code>miss</code> — OS가 해당 PV를 찾지 못하는 상태, lsvg -p에서 발생</li>
+      </ul>
+    </section>
   </div>
 </body>
 </html>
