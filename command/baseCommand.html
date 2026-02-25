@@ -53,12 +53,24 @@
       <ul>
         <li><code>-t</code> — 시간순 정렬</li>
         <li><code>-r</code> — 정렬 역으로 적용</li>
+        <li><code>-h</code> — 파일 크기 huaan readable</li>
+        <li><code>-S</code> — 파일 크기순 정렬</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>find</h2>
+      <ul>
+        <li><code>-type</code> — 파일 타입, f ,d, l 등 </li>
+        <li><code>-maxdepth</code> — 탐색 제한 설정</li>
+        <li><code>-printf</code> — 출력 형식 제한, "%f" <- 파일명만</li>
       </ul>
     </section>
 
     <section class="card">
       <h2>리다이렉션, here string</h2>
       <ul>
+        <li>파일 vs 명령어</li>
         <li><code>>>></code> — 문자열을 표준입력(stdin, FD 0)으로 직접 전달 기능</li>
         <li><code>>></code> — 덮어쓰기</li>
         <li><code>></code> — 이어쓰기</li>
@@ -66,10 +78,33 @@
     </section>
 
     <section class="card">
+      <h2>파이프라인</h2>
+      <ul>
+        <li>명령어 vs 명령어</li>
+        <li><code>|</code> — 기본 문법</li>
+      </ul>
+    </section>
+
+    <section class="card">
       <h2>sort</h2>
       <ul>
+        <li><code>-h</code> — human readable기준 정렬</li>
         <li><code>-r</code> — 옵션키면 내림차순, 안 키면 오름차순</li>
         <li><code>-k n</code> — n번째 컬럼 기준</li>
+      </ul>
+    </section>
+    
+    <section class="card">
+      <h2>백그라운드 작업관리</h2>
+      <ul>
+        <li><code>&</code> — 명령어 제일 뒤에 추가하면 백그라운드로 실행</li>
+        <li><code>jobs</code> — 백그라운드로 실행중인 프로세스 출력</li>
+        <li>jobs로 출력되는 색인은 fg, bg에서 %로 접근가능</li>
+        <li><code>fg %n</code> — 백그라운드 프로세스를 포그라운드로 전환</li>
+        <li><code>bg %n</code> — 포그라운든 프로세스를 백그라운드로 전환</li>
+        <li><code>kill %n</code> — 백그라운드 작업 종료</li>
+        <li><code>nohup</code> — 터미널이 종료되어도 계속 실행</li>
+        <li><code>setsid</code> — 세션 완전 분리</li>
       </ul>
     </section>
 
