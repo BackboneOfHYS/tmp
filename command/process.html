@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Linux 프로세스 명령어 요약</title>
+  <style>
+    :root { --fg:#111; --muted:#666; --bg:#fff; --card:#f7f7f8; --line:#e6e6e9; }
+    body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
+    h1 { font-size: 20px; margin: 0 0 12px; }
+    p  { margin: 0 0 18px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .card h2 { font-size: 15px; margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; line-height: 1.35; }
+    code { background: #fff; border: 1px solid var(--line); padding: 2px 6px; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+    .quick { margin-top: 14px; }
+    pre { margin: 8px 0 0; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: #fff; overflow: auto; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Linux 프로세스 기본 정리</h1>
+
+  <div class="grid">
+    <section class="card">
+      <h2>top</h2>
+      <ul>
+        <li><code>P</code> — CPU 기준 정렬</li>
+        <li><code>M</code> — 메모리 기준 정렬</li>
+        <li><code>T</code> — 누적 CPU 사용 시간 기준 정렬</li>
+        <li><code><</code> — 오름차순 정렬</li>
+        <li><code>></code> — 내림차순 정렬</li>
+        <li><code>R</code> — 현재 기준 역순 정렬</li>
+        <li><code>u</code> — 유저 기준 검색</li>
+        <li><code>k</code> — 프로세스 종료</li>
+        <li><code>r</code> — pid 우선순위 번경</li>
+        <li><code>/</code> — 검색(불확실)</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>
