@@ -35,9 +35,29 @@
     <section class="card">
       <h2>권한 설정</h2>
       <ul>
+        <li><code>SUID/SGID</code> — 실행시 파일 소유자/그룹 권한으로 실행, 설정되면 x대신 s, x가 없는데 s있으면 S</li>
+        <li><code>Sticky bit</code> — 디렉토리에서 삭제 제한, 디렉토리에 w권한있으면 파일삭제 가능(파일 권한과 무관)</li>
+        <li><code>useradd [계정명]</code> — 유저 생성(리눅스)</li>
+        <li><code>mkuser home=?, pgrp=?, groups=?, </code> — 유저 생성(유닉스)</li>
+        <li><code>passswd 계정명</code> — 유저 비밀번호 설정</li>
         <li><code>chmod 권한 파일명</code> — 파일 권한속성 변경</li>
         <li><code>chown 소유자:소유그룹 파일명</code> — 파일 소유자, 소유그룹 변경</li>
+        <li><code>usermod</code> — 계정의 소속 그룹추가(리눅스)</li>
+          <ul>
+            <li><code>-g</code> — 기본 그룹 변경</li>
+            <li><code>-G</code> — 보조 그룹 변경</li>
+            <li><code>-a</code> — 보조 그룹 변경시 기존 그룹 유지</li>
+            <li><code>-d</code> — 홈 디렉토리 변경</li>
+            <li><code>-m</code> — -d 사용시 실제 디렉토리 내용을 같이 이동</li>
+            <li><code>-s</code> — 로그인 쉘 변경</li>
+            <li><code>-L</code> — 계정 잠금</li>
+            <li><code>-U</code> — 계정 잠금 해제</li>
+            <li><code>-U</code> — 계정 잠금 해제</li>
+            <li><code>-l</code> — 사용자 이름 변경</li>
+          </ul>
+        <li><code>chuser</code> — 계정의 소속 그룹추가(유닉스)</li>
       </ul>
+      
     </section>
 
     <section class="card">
@@ -64,6 +84,30 @@
         <li><code>-type</code> — 파일 타입, f ,d, l 등 </li>
         <li><code>-maxdepth</code> — 탐색 제한 설정</li>
         <li><code>-printf</code> — 출력 형식 제한, "%f" <- 파일명만</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>tar</h2>
+      <ul>
+        <li><code>-v</code> — 출력 보기 </li>
+        <li><code>-f</code> — 파일명 지정</li>
+        <li><code>-t</code> — 내용물 보기</li>
+        <li><code>-c</code> — 새로 묶기</li>
+        <li><code>-x</code> — 압축 풀기</li>
+        <li><code>-z</code> — 단순 압축</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>gzip</h2>
+      <ul>
+        <li><code>gzip </code> — gzip은 기존 파일 삭제, 하나의 파일만 압축하기 때문에 tar로 묶고 압축</li>
+        <li><code>-1~9</code> — 압축 속도, 압축률 조정</li>
+        <li><code>-v</code> — 실행처리 과정 출력</li>
+        <li><code>-r</code> — 디렉터리 내부 재귀 압축</li>
+        <li><code>-d</code> — 압축 해제</li>
+        <li><code>-c</code> — 리다이렉션으로 저장</li>
       </ul>
     </section>
 
