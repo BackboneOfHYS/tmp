@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Linux vmstat 명령어 정리</title>
+  <style>
+    :root { --fg:#111; --muted:#666; --bg:#fff; --card:#f7f7f8; --line:#e6e6e9; }
+    body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
+    h1 { font-size: 20px; margin: 0 0 12px; }
+    p  { margin: 0 0 18px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .card h2 { font-size: 15px; margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; line-height: 1.35; }
+    code { background: #fff; border: 1px solid var(--line); padding: 2px 6px; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+    .quick { margin-top: 14px; }
+    pre { margin: 8px 0 0; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: #fff; overflow: auto; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Linux vmstat 명령어 정리</h1>
+
+  <div class="grid">
+    <section class="card">
+      <h2>기본 옵션</h2>
+      <ul>
+        <li><code>vmstat n1 n2</code> — n1초마다 갱신, n2번 출력 후 끝</li>
+        <li><code>-s</code> — 요약 통계</li>
+        <li><code>-d</code> — 디스크 통계</li>
+        <li><code>-m</code> — 슬랩 캐시 정보</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>프로세스 상태 - procs</h2>
+      <ul>
+        <li><code>r</code> — 실행 대기 중 프로세스 수</li>
+            <ul>
+                <li>running or runable(R 상태)에 해당하는 프로세스 수</li>
+                <li>I/O 대기중인 프로세스는 (D 상태) b 컬럼 반영</li>
+            </ul>
+        <li><code>b</code> — I/O 대기 프로세스 수</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>메모리 - memory</h2>
+      <ul>
+        <li><code>swpd</code> — 사용 중인 swap 메모리</li>
+        <li><code>free</code> — 완전한 free 메모리</li>
+        <li><code>buff</code> — 버퍼 메모리</li>
+        <li><code>cache</code> — 페이지 캐시</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>스왑 - swap</h2>
+      <ul>
+        <li><code>si</code> — swap in(디스크->메모리)</li>
+        <li><code>so</code> — swap out(메모리->디스크)</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>디스크 I/O - io</h2>
+      <ul>
+        <li><code>bi</code> — 블록 읽기</li>
+        <li><code>bo</code> — 블록 쓰기</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>커널활동 - system</h2>
+      <ul>
+        <li><code>in</code> — 인터럽트 수</li>
+        <li><code>cs</code> — 컨텍스트 스위치</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>CPU 사용률 - cpu</h2>
+      <ul>
+        <li><code>us</code> — 사용자 영역 CPU</li>
+        <li><code>sy</code> — 커널 영역 CPU</li>
+        <li><code>id</code> — idle</li>
+        <li><code>wa</code> — I/O wait</li>
+        <li><code>st</code> — steal</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>

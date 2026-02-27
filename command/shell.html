@@ -33,10 +33,14 @@
     </section>
 
     <section class="card">
-      <h2>입출력</h2>
+      <h2>입출력 및 기본</h2>
       <ul>
-        <li><code>read -r 변수명</code> — 입력, -r옵션은 \를 이스케이프로 인식하지 않음</li>
+        <li><code>read -r 변수명</code> — '한 줄' 입력, -r옵션은 \를 이스케이프로 인식하지 않음</li>
+        <li><code>read -d '구분자'</code> — 구분자를 만나기 전까지 읽음</li>
         <li><code>echo/prinf "$변수명"</code> — </li>
+        <li><code>sleep n</code> — sleep 명령어</li>
+        <li><code>$RANDOM</code> — 난수</li>
+        <li><code>변수명=$(명령어)</code> — 명령어 결과 저장</li>
       </ul>
     </section>
 
@@ -63,6 +67,20 @@
         <li><code>fi</code> — 기본 문법</li>
         <li><code>[[ 변수 =~ 정규식 ]];</code> — 정규식 조건</li>
         <li><code>(( 변수 -eq 변수 ));</code> — 산술연산영역, 조건 아님!</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>while</h2>
+      <ul>
+        <li><code>while [ ]</code> — 기본 문법</li>
+        <li><code>do</code> — 기본 문법</li>
+        <li><code>done</code> — 기본 문법</li>
+        <li><code>while true</code> — 무한 루프</li>
+        <li><code>while IFS= read -r line</code> — 파일 읽기</li>
+        <li><code>done < [파일명]</code> — 파일 읽기</li>
+        <li><code>while read file</code> — 명령어 결과 읽기</li>
+        <li><code>done < <(ls)</code> — 명령어 결과 읽기</li>
       </ul>
     </section>
 

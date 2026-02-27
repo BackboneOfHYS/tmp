@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Linux ssh 명령어 정리</title>
+  <style>
+    :root { --fg:#111; --muted:#666; --bg:#fff; --card:#f7f7f8; --line:#e6e6e9; }
+    body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
+    h1 { font-size: 20px; margin: 0 0 12px; }
+    p  { margin: 0 0 18px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .card h2 { font-size: 15px; margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; line-height: 1.35; }
+    code { background: #fff; border: 1px solid var(--line); padding: 2px 6px; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+    .quick { margin-top: 14px; }
+    pre { margin: 8px 0 0; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: #fff; overflow: auto; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Linux ssh 명령어 정리</h1>
+
+  <div class="grid">
+
+    <section class="card">
+      <h2>passphrase</h2>
+      <ul>
+        <li>개인키를 다시 암호화하는 용도</li>
+      </ul>
+    </section>
+
+
+    <section class="card">
+      <h2>ssh-agent</h2>
+      <ul>
+        <li><code>-s</code> — sh/bash 문법으로 환경변수 설정 코드 출력</li>
+        <li><code>-c</code> — csh/tcsh 문법으로 환경변수 설정 코드 출력</li>
+        <li><code>eval "$(ssh-agent -s)"</code> — ssh-agent 환경변수 적용</li>
+        <li><code>-k</code> — 메모리에서 키 제거됨</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>ssh-add</h2>
+      <ul>
+        <li><code>ssh-add ~/.ssh/id-ed25519</code> — ssh 개인키 등록</li>
+        <li><code>-d 키경로</code> — 키 하나만 제거</li>
+        <li><code>-D</code> — 키 전체 제거</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>ssh [옵션] 유저명@주소</h2>
+      <ul>
+        <li><code>-p</code> — 포트 지정</li>
+        <li><code>-i</code> — 개인키 지정</li>
+        <li><code>-v, -vv, -vvv</code> — 디버그 모드, 단계별로 자세한 출력</li>
+        <li><code>-L</code> — 로컬포트 포워딩</li>
+        <li><code>-R</code> — 리버스 포트 포워딩</li>
+        <li><code>ssh -L(R) port:host:port 유저명@주소</code> — </li>
+        <li><code>-T</code> — tty 할당 안 함</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>scp</h2>
+      <ul>
+        <li><code>-r</code> — 디렉토리 전체 복사</li>
+        <li><code>-P</code> — 포트 지정</li>
+        <li><code>-i</code> — 개인키 지정</li>
+        <li><code>-p</code> — 원본 파일 속성 유지</li>
+        <li><code>-C</code> — 압축해서 전송</li>
+        <li><code>-l</code> — 대역폭 제한</li>
+        <li><code>scp 파일명 유저@호스트:경로</code> — 로컬->원격</li>
+        <li><code>scp 유저@호스트:경로 경로</code> — 원격->로컬</li>
+        <li><code>scp 유저@호스트:경로 유저@호스트:경로</code> — 원격->원격</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>ssh-keygen</h2>
+      <ul>
+        <li><code>~/.ssh/</code> — 저장 경로</li>
+        <li><code>~/.ssh/id_타입명</code> — 개인키</li>
+        <li><code>~/.ssh/id_타입명.pub</code> — 공개키</li>
+        <li><code>-t</code> — 타입 지정(rsa, ed25519)</li>
+        <li><code>-C</code> — 주석</li>
+        <li><code>-b</code> — 키 길이 지정</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>ssh-copy-id 유저명@호스트명</h2>
+      <ul>
+        <li><code>~/.ssh/authorized_keys</code> — 공개키 저장 파일</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>
