@@ -37,6 +37,8 @@
       <ul>
         <li><code>read -r 변수명</code> — '한 줄' 입력, -r옵션은 \를 이스케이프로 인식하지 않음</li>
         <li><code>read -d '구분자'</code> — 구분자를 만나기 전까지 읽음</li>
+        <li><code>read -a 변수명</code> — 주어진 문자열 배열로 저장</li>
+        <li><code>IFS=':' read -r -a 변수명</code> — 구분자 기준으로 배열 생성</li>
         <li><code>echo/prinf "$변수명"</code> — </li>
         <li><code>sleep n</code> — sleep 명령어</li>
         <li><code>$RANDOM</code> — 난수</li>
@@ -67,6 +69,12 @@
         <li><code>fi</code> — 기본 문법</li>
         <li><code>[[ 변수 =~ 정규식 ]];</code> — 정규식 조건</li>
         <li><code>(( 변수 -eq 변수 ));</code> — 산술연산영역, 조건 아님!</li>
+        <li><code>[ -e 경로 ]</code> — 종류 구분하지 않은 존재 여부 확인</li>
+        <li><code>[ -f 경로 ]</code> — 파일 존재 여부</li>
+        <li><code>[ -d 경로 ]</code> — 디렉토리 존재 여부</li>
+        <li><code>[ -rwx 경로 ]</code> — 읽기, 쓰기, 실행 가능 여부</li>
+        <li><code>[ -s 경로 ]</code> — 크기가 0보다 큼</li>
+        <li><code>[ -L 경로 ]</code> — 심볼릭 링크</li>
       </ul>
     </section>
 
@@ -81,6 +89,45 @@
         <li><code>done < [파일명]</code> — 파일 읽기</li>
         <li><code>while read file</code> — 명령어 결과 읽기</li>
         <li><code>done < <(ls)</code> — 명령어 결과 읽기</li>
+        <li><code>continue</code> — 다음 분기로 점프</li>
+        <li><code>break</code> — 반복 종료</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>배열</h2>
+      <ul>
+        <li><code>arr=(apl ban chr)</code> — 기본 문법</li>
+        <li><code>arr[idx]=attr</code> — 특정 요소 변경</li>
+        <li><code>arr+=(apl)</code> — 요소 추가</li>
+        <li><code>${arr[idx]}</code> — 요소 접근</li>
+        <li><code>${arr[@]}</code> — 요소 전체, 독립요소 취급</li>
+        <li><code>${arr[*]}</code> — 요소 전체, 뮨저열 취급</li>
+        <li><code>${#arr[@]}</code> — 배열 길이</li>
+        <li><code>${!arr[@]}</code> — 인덱스 목록</li>
+        <li><code>${arr[@]:1:2}</code> — 슬라이싱</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>함수</h2>
+      <ul>
+        <li><code>함수명(){}</code> — 기본 문법</li>
+        <li><code>return 0~255</code> — 0은 성공</li>
+        <li><code>함수명 인자1 인자2 ...</code> — 사용법</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>리다이렉션</h2>
+      <ul>
+        <li><code><</code> — file input</li>
+        <li><code><<</code> — 여러줄 블록 input</li>
+        <li><code><<<<code> — 문자열 input</li>
+        <li><code>></code> — 파일 덮어쓰기</li>
+        <li><code>>><code> — 파일 이어쓰기</li>
+        <li><code>2><code> — stderr 덮어쓰기</li>
+        <li><code>&><code> — stdout + stderr</li>
       </ul>
     </section>
 

@@ -61,10 +61,33 @@
     </section>
 
     <section class="card">
-      <h2>grep</h2>
+      <h2>stat</h2>
       <ul>
         <li><code>-i</code> — 대소문자 구분 안 함</li>
         <li><code>-c</code> — 매칭된 라인 수만 숫자로 출력</li>
+      </ul>
+    </section>
+    
+    <section class="card">
+      <h2>grep 경로</h2>
+      <ul>
+        <li><code>-c "포맷문자열"</code> — 포맷 지정 출력</li>
+        <li><code>%n</code> — 파일 이름</li>
+        <li><code>%s</code> — 파일 크기(bytes)</li>
+        <li><code>%U</code> — 소유자 이름</li>
+        <li><code>%u</code> — UID</li>
+        <li><code>%G</code> — 그룹 이름</li>
+        <li><code>%g</code> — GID</li>
+        <li><code>%a</code> — 권한 (숫자)</li>
+        <li><code>%A</code> — 권한 (문자)</li>
+        <li><code>%F</code> — 파일 타입</li>
+        <li><code>%i</code> — inode 번호</li>
+        <li><code>%h</code> — 하드링크 개수</li>
+        <li><code>%x</code> — 접근 시간</li>
+        <li><code>%y</code> — 수정 시간</li>
+        <li><code>%z</code> — 상태 변경 시간</li>
+        <li><code>-L</code> — 심볼릭 링크에서 원본파일 정보</li>
+        <li><code>-f</code> — 주어진 경로가 속한 슈퍼블록(파일시스템)의 정보 출력</li>
       </ul>
     </section>
 
