@@ -1,0 +1,88 @@
+리눅스 명령어
+
+2.2. 시스템 사용자 정보 91p
+
+- logname
+whoami는 현재 유저명(EUID 기준), logname은 처음 로그인한 유저 기준
+- who
+현재 로그인한 모든 계정, logname 기준 아님
+
+2.3 리눅스 시스템 정보 95p
+- uname
+  - a 전부 출력
+  - m CPU 아키텍처
+  - n 네트워크 호스트 이름
+  - r 커널 릴리즈 버전, 버전 식별, 모듈 경로, 커널 호환성 식별, 
+    - uek (Unbreakable Enterprise Kernel)
+    - 커널 기본 버전-배포판 빌드/패치 번호.배포판/커널 종류.아키텍처
+    - 커널 기본 버전 = 메이저.마이너.패치레벨
+    - 배포판 빌드/패치 번호 = 배포판 빌드 번호.서브 패치 번호.추가 패치 레벨.리빌드 번호
+    - el8uek = Enterprise Linux 8 , Unbreakable Enterprise Kernel
+    - 공식 커널 개발팀(kernel.org)와 벤더 관리는 별개
+    - 커널 기본 버전은 커널 개발팀 관리 (업스트림 버전)
+    - 배포판 빌드 번호 - 배포판 릴리즈
+    - 서브 패치 - 추가 수정
+    - 추가 패치 - 보완 수정
+  - s 운영체제 커널 이름
+  - v 커널 빌드 정보, 빌드 이력, 커널 교체 여부 확인
+  - p 프로세서
+  - i 하드웨어 플랫폼
+  - o os 이름
+- hostname
+- arch
+CPU 정보 확인
+- env
+환경변수 출력
+- which  명령어
+명령어의 위치 출력
+- history
+- !n
+사용했던 명령어 중 n번째로 수행한 명령어 사용
+- history -d n
+n번째로 수행한 명령어를 histoyr에서 삭제
+- history -c 
+이전에 사용했던 명령들을 모두 삭제
+
+8.1. 하드디스크 관리 386p
+- IDE(Integrated Drive Electronics), ATA(Advanced Technology Attachment)(병렬방식이라 PATA로도 부름)
+- SATA(직렬방식)
+- NVMe(Non-Volatile Memory Express) (PCIe(Peripheral Component Interconnect Express) 방식, 플래시 메모리 최적화)
+- SAS(Serial(직렬) Attached SCSI(Small Computer system Interface ,소형 컴퓨터 시스템용 인터페이스))
+- SCSI는 서버용, ATA는 개인용
+
+- 1세대 HDD 중심, PATA, Parallel SCSI
+- 2세대 속도 개선, SATA, SAS
+- 3세대 SSD 등장(플래시 메모리)
+- 4세대 NVMe, PCIe기반
+
+8.2. 파일 시스템 검사 및 복구 419p
+- fsck
+- e2fsck
+- badblocks
+- dumpe2fs
+
+8.3. 쿼터 설정 429p
+- quotacheck
+- qutaon
+- edquota
+- quota
+- repquota
+
+10.4. 프로세스 명령어 513p
+- ps
+- pgrep
+- kill
+
+10.5. 서비스와 소켓 522p
+- service -> /usr/lib/systemd/system/
+- socket -> /usr/lib/system/system/*.socket
+
+???. 부트 과정
+- BIOS
+  - MBR 읽음
+  - GRUB 읽음 (부트로더)
+- UEFI
+  - EFI System Partition/EFI/.../*.efi 파일 읽음
+  - 위 파티션의 파일시스템은 UEFI 펌웨어가 지원해야함(EFI는 FAT32로 정의됨)
+  - GRUB 읽음(부트로더)
+
