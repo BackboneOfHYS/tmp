@@ -117,6 +117,49 @@
         <li><code>miss</code> — OS가 해당 PV를 찾지 못하는 상태, lsvg -p에서 발생</li>
       </ul>
     </section>
+
+    <section class="card">
+      <h2>파일시스템 검사 및 복구</h2>
+      <ul>
+        <li><code>fsck [옵션] [장치명]</code> — 파일 시스템 점검 및 복구</li>
+          <ul>
+            <li>디스크 I/O 캐시로 인해 오류발생 가능하므로 umount 필수</li>
+            <li><code>-a</code> — 오류 발견 시 묻지 않고 자동 복구</li>
+            <li><code>-r</code> — 오류 복구 시 사용자에게 확인 요청</li>
+            <li><code>-y</code> — 모든 질문 yes</li>
+            <li><code>-n</code> — 수정하지 않고 점검만 수행</li>
+            <li><code>-f</code> — 강제 점검 진행</li>
+            <li><code>-t [타입]</code> — 점검 대상 파일시스템 지정</li>
+            <li><code>-V</code> — 상세 출력</li>
+          </ul>
+        <li><code>e2fsck</code> — ext2/3/4 파일시스템 타겟 체크 도구</li>
+        <li><code>badblocks [옵션] [장치명]</code> — 물리적 손상으로 데이터 rw 불가한 배드 섹터 검색 도구 </li>
+          <ul>
+            <li>물리적 배드 섹터 - 물리적 파손</li>
+            <li>논리적 배드 섹터 - 기록 오류로 ECC값 오류</li>
+            <li>리매핑 - 배드섹터를 봉인하고 예비 섹터를 할당하는 것</li>
+            <li><code>-v</code> — 상세 출력</li>
+            <li><code>-o [파일명]</code> — 결과 파일 저장</li>
+            <li><code>-n</code> — 데이터를 유지하면서 검사</li>
+            <li><code>-w</code> — 데이터 삭제, 특정 패턴으로 검사</li>
+            <li><code>-s</code> — 검사 진행률을 %를 써서 출력</li>
+          </ul>
+        <li><code>dump</code> — 백업도구</li>
+        <li><code>restore</code> — 복구도구</li>
+        <li><code>dumpe2fs</code> — ext2/3/4/ 설정정보 조회</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>쿼터 관리</h2>
+      <ul>
+        <li><code>quotacheck</code> — 사용량 체크 및 쿼타 기록 갱신</li>
+        <li><code>qutaon/off</code> — 쿼타 기능 활성화</li>
+        <li><code>edquota</code> — 쿼타 설정 편집</li>
+        <li><code>quota</code> — 쿼타 설정 확인</li>
+        <li><code>repquota</code> — 보고서 형태로 출력</li>
+      </ul>
+    </section>
   </div>
 </body>
 </html>
