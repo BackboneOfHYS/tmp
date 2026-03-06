@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Linux system session</title>
+  <style>
+    :root { --fg:#111; --muted:#666; --bg:#fff; --card:#f7f7f8; --line:#e6e6e9; }
+    body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
+    h1 { font-size: 20px; margin: 0 0 12px; }
+    p  { margin: 0 0 18px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .card h2 { font-size: 15px; margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; line-height: 1.35; }
+    code { background: #fff; border: 1px solid var(--line); padding: 2px 6px; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+    .quick { margin-top: 14px; }
+    pre { margin: 8px 0 0; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: #fff; overflow: auto; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Linux system session</h1>
+
+  <div class="grid">
+    <section class="card">
+      <h2>what is system session?</h2>
+      <ul>
+        <li>사용자 세션 / 시스템(데몬) 세션 으로 구분됨</li>
+        <li>위 둘의 가장 큰 차이는 표준입출력(제어터미널) stdin, stdout, stderr의 유무</li>
+        <li>사용자 세션의 세션리더 프로세는 대부분 쉘</li>
+        <li>시스템(데몬) 세션의 세션리더는 데몬 프로세스 그 자체</li>
+        <li>systemctl로 start하면 systemctl이 D-Bus 통신 채널로 실행 요청</li>
+        <li>systemd(시스템 데몬, pid 1)이 fork(), setsid()명령(또는 systemd의 Cgroup 안에서)으로 새로운 데몬 세션 생성</li>
+        <li>제어터미널은 입출력 통로</li>
+        <li>세션은 터미널과 연결된 모든 프로세스를 하나로 묶는 관리 단위</li>
+        <li>쉘은 세션이 시작될 때 가장 먼저 실행, 세션 내 다른 프로세스 실행</li>
+        <li>쉘은 세션 설정에 접근할 수 있음</li>
+        <li>데몬 프로세스는 쉘이 없음</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>how make session?</h2>
+      <ul>
+        <li>부팅 후 최초 프로세스 생성</li>
+          <ul>
+            <li>0번(idle/swapper) - 커널, 프로세스 스케줄링 담당</li>
+            <li>1번(init/systemd) - 모든 프로세스의 조상, 시스템 서비스와 데몬 관리</li>
+            <li>2번(kthreadd) - 커널 스레드 관리</li>
+          </ul>
+        <li>systemd가 getty 실행</li>
+          <ul>
+            <li>터미널 선점 및 초기화</li>
+            <li>키보드 1개 -> 가상 스위치 (기본 tty1, ctrl + alt + Fn으로 변경 가능) -> real 터미널(/dev/ttyn) -> 커널의 가상 터미널(실제 입출력 담당)</li>
+            <li>표준입출력(제어터미널) 연결</li>
+            <li>사용자 이름 대기</li>
+          </ul>
+        <li>getty가 exec 명령으로 login 프로세스 실행</li>
+        <li>인증 과정</li>
+        <li>로그인 성공 후 로그인 프로세스 동작</li>
+        <ul>
+            <li>로그인 프로세스 권한 변경(root->user)</li>
+            <li>setsid() 호출, 세션 리더 등록</li>
+            <li>환경 변수 로드</li>
+        </ul>
+        <li>login이 exec명령으로 사용자 설정의 로그인 쉘 실행</li>
+      </ul>
+    </section>
+
+    <section class="card">
+        <h2>what have session?</h2>
+        <ul>
+            <li>환경변수</li>
+            <li>프로세스 그룹 관리</li>
+            <li>리소스 제한</li>
+            <li>umask</li>
+            <li>tty 설정(제어터미널과의 통신규칙)</li>
+            <li>namespace & cgroups</li>
+            <li>쉘 옵션 플래그는 초기에는 쉘이 세션을 훑고 스스로 결정</li>
+            <li>이후에는 사용자가 관리</li>
+        </ul>
+    </section>
+
+  </div>
+</body>
+</html>
