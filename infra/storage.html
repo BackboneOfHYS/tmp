@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>스토리지 하드웨어 장비</title>
+  <style>
+    :root { --fg:#111; --muted:#666; --bg:#fff; --card:#f7f7f8; --line:#e6e6e9; }
+    body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
+    h1 { font-size: 20px; margin: 0 0 12px; }
+    p  { margin: 0 0 18px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .card h2 { font-size: 15px; margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; line-height: 1.35; }
+    code { background: #fff; border: 1px solid var(--line); padding: 2px 6px; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+    .quick { margin-top: 14px; }
+    pre { margin: 8px 0 0; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: #fff; overflow: auto; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>스토리지 하드웨어 장비</h1>
+
+  <div class="grid">
+
+    <section class="card">
+      <h2>참고지식</h2>
+      <ul>
+        <li>서버에서 인치는 표준</li>
+        <li>인치는 성인 남성 엄지손가락 한 마디에서 유래</li>
+        <li>1(in) = 2.54(cm)</li>
+        <li>피트는 성인 남성 발 크기에서 유래</li>
+        <li>1(ft) = 12(in)</li>
+        <li>3(ft) = 1(yd)</li>
+        <li>1760(yd) = 1(mi)</li>
+        <li>렉의 너비는 19(in)</li>
+        <li>랙의 유닛(높이)는 1U = 1.75(in)</li>
+        <li>표준 랙의 전체 높이 = 42U</li>
+      </ul>
+      <ul>
+        <li>랙은 수납 공간, 샤시는 장비들의 통합 몸체, 샤시는 랙 안에 장착</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>저장 매체 종류에 따른 분류</h2>
+      <ul>
+        <li>HDD(Hard Disk Drive), Spinning Disk - 부품, 자기 디스크, 기계식</li>
+        <li>SSD(Solid State Drive), Solid State - 부품, 반도체 저장 장치, 플래시 메모리, 전자식</li>
+        <li>SCM(Storage Class Memory, 부품, SSD보다 빠르고 주소 지정 가능)</li>
+        <li>All-HDD (ALL-SATA/SAS) - 전부 HDD</li>
+        <li>All-Flash - 전부 SSD</li>
+        <li>Hybrid - HDD와 SSD 모두 활용</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>외형에 따른 분류</h2>
+      <ul>
+        <li>Card Type(추가 부품 형태), 얇은 판 모양, PCB에 칩을 박는 형태</li>
+        <li>JBOD(Just a Bunch Of Disks) - 그저 디스크 묶음, 디스크 슬롯만 가득 찬 박스, 연결된 서버에서 데이터 관리</li>
+        <li>Storage Array - 자체 CPU(컨트롤러)와 OS 존재, 자체 관리</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>연결에 따른 분류</h2>
+      <ul>
+        <li>DAS(Direct Attached Storage) - 서버 본체에 케이블로 연결</li>
+        <li>NAS</li>
+        <li>SAN</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>설치 형태에 따른 분류</h2>
+      <ul>
+        <li>Rack-Mountable - 랙에 고정될 수 있는 형태</li>
+        <li>Tower - 타워형, 일반적인 PC 본체 모델</li>
+        <li>Blade - 커다란 전용 통(샤시) 하나에 얇은 서버들이 꽂힘</li>
+        <li>Rugged/Portable - 외부 강화 프레임, 들고 다닐 수 있는 손잡이</li>
+        <li>LFF(Large Form Factor) - 3.5인치 드라이브</li>
+        <li>SFF(Small Form Factor) - 2.5인치 드라이브`</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>물리/논리 프로토콜</h2>
+      <ul>
+        <li>SATA 계열 - SATA 포트(L자형 커넥터), AHCI 프로토콜, HDD, 2.5인치 SSD, 전원-데이터 케이블 분리</li>
+        <li>M.2 포트, 막대형 NVMe SSD</li>
+        <li>SAS 게열 - SAS 포트(서버용), SCSI 프로토콜, 전원-케이블 일체형</li>
+        <li>PCIe 계열 - PCIe 슬롯/레인, NVMe, CXL 프로토콜</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>

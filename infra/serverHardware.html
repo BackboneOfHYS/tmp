@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>서버 하드웨어 유형</title>
+  <style>
+    :root { --fg:#111; --muted:#666; --bg:#fff; --card:#f7f7f8; --line:#e6e6e9; }
+    body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
+    h1 { font-size: 20px; margin: 0 0 12px; }
+    p  { margin: 0 0 18px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .card h2 { font-size: 15px; margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; line-height: 1.35; }
+    code { background: #fff; border: 1px solid var(--line); padding: 2px 6px; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+    .quick { margin-top: 14px; }
+    pre { margin: 8px 0 0; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: #fff; overflow: auto; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>서버 하드웨어 유형</h1>
+
+  <div class="grid">
+
+    <section class="card">
+      <h2>서버 역할에 따른 분류</h2>
+      <ul>
+        <li>프로세서, 컨트롤러, 연산/처리, 컴퓨팅</li>
+        <li>스토리지</li>
+        <li>네트워크</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>서버 하드웨어 유형에 따른 분류</h2>
+      <ul>
+        <li>랙 마운트</li>
+        <li>샤시(Chassis), 블레이드(Blade)</li>
+        <li>타워</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>서버 VS 개인 PC 회로기판 차이</h2>
+      <h2>서버 회로기판 구조는 드라이브(디스크)->백플레인->메인보드</h2>
+      <ul>
+        <li>백플레인 유무 - 배선 간소화, 전원 분배 및 관리, 핫 스왑 지원</li>
+        <li>멀티 소캣 유무</li>
+        <li>메모리 슬롯 개수 차이</li>
+        <li>RDIMM/ECC 지원 유무</li>
+        <li>관리 전용 프로세서 유무</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>
