@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>스토리지 하드웨어 솔루션</title>
+  <style>
+    :root { --fg:#111; --muted:#666; --bg:#fff; --card:#f7f7f8; --line:#e6e6e9; }
+    body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
+    h1 { font-size: 20px; margin: 0 0 12px; }
+    p  { margin: 0 0 18px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .card h2 { font-size: 15px; margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; line-height: 1.35; }
+    code { background: #fff; border: 1px solid var(--line); padding: 2px 6px; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+    .quick { margin-top: 14px; }
+    pre { margin: 8px 0 0; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: #fff; overflow: auto; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>스토리지 하드웨어 솔루션</h1>
+
+  <div class="grid">
+
+    <section class="card">
+      <h2>스토리지 하드웨어 솔루션 리스트</h2>
+      <ul>
+        <li>H/W 계층</li>
+          <ul>
+            <li>Hardware RAID - 안정성</li>
+          </ul>
+        <li>S/W 계층</li>
+          <ul>
+            <li>OS 레벨</li>
+              <ul>
+                <li>LVM - 유연성</li>
+                <li>Software RAID - 안정성</li>
+              </ul>
+            <li>FileSystem 레벨</li>
+              <ul>
+                <li>ZFS / Btrfs</li>
+              </ul>
+            <li>Infrastructure 레벨</li>
+              <ul>
+                <li>SDS(Software Defined Storage) - 제어의 주체</li>                
+                <li>HCI(Hyper-Converged Infrastructure) - 물리적 구조</li>
+                <li>Disaggregated Storage, CDI(Composable Disaggregated Infrastructure)</li>
+                <li>참고 - Fabric은 어디서든 데이터를 끌어올 수 있다는 의미의 네트워크 망을 의미</li>
+              </ul>
+          </ul>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>스토리지 효율화 기술</h2>
+      <ul>
+        <li>전송 규격 기술: NVMe-over-Fabrics(NVMe-oF)</li>
+        <li>Erasure Coding - 데이터 보호 알고리즘, 인프라 관점</li>
+        <li>중복 제거(Deduplication) & 압축(Compression)</li>
+        <li>스토리지 계층화: 티어링(Tiering) & 캐싱(Caching)</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>SDS/HCI 관리 콘솔</h2>
+      <ul>
+        <li>개별 호스트 접속</li>
+        <li>중앙 관리 콘솔</li>
+        <li>하드웨어 관리 콘솔</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>SDS/HCI 네트워크 구성</h2>
+      <ul>
+        <li>관리망</li>
+        <li>스토리지망(SAN)</li>
+        <li>서비스망</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>CDI 관리 콘솔</h2>
+      <ul>
+        <li>개별 컴퓨팅 서버 접속</li>
+        <li>오케스트레이터(중앙 제어 소프트웨어) 접속</li>
+        <li>하드웨어 관리 콘솔</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>CDI 네트워크 구성</h2>
+      <ul>
+        <li>관리망</li>
+        <li>스토리지망(SAN)</li>
+        <li>서비스망</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>SAN 종류</h2>
+      <ul>
+        <li>FC-SAN - 광케이블(Fiber Channel)과 전용 FC-스위치</li>
+        <li>IP-SAN - 이더넷 하드웨어, iSCSI, NVMe-oF, SDS 전용 프로토콜 사용</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>
