@@ -160,6 +160,24 @@
         <li><code>repquota</code> — 보고서 형태로 출력</li>
       </ul>
     </section>
+
+    <section class="card">
+      <h2>RAID 컨트롤러</h2>
+      <ul>
+        <li><code>lspci</code> — pci 포트 연결 확인</li>
+        <li><code>lsmod</code> — 드라이버 로드 여부 확인</li>
+        <li><code>storcli</code> — Broadcom / LSI 벤더사 명령어</li>
+        <li><code>ssacli</code> — HP(HPE) 벤더사 명령어</li>
+        <li><code>perccli</code> — DELL 벤더사 명령어</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>FC HBA</h2>
+      <ul>
+        <li><code>cat /sys/class/fc_host/host*/port_name</code> — WWN 확인 후 스토리지에 등록해야 디스크 보임</li>
+      </ul>
+    </section>
   </div>
 </body>
 </html>
