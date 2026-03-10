@@ -71,6 +71,10 @@
         <li>DAS(Direct Attached Storage) - 서버 본체에 케이블로 연결</li>
         <li>NAS</li>
         <li>SAN</li>
+        <ul>
+          <li>FC - 광 연결</li>
+          <li>iSCSI - UTP 연결</li>
+        </ul>
       </ul>
     </section>
 
@@ -89,9 +93,44 @@
     <section class="card">
       <h2>물리/논리 프로토콜</h2>
       <ul>
-        <li>SATA 계열 - SATA 포트(L자형 커넥터), AHCI 프로토콜, HDD, 2.5인치 SSD, 전원-데이터 케이블 분리</li>
+        <li>ATA</li>
+          <ul>
+            <li>매커니즘 - PATA</li>
+            <li>물리칩셋 - PIIX, ICH6</li>
+            <li>프로토콜 - IDE(Integrated Drive Electronics), 디스크 내장 컨트롤러의 시작</li>
+          </ul>
+          <ul>
+            <li>매커니즘 - SATA</li>
+            <li>물리칩셋 - ICH6</li>
+            <li>프로토콜 - AHCI(Advanced Host Controller Interface), 직렬방식의 등장으로 호스트에서 효율적인 디스크 컨트롤 개선</li>
+          </ul>
+        <li>SCSI</li>
+          <ul>
+            <li>매커니즘 - 기본 SCSI</li>
+            <li>물리칩셋 - Bus Logic, LSI Logic</li>
+            <li>프로토콜 - SCSI</li>
+          </ul>
+          <ul>
+            <li>매커니즘 - SAS(Serial Attached SCSI)</li>
+            <li>물리칩셋 - LSI Logic SAS</li>
+            <li>프로토콜 - SCSI</li>
+          </ul>
+          <ul>
+            <li>매커니즘 - PVSCSI(ParaVirtualized SCSI)</li>
+            <li>물리칩셋 - VM Direct</li>
+            <li>프로토콜 - SCSI</li>
+          </ul>
+        <li>NVMe</li>
+        <ul>
+            <li>매커니즘 - NVMe</li>
+            <li>물리칩셋 - PCIe(메인보드), NVMeController(SSD)</li>
+            <li>프로토콜 - NVMe</li>
+          </ul>
+      </ul>
+
+      <ul>
+        <li>- 수정필요 -</li>
         <li>M.2 포트, 막대형 NVMe SSD</li>
-        <li>SAS 게열 - SAS 포트(서버용), SCSI 프로토콜, 전원-케이블 일체형</li>
         <li>PCIe 계열 - PCIe 슬롯/레인, NVMe, CXL 프로토콜</li>
       </ul>
     </section>
