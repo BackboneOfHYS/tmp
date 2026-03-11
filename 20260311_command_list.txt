@@ -1,0 +1,81 @@
+groudadd
+grouddel
+
+usermod
+gpasswd
+
+gpasswd -A <사용자 id> <그룹명>
+gpasswd -a user group
+gpasswd -d user group
+gpasswd group
+
+cp -r
+chmod -R 
+chown -R
+
+tar -xvf <파일명> -C <PATH>
+
+pkill -u <유저명>
+
+보조그룹은 /etc/passwd에 안 보임
+
+tar로 하면 uid기준으로 onwer가 바뀜
+
+==========================
+
+os 초기 설치 때 lvm 구성
+os 하고 나서 다른 장치 인식으로 lvm 구성도 된다
+후자의 경우 다른 lv에 백업해두고 기존 legacy 파티션을 민 다음 lvm을 적용시킬 수 있다.
+근데 어차피 백업을 하던 새로운 lv에 복사를 하던 똑같다~
+
+백업 명령어는 tar, cp, rsync가 있다.
+
+pvmove로 디스크 교체가 간편하다
+
+근데 pvmove를 못하는 경우가 컨트롤러가 행되면 안 되는데 이걸 raid가 커버한다~
+
+===============
+
+lsblk
+blkid
+
+디스크 추가(vm에서)
+
+sblk
+blkid
+
+fdisk <dev/???>
+n ->  새 파티션
+p -> primary 파티션 or e -> extended 파티션, MBR 파티션 4개 개수 제한을 우회하는 것, 
+1 -> 파티션 번호
+enter -> 시작 섹터
+enter -> 끝 섹터, +20G(파티션 용량 20G)
+w -> 저장
+
+
+pvcreate <dev/???>
+pvs
+pvdisplay
+vgcreate  <그룹명> <pv명> <pv명> ...
+vgs
+vgdisplay
+lvcreate -L <용량> -n <lv명> <그룹명>
+
+
+mkfs.<fs명> <lv명>
+
+mkdir 마운트 포인트
+mount 마운트 포인트
+
+기존 파티션에서 lvm 파티션으로 복사
+
+기존 파티션 umount 진행
+
+기존 파티션 포맷
+mkfs~
+/dev/sda를 pvcraate에 넣기
+
+fstab에서 lvm 반영하기, mount -a로 fstab 정상작동확인
+UUID=xxxx-xxxx /data xfs defaults 0 0
+UUID 마운트포인트 파일시스템 마운트옵션 dump(백업여부) fsck순서(0은 안 함, 1은 최우선, 2는 그 다음 검사, 깨져있으면 마운트 전에 복구)
+fstab은 마운트만 한다! 포맷은 안 함!
