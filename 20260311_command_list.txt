@@ -14,12 +14,20 @@ chmod -R
 chown -R
 
 tar -xvf <파일명> -C <PATH>
+tar --numeric-owner
+tar --same-owner -> 위험하므로 계정명 재확인 및 다른 계정 안 가르키는지 확인
+			 -> 작동 방식이 cat /etc/passwd해서 uid 찾아서 바꿔치기임
 
 pkill -u <유저명>
 
 보조그룹은 /etc/passwd에 안 보임
 
-tar로 하면 uid기준으로 onwer가 바뀜
+tar로 하면 root로 푸는 것과 user로 푸는 것과 차이가 발생
+루트는 uid기준으로 onwer가 바뀜
+일반계정은 자기자신으로 바꿔치기됨
+
+chown은 루트만 가능, quota, 악성코드 소유자 우회가능하기 때문
+
 
 ==========================
 
@@ -52,7 +60,6 @@ enter -> 시작 섹터
 enter -> 끝 섹터, +20G(파티션 용량 20G)
 w -> 저장
 
-
 pvcreate <dev/???>
 pvs
 pvdisplay
@@ -60,7 +67,6 @@ vgcreate  <그룹명> <pv명> <pv명> ...
 vgs
 vgdisplay
 lvcreate -L <용량> -n <lv명> <그룹명>
-
 
 mkfs.<fs명> <lv명>
 
@@ -79,3 +85,11 @@ fstab에서 lvm 반영하기, mount -a로 fstab 정상작동확인
 UUID=xxxx-xxxx /data xfs defaults 0 0
 UUID 마운트포인트 파일시스템 마운트옵션 dump(백업여부) fsck순서(0은 안 함, 1은 최우선, 2는 그 다음 검사, 깨져있으면 마운트 전에 복구)
 fstab은 마운트만 한다! 포맷은 안 함!
+
+ntp / chrony
+timedatectl set-ntp false
+System clock synchronized: No
+NTP service: inactive
+
+ntp를 먼저 끄고 변경해야됨!
+date -s로 시간변경

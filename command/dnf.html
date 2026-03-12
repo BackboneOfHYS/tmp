@@ -95,12 +95,17 @@
 
     <h3>목록 조회, 패키지 이름 기준<span class="pill">list</span></h3>
     <pre><code>dnf list installed
-dnf list available
-dnf list all</code></pre>
+               dnf list available
+               dnf list all
+    </code></pre>
 
     <h3>파일을 제공하는 패키지 찾기 <span class="pill">provides</span></h3>
     <pre><code>dnf provides /usr/sbin/nginx</code></pre>
     <p>※ <code>rpm -qf</code>에 해당하는 상위 개념(Repo까지 포함해서 검색 가능)</p>
+
+    <h3>dnf 설정 매니저<span class="pill">dnf config-manager</span></h3>
+    <pre><code>dnf config-manager --dump</code></pre>
+
   </div>
 
     <h3>설치된 패키지의 파일 경로는 rpm이 담당</h3>
@@ -175,6 +180,14 @@ dnf makecache</code></pre>
       <li>
         <code>/etc/dnf/</code><br>
         → dnf 패키지 매니저의 전역 설정 파일이 위치하는 디렉터리
+      </li>
+      <li>
+        <code>/etc/dnf/dnf.conf</code><br>
+        dnf 기본 설정
+        <ul>
+          <li><code>retries=0</code>다운로드 실패 시 재시도 횟수</li>
+          <li><code>timeout=3</code>서버 응답을 기다리는 시간(초)</li>
+        </ul>
       </li>
       <li>
         <code>/etc/pki/rpm-gpg/</code><br>
