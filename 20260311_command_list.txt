@@ -188,3 +188,7 @@ ntp는 epoch값 조정해줌
 fstab 추가
 부팅되고 무한로딩창 뜸
 그냥 UUID 오탈자임
+
+================== 20260313 명령어 모음
+dmidecode -t system
+lspci | grep -E "SATA|SAS|NMVe|RAID"
