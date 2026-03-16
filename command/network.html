@@ -126,6 +126,44 @@
         <li><code>tcpdump -nn port 80</code> — 포트 필터 + 숫자 출력</li>
       </ul>
     </section>
+
+    <section class="card">
+      <h2>🧪 ntp / chrony 설정</h2>
+      <ul>
+        <li><code>systemctl start ntpd / chronyd</code> — systemctl 명령으로 ntp / chrony 가동, 중지</li>
+        <li><code>/etc/chrony.conf</code> — 설정파일 경로</li>
+        <li><code>/etc/ntp.conf</code> — 설정파일 경로</li>
+        <li>서버 주소 뒤에 iburst 추가</li>
+        <li><code>pool poll.ntp.org iburst</code></li>
+        <li><code>server time.bora.net iburst</code></li>
+        <li><code>설정 적용하려면 서비스 재시작</code></li>
+        <li>server는 단일 행만 보고 pool은 여러개 행을 넣을 수 있음</li>
+        <li>server랑 pool 둘 다 설정하면 server먼저 보고 pool은 후보군으로 됨</li>
+        <li>driftfile은 오답노트, 호스트 시계가 얼머나 하루에 빠른가, 느린가</li>
+        <li>makestep은 임계값을 넘은 오차를 바로 점프해서 시간 동기화, 원래는 천천히 맞춤</li>
+        <li>소프트웨어와 하드웨어 시간 동기화하는 게 rtcsync</li>
+        <li>hardwarestamp는 nic에서 지원해야 되며 ntp/chrony 패킷이 온 정확한 시점을 찍어서 cpu가 안 바쁠 때? 전달</li>
+        <li>minsources는 pool에서 다수결투표의 최소 개수를 지정</li>
+        <li>maxsourrces는 pool에서 다수결투표의 최대 개수를 지정</li>
+        <li>allow는 내 서버를 ntp 서버로 변신시킴</li>
+        <li>startum은 시간 신뢰 등급이며 ntp가 끊기면 기본으로는 다른 장비들에게 시간 정보 주지 않음</li>
+        <li>하지만 local startum 10을 설정하면 호스트를 바로보는 클라이언트들이 10등급의 대장서버로 인식함</li>
+        <li><code>/etc/chrony.keys</code>번호/알고리즘/비밀번호, 번호는 chrony.conf에서 사용, 비밀번호는 server-client에서 동일하게 가져야함</li>
+        <li>윤초(지구의 자전시간과 원자시계 오차 맞추기 위해 1초 더하거나 빼는 것)</li>
+        <li>leapsectz는 윤초를 처리할 때 시스템 타임존 데이터베이스(/usr/share/zoneinfo)을 참고하라는 명령어</li>
+        <li>최근에는 leap smearing을 더 선호함(1초를 바로 더하지 않고 천천히 더함)</li>
+        <li>log 선택 가능한 정보 리스트</li>
+          <ul>
+            <li><code>measurements</code>각 NTP 소스로부터 받은 원시 측정값(가장 세밀함)</li>
+            <li><code>statistics</code>각 소스에 대해 수행된 회귀 분석 통계(안정성 판단용)</li>
+            <li><code>tracking</code>시스템 시계의 이득/손실 속도 및 보정된 오차 기록</li>
+            <li><code>refid</code>각 소스의 참조 ID(Refid) 정보</li>
+            <li><code>rtc</code>시스템의 하드웨어 시계(RTC)에 대한 오차 및 보정 기록</li>
+            <li><code>rawmeasurements</code>필터링되지 않은 순수 네트워크 패킷 타임스탬프(디버깅용)</li>
+            <li><code>subseconds</code>(일부버전) 소수점 이하의 아주 정밀한 시간 단위 정보</li>
+          </ul>
+      </ul>
+    </section>
   </div>
 
   <section class="card quick">
