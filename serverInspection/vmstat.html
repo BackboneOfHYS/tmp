@@ -68,6 +68,8 @@
     <section class="card">
       <h2>스왑 - swap</h2>
       <ul>
+        <li>보통 초당 KB 수를 나타낸다.</li>
+        <li>스왑 영역은 페이지로 관리되며 한 페이지 당 4KB이다.</li>
         <li><code>si</code> — swap in(디스크->메모리)</li>
         <li><code>so</code> — swap out(메모리->디스크)</li>
       </ul>
@@ -76,8 +78,23 @@
     <section class="card">
       <h2>디스크 I/O - io</h2>
       <ul>
+        <li>보통 초당 블록 수를 나타내며 한 블록 당 1KB이다.</li>
+        <li>메모리와 실제 디스크 장치 사이 오가는 것을 측정</li>
+        <li>AP에서 데이터 발생된다고 바로 반영 X</li>
+        <li>VFS 계층 아래 Block I/O Layer에서 발생하는 이벤트 집계</li>
         <li><code>bi</code> — block in 블록 읽기</li>
+          <ul>
+            <li>디스크 데이터 -> 메모리 공간</li>
+            <li>새로운 프로그램 실행</li>
+            <li>파일 내용 읽을 때</li>
+            <li>SWAP In</li>
+          </ul>
         <li><code>bo</code> — block out 블록 쓰기</li>
+          <ul>
+              <li>파일을 저장할 때</li>
+              <li>데이터베이스에 입력/수정할 때</li>
+              <li>Swap Out </li>
+          </ul>
       </ul>
     </section>
 
@@ -105,7 +122,7 @@
         <li><code>st</code> — steal</li>
           <ul>
             <li>주로 클라우드 등에서 VM내부 OS에서 vCPU 접근정도 측정</li>
-            <li>측정 방식은 기대한 시각과 실제 응답 시각의 차이<li>
+            <li>측정 방식은 기대한 시각과 실제 응답 시각의 차이</li>
           </ul>
       </ul>
     </section>
