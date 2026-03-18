@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Linux 프로세스 명령어 요약</title>
+  <title>Linux proc directory 정리</title>
   <style>
     :root { --fg:#111; --muted:#666; --bg:#fff; --card:#f7f7f8; --line:#e6e6e9; }
     body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
@@ -21,34 +21,14 @@
   </style>
 </head>
 <body>
-  <h1>Linux 프로세스 기본 정리</h1>
+  <h1>Linux proc directory 정리</h1>
 
   <div class="grid">
     <section class="card">
-      <h2>top</h2>
+      <h2>기본 개념</h2>
       <ul>
-        <li><code>P</code> — CPU 기준 정렬</li>
-        <li><code>M</code> — 메모리 기준 정렬</li>
-        <li><code>T</code> — 누적 CPU 사용 시간 기준 정렬</li>
-        <li><code><</code> — 오름차순 정렬</li>
-        <li><code>></code> — 내림차순 정렬</li>
-        <li><code>R</code> — 현재 기준 역순 정렬</li>
-        <li><code>u</code> — 유저 기준 검색</li>
-        <li><code>k</code> — 프로세스 종료</li>
-        <li><code>r</code> — pid 우선순위 번경</li>
-        <li><code>/</code> — 검색(불확실)</li>
-        <li><code>o</code> — 컬럼명=값 으로 필터링</li>
-        <li><code>=</code> — o 옵션 취소</li>
-        <li><code>c</code> — COMMAND의 전체 경로와 옵션 출력</li>
-        <li><code>L</code> — 전체 목록에서 하이라이트하기</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>ps</h2>
-      <ul>
-        <li><code>-e</code> — 모든 프로세스 출력, -A와 동일</li>
-        <li><code>-f</code> — 상세 정보 풀 포맷으로 출력</li>
+        <li>커널의 메모리 속에 존재하는 가상 파일 시스템</li>
+        <li>시스템의 현재 상태를 파일 형태로 보여주는 역할</li>
       </ul>
     </section>
   </div>

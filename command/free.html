@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Linux free 명령어 정리</title>
+  <style>
+    :root { --fg:#111; --muted:#666; --bg:#fff; --card:#f7f7f8; --line:#e6e6e9; }
+    body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
+    h1 { font-size: 20px; margin: 0 0 12px; }
+    p  { margin: 0 0 18px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .card h2 { font-size: 15px; margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; line-height: 1.35; }
+    code { background: #fff; border: 1px solid var(--line); padding: 2px 6px; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+    .quick { margin-top: 14px; }
+    pre { margin: 8px 0 0; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: #fff; overflow: auto; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Linux free 명령어 정리</h1>
+
+  <div class="grid">
+    <section class="card">
+      <h2>기본 개념</h2>
+      <ul>
+        <li>시스템이 메모리를 어떻게 사용하는지 출력</li>
+        <li>리눅스는 남는 공간을 buff/cache로 적극 활용</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>옵션</h2>
+      <ul>
+        <li><code>-h</code>Human_readable</li>
+        <li><code>-b, k, m, g</code>단위 고정 Byte, ...</li>
+        <li><code>-t</code>하단 RAM과 SWAP의 합계(Total)라인을 추가</li>
+        <li><code>-s [초]</code>지정 초 단위로 반복출력</li>
+        <li><code>-c [횟수]</code>지정 횟수만큼 출력, -s옵션과 함께 사용</li>
+        <li><code>-w</code>Wide mode. buff와 cache를 분리, 상세 출력</li>
+        <li><code>-V</code>free 명령 버전 정보 확인</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>일반 메모리 vs 버퍼 vs 캐시</h2>
+      <ul>
+        <li>일반 메모리 - 실제 프로세스가 점유</li>
+        <li>버퍼 - </li>
+          <ul>
+            <li>하드디스크 같은 블록장치에 데이터를 쓰기 전에 잠시 머무는 공간</li>
+            <li>디스크의 어느 위치에 저장될지 분석하여 데이터 정렬 및 병합</li>
+            <li>응용 프로그램이 요청한 데이터 단위와 하드웨어가 다루는 데이터 단위가 다른 것을 해결</li>
+            <li>메타 데이터 저장(권한, 소유자, 생성 시간 등)</li>
+            <li>저널링으로 안전하게 기록</li>
+          </ul>
+        <li>캐시 - </li>
+          <ul>
+            <li>디스크에서 읽어온 파일 데이터를 메모리에 남겨둔 것</li>
+            <li>읽기 성능 최적화 - 곧 읽을 것 같은 데이터를 미리 가져옴</li>
+            <li>쓰기 성능 최적화 - 지연 쓰기, 변경된 내용을 바로 반영하지 않은 더티페이지를 가지고 있음, 커널이 나중에 저장</li>
+            <li>위 과정으로 프로그램은 바로 다음 과정을 진행할 수 있음</li>
+            <li>실행 파일 및 라이브러리 공유</li>
+          </ul>
+          <li>버퍼 vs 캐시</li>
+            <ul>
+              <li>캐시는 파일 내용 중심, 논리적인 속도 향상</li>
+              <li>버퍼는 디스크 블록 중심, 물리적인 효율</li>
+            </ul>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>장치파일 유형</h2>
+      <ul>
+        <li>블록장치파일 - 블록 단위, 임의 접근(random access) 가능</li>
+        <li>문자장치파일 - 문자 단위, 스트림 형태</li>
+        <li>네트워크장치파일 - 소캣 단위(?)</li>
+      </ul>
+    </section>
+
+  </div>
+</body>
+</html>

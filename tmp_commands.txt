@@ -89,3 +89,28 @@ n번째로 수행한 명령어를 histoyr에서 삭제
   - GRUB 읽음(부트로더)
 
 ???. smartctl
+
+???. 아침점검 명령어
+- Disk 점검
+  - cat /var/log/messages | grep -i "i/o" | grep -i "error" | grep -v "fd0" | wc -l
+  - cat /var/log/messages | grep -i "scsi" | grep -i "error" | wc -l
+  - cat /var/log/messages | grep -i "^.ext.$" | grep -i "error" | wc -l
+  - cat /var/log/messages | grep -i "physdisk" | grep -i "failed" | wc -l 
+
+- CPU 개수
+  - lsdev -Cc processor | grep Available | wc -l
+  - ledev는 proinfo 패키지 설치해야 됨
+    - 이 외에도 lscpu, lspci, lcusb 등이 있음
+
+- 메모리 점검
+  - free -m | gre Mem
+
+- 스왑 점검
+  - free -m | tail -1 | awk '{print int($2)}'
+
+- Run-Q 개수
+  - echo $(vmstat 3 2 | tail -n 1) | awk '{print $1}'
+
+- CPU사용률 점검
+  - echo $(vmstat 3 2 | tail -n 1) | awk '{print $13, $14}'
+

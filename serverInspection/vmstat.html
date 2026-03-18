@@ -25,6 +25,14 @@
 
   <div class="grid">
     <section class="card">
+      <h2>기본 개념</h2>
+      <ul>
+        <li>Run-Queue는 실행중 + 대기중 프로세스 전체 포함</li>
+        <li>스케줄러 입장에서 다음에 실행할 놈을 고르는 것이기 때문</li>
+      </ul>
+    </section>
+    
+    <section class="card">
       <h2>기본 옵션</h2>
       <ul>
         <li><code>vmstat n1 n2</code> — n1초마다 갱신, n2번 출력 후 끝</li>
@@ -39,20 +47,21 @@
       <ul>
         <li><code>r</code> — 실행 대기 중 프로세스 수</li>
             <ul>
+                <li>Run-Queue</li>
                 <li>running or runable(R 상태)에 해당하는 프로세스 수</li>
                 <li>I/O 대기중인 프로세스는 (D 상태) b 컬럼 반영</li>
             </ul>
-        <li><code>b</code> — I/O 대기 프로세스 수</li>
+        <li><code>b</code> — I/O 대기 프로세스 수, 인터럽트 불가능한 수면 상태</li>
       </ul>
     </section>
 
     <section class="card">
       <h2>메모리 - memory</h2>
       <ul>
-        <li><code>swpd</code> — 사용 중인 swap 메모리</li>
-        <li><code>free</code> — 완전한 free 메모리</li>
-        <li><code>buff</code> — 버퍼 메모리</li>
-        <li><code>cache</code> — 페이지 캐시</li>
+        <li><code>swpd</code> — swap 사용량</li>
+        <li><code>free</code> — 사용 가능한 여유 물리 메모리</li>
+        <li><code>buff</code> — 버퍼로 사용중인 메모리</li>
+        <li><code>cache</code> — 캐시로 사용중인 메모리</li>
       </ul>
     </section>
 
@@ -67,26 +76,26 @@
     <section class="card">
       <h2>디스크 I/O - io</h2>
       <ul>
-        <li><code>bi</code> — 블록 읽기</li>
-        <li><code>bo</code> — 블록 쓰기</li>
+        <li><code>bi</code> — block in 블록 읽기</li>
+        <li><code>bo</code> — block out 블록 쓰기</li>
       </ul>
     </section>
 
     <section class="card">
       <h2>커널활동 - system</h2>
       <ul>
-        <li><code>in</code> — 인터럽트 수</li>
-        <li><code>cs</code> — 컨텍스트 스위치</li>
+        <li><code>in</code> — 초당 발생한 인터럽트 수</li>
+        <li><code>cs</code> — 초당 발생한 컨텍스트 스위치 수</li>
       </ul>
     </section>
 
     <section class="card">
       <h2>CPU 사용률 - cpu</h2>
       <ul>
-        <li><code>us</code> — 사용자 영역 CPU</li>
-        <li><code>sy</code> — 커널 영역 CPU</li>
-        <li><code>id</code> — idle</li>
-        <li><code>wa</code> — I/O wait</li>
+        <li><code>us</code> — 사용자 영역 CPU 점유율</li>
+        <li><code>sy</code> — 커널 영역 CPU 점유율</li>
+        <li><code>id</code> — idle 점유율</li>
+        <li><code>wa</code> — I/O wait 점유율</li>
         <li><code>st</code> — steal</li>
       </ul>
     </section>

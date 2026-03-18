@@ -38,11 +38,31 @@
         <li><code>SUID/SGID</code> — 실행시 파일 소유자/그룹 권한으로 실행, 설정되면 x대신 s, x가 없는데 s있으면 S</li>
         <li><code>Sticky bit</code> — 디렉토리에서 삭제 제한, 디렉토리에 w권한있으면 파일삭제 가능(파일 권한과 무관)</li>
         <li><code>useradd [계정명]</code> — 유저 생성(리눅스)</li>
+        <li><code>userdel [계정명]</code> — 유저 삭제(리눅스)</li>
+        <li><code>groupadd [계정명]</code> — 그룹 생성(리눅스)</li>
+        <li><code>groupdel [계정명]</code> — 그룹 삭제(리눅스)</li>
+
         <li><code>mkuser home=?, pgrp=?, groups=?, </code> — 유저 생성(유닉스)</li>
+        
         <li><code>passswd 계정명</code> — 유저 비밀번호 설정</li>
+        <li><code>gpasswd [그룹명]</code>— 그룹 비밀번호 설정</li>
+          <ul>
+            <li><code>-a 유저명</code>유저 추가</li>
+            <li><code>-d 유저명</code>유저 삭제</li>
+            <li><code>-M 유저1, ...</code>그룹멤버 세팅</li>
+            <li><code>-A 유저1, ...</code>관리자 세팅</li>
+            <li><code>-r</code>비밀번호 삭제</li>
+            <li><code>-R</code>newgrp 명령어와 비밀번호를 통한 그룹 접근 금지 설정</li>
+            <li><code>-R</code>/etc/gshadow에 !설정이면 -R옵션 적용임</li>
+            <li><code>-R</code>해당 옵션 취소하려면 그룹 비밀번호 재설정</li>
+            <li><code>-Q</code>/etc가 아닌 다른 마운트포인트를 가리킴</li>
+          </ul>
+        
+
         <li><code>chmod 권한 파일명</code> — 파일 권한속성 변경</li>
         <li><code>chown 소유자:소유그룹 파일명</code> — 파일 소유자, 소유그룹 변경</li>
-        <li><code>usermod</code> — 계정의 소속 그룹추가(리눅스)</li>
+
+        <li><code>usermod</code> — 계정 설정(리눅스)</li>
           <ul>
             <li><code>-g</code> — 기본 그룹 변경</li>
             <li><code>-G</code> — 보조 그룹 변경</li>
@@ -55,7 +75,12 @@
             <li><code>-U</code> — 계정 잠금 해제</li>
             <li><code>-l</code> — 사용자 이름 변경</li>
           </ul>
-        <li><code>chuser</code> — 계정의 소속 그룹추가(유닉스)</li>
+        <li><code>chuser</code> — 계정 설정(유닉스)</li>
+        <li><code>groupmod</code>— 그룹 설정(리눅스)</li>
+          <ul>
+            <li><code>-a 유저명</code>그룹에 유저 추가</li>
+          </ul>
+        
       </ul>
       
     </section>
@@ -65,7 +90,8 @@
       <ul>
         <li><code>-i</code> — 대소문자 구분 안 함</li>
         <li><code>-c</code> — 매칭된 라인 수만 숫자로 출력</li>
-        <li><code>-e</code> — e를 안 쓰면 grep은 첫 인자를 검색어로 봄</li>
+        <li><code>-e</code> — 해당 옵션으로 검색어 다수 지정 가능 -e 패턴 -e 패턴, 하이푼을 패턴에 넣고 싶을 때도 활용</li>
+        <li><code>-v</code> — 해당 패턴이 없는, 반대로 출력</li>
         <li><code>-E 정규식</code>egrep과 동일</li>
         <li><code>grep -r "패턴" 경로1 경로 2 ...</code> — 지정 경로내의 모든 파일에서 패턴 찾기</li>
       </ul>
@@ -202,7 +228,7 @@
     </section>
 
     <section class="card">
-      <h2>unmae</h2>
+      <h2>uname</h2>
       <ul>
         <li>시스템 정보 출력</li>
         <li><code>-a</code> — 전부 출력</li>
@@ -243,6 +269,18 @@
       <ul>
         <li>사용했던 명령어 기록 확인 및 n번째로 실행한 명령어 실행</li>
         <li><code>-d n/ -c</code> — n번째 명령어 삭제, history 전체 삭제</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>wc</h2>
+      <ul>
+        <li>wc 파일경로 -> "행 단어 비트 파일명" 출력</li>
+        <li><code>-l</code> — 행 수 출력</li>
+        <li><code>-w</code> — 단어 수 출력</li>
+        <li><code>-c</code> — 바이트 수 출력</li>
+        <li><code>-m</code> — 글자 수(멀티바이트 처리 유리)</li>
+        <li><code>-L</code> — 가장 긴 줄의 길이가 몇 글자인지</li>
       </ul>
     </section>
   </div>

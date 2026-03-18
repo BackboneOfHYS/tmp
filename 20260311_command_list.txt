@@ -1,7 +1,3 @@
-groudadd
-grouddel
-
-usermod
 gpasswd
 
 gpasswd -A <사용자 id> <그룹명>
@@ -49,7 +45,7 @@ blkid
 
 디스크 추가(vm에서)
 
-sblk
+lsblk
 blkid
 
 fdisk <dev/???>
