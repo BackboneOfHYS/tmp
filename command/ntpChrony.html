@@ -48,7 +48,7 @@
         <li>윤초(지구의 자전시간과 원자시계 오차 맞추기 위해 1초 더하거나 빼는 것)</li>
         <li>leapsectz는 윤초를 처리할 때 시스템 타임존 데이터베이스(/usr/share/zoneinfo)을 참고하라는 명령어</li>
         <li>최근에는 leap smearing을 더 선호함(1초를 바로 더하지 않고 천천히 더함)</li>
-        <li>log 선택 가능한 정보 리스트</li>
+        <li>log 선택 가능한 정보 리스트, /var/log/chrony, ntp는 syslog나 messages에 찍힘</li>
           <ul>
             <li><code>measurements</code>각 NTP 소스로부터 받은 원시 측정값(가장 세밀함)</li>
             <li><code>statistics</code>각 소스에 대해 수행된 회귀 분석 통계(안정성 판단용)</li>
