@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Linux /etc/sysctl.conf 정리</title>
+  <style>
+    :root { --fg:#111; --muted:#666; --bg:#fff; --card:#f7f7f8; --line:#e6e6e9; }
+    body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
+    h1 { font-size: 20px; margin: 0 0 12px; }
+    p  { margin: 0 0 18px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .card h2 { font-size: 15px; margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; line-height: 1.35; }
+    code { background: #fff; border: 1px solid var(--line); padding: 2px 6px; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+    .quick { margin-top: 14px; }
+    pre { margin: 8px 0 0; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: #fff; overflow: auto; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Linux /etc/sysctl.conf 정리</h1>
+
+  <div class="grid">
+    <section class="card">
+      <h2>기본 개념</h2>
+      <ul>
+        <li>커널의 동작 방식을 결정하는 파일</li>
+        <li>커널 전체 체질을 조절</li>
+        <li><code>sysctl -a</code>커널 파라미터 출력</li>
+        <li><code>sysctl -p</code>sysctl.conf 내용 즉시반영</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>주요 역할</h2>
+      <ul>
+        <li>네트워크 최적화</li>
+        <li>메모리 관리</li>
+        <li>보안 강화</li>
+        <li>파일시스템</li>
+        <li>기타 등등</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>공유메모리</h2>
+      <ul>
+        <li>여러 프로세스가 함께 사용하는 메모리 공간</li>
+        <li><code>kernel.shmmax</code>단일 공유 메모리 세그먼트(덩어리)의 최대 크기</li>
+        <li><code>kernel.shmall</code>시스템 전체에서 사용가능한 공유메모리 총 페이지 수</li>
+        <li><code>4KB</code>대개 메모리 페이지 크기</li>
+        <li>전체 사용할 공유 메모리 바이트 / 4096 = kernel.shmall로 보통 조절함</li>
+        <li>질문 -> 공유 메모리를 한 번에 안 주고 단위를 두는가?</li>
+        <li>답변 -> 최대 할당량 지정, 관리 및 할당에 용이하므로</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>세마포어</h2>
+      <ul>
+        <li>공유자원 접근에 순서제어</li>
+        <li>세마포어는 공유자원의 접근에 대한 신호등</li>
+        <li>신호등이 있고, 신호등 그룹이 있고 전체 신호등 개수가 있는 것</li>
+        <li><code>kernel.sem = SEMMSL SEMMNS SEMOPM SEMMNI</code>세마포어 설정값 형식</li>
+        <li><code>SEMMSL</code>하나의 세마포어 세트당 가질 수 있는 최대 세마포어 개수</li>
+        <li><code>SEMMNS</code>시스템 전체에서 쓸 수 있는 총 세마포어 개수</li>
+        <li><code>SEMOPM</code>한 번의 시스템 호출로 작업할 수 있는 최대 작업 개수</li>
+        <li><code>SEMMNI</code>시스템 전체에서 만들 수 있는 세마포어 세트의 최대 개수</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>메시지 큐</h2>
+      <ul>
+        <li>프로세스 통신의 메시지 용량 설정</li>
+        <li><code>kernel.msgmax</code>메시지 한 개 최대 크기</li>
+        <li><code>kernel.msgmnb</code>메시지 큐 총 크기</li>
+        <li><code>kernel.msgmni</code>시스템 전체 메시지 큐 최대 개수</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>코어</h2>
+      <ul>
+        <li>스케줄링, 분산처리, 성능제한</li>
+        <li>세부적인 것은 /sys/devices/system/cpu에서 관리</li>
+        <li><code>kernel.sched_min_granularity_ns</code>프로세스에게 부여되는 최소 실행시간</li>
+        <li><code>kernel.sched_latency_ns</code>프로세스가 적어도 한 번은 실행되도록 하는 전체 주기</li>
+        <li><code>kernel.sched_wakeup_granularity_ns</code>프로세스가 깨어나고 현재 실행중인 프로세스를 밀어내고 코어를 차지할지 결정하는 결정값</li>
+        <li><code>kernel.numa_balancing</code>구조에서 메모리와 가까운 CPU 코어로 자동 배치</li>
+        <li><code>kernel.sched_migration_cost-ns</code>CPU코어에서 다른 코어로 프로세스 마이그레이션이 발생할 때 비용 판단 기준시</li>
+        <li><code>kernel.panic</code>CPU코어 오류나 커널 패닉 발생시 자동 재부팅까지 대기시간</li>
+        <li><code>kernel.core_pattern</code>프로세스 비정상 종료 시 생성되는 코어 덤프 파일의 경로, 파일명 지정</li>
+        <li><code>kernel_nmi_watchdog</code>특정 코어가 완전히 멈췄는지 감지하는 기능</li>
+        <li><code>kernel.perf_event_paranoid</code>CPU코어 성능 카운터를 어디까지 모니터링할 수 있는자</li>
+        <li><code>kernel.kptr_restrict</code>커널 심볼 주소 노출 제한</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>

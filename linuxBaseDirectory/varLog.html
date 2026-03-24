@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Linux /var/log directory 정리</title>
+  <style>
+    :root { --fg:#111; --muted:#666; --bg:#fff; --card:#f7f7f8; --line:#e6e6e9; }
+    body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
+    h1 { font-size: 20px; margin: 0 0 12px; }
+    p  { margin: 0 0 18px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .card h2 { font-size: 15px; margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; line-height: 1.35; }
+    code { background: #fff; border: 1px solid var(--line); padding: 2px 6px; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+    .quick { margin-top: 14px; }
+    pre { margin: 8px 0 0; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: #fff; overflow: auto; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Linux /var/log directory 정리</h1>
+
+  <div class="grid">
+    <section class="card">
+      <h2>기본 개념</h2>
+      <ul>
+        <li>대부분의 로그 디렉토리의 루트</li>
+        <li>로그 관리 방식은 rsyslog(syslog의 개선), systemd-journald 방식 혼용</li>
+        <li><code>rsyslog</code>텍스트 파일 형태의 로그 관리 시스템</li>
+        <li><code>systemd-journald</code>바이너리 파일 형태로 전용 명령어 journalctl을 통해 조회</li>
+        <li><code>logrotate</code>오래된 로그 압축, 삭제 관리</li>
+        
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>특수 로그 방식</h2>
+      <ul>
+        <li><code>/proc/sys/kernel/printk</code>커널 중요도에 따라 콘솔로 출력하는 기능의 기본 설정파일</li>
+        <li><code>Kernel Ring Buffer - dmesg</code></li>
+        <li><code>/dev/kmsg</code></li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>로그 목록</h2>
+      <ul>
+        <li><code>/var/log/message</code>CentOS, RHEL 계열</li>
+        <li><code>/var/log/syslog</code>Ubuntu, Debian 계열</li>
+        <li><code>/var/log/auth.log</code>로그인 시도, sudo 사용 등 인증 관련 기록</li>
+        <li><code>/var/log/dmesg</code>커널 및 하드웨어 장치 관련 메시지</li>
+        <li><code>/var/log/secure</code>보안 및 인증 관련 로그(주로 RedHat 계열)</li>
+        <li><code>/var/log/apache2, nginx 등</code>웹 서버 접속 및 에러 로그</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>설정 파일</h2>
+      <ul>
+        <li><code>/etc/syslog.conf, rsyslog.conf</code>rsyslog(syslog)의 설정파일</li>
+        <li><code>/etc/systemd/journald.conf</code>systemd-journald의 설정파일</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>
