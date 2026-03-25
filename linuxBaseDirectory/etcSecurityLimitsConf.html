@@ -30,6 +30,28 @@
         <li>프로세스, 유저의 시스템 자원 접근 한도 조절</li>
       </ul>
     </section>
+
+    <section class="card">
+      <h2>항목별 시그니처</h2>
+      <ul>
+        <li><code>nofile - open files</code>한 프로세스가 열 수 있는 최대 파일 수</li>
+        <li><code>nproc - max user processes</code>사용자가 생성할 수 있는 최대 프로세스/스레드 수</li>
+        <li><code>core - core file size</code>프로그램 비정상 종료 시 생성되는 코어 덤프 크기</li>
+        <li><code>rss - max memory size</code>프로세스가 점유할 수 있는 최대 물리 메모리 크기</li>
+        <li><code>stack - stack size</code>프로세스의 최대 스택 영역 크기</li>
+        <li><code>fsize - file size</code>사용자가 생성할 수 있는 최대 파일 크기</li>
+        <li><code>cpu - cpu time</code>프로세스가 사용할 수 있는 최대 CPU 시간</li>
+        <li><code>memlock - max locked memory</code>메모리에 고정(Lock)할 수 있는 최대 주소 공간</li>
+        <li><code>as - virtual memory</code>프로세스당 사용 가능한 최대 가상 메모리 크기</li>
+        <li><code>설정불가 - pipe size</code>pipe size, 512bytes</li>
+        <li><code>data - data seg size</code>프로세스의 데이터 세그먼트 최대 크기</li>
+        <li><code>nice - scheduling priority</code>프로세스의 스케줄링 우선순위(0~20) 숫자가 낮을 수록 순위 높음</li>
+        <li><code>sigpending - pending signals</code>대체 가능한 최대 시그널 수</li>
+        <li><code>msgqueue - POSIX message queues</code>POSIX 메시지 큐에 사용할 수 있는 최대 바이트 수</li>
+        <li><code>locks - fild locks</code>사용자가 걸 수 있는 최대 파일 잠금(Fcntl locks) 개수</li>
+        <li><code>rtprio - real-time priority</code>실시간(Real-time) 스케줄링 우선순위</li>
+      </ul>
+    </section>
   </div>
 </body>
 </html>
