@@ -93,6 +93,27 @@
     </section>
 
     <section class="card">
+      <h2>fidsk 옵션 정리</h2>
+      <ul>
+        <li><code>step.1 p</code> — 파티션 테이블 정보</li>
+        <li><code>step.1 l</code> — 지원하는 파티션 타입</li>
+        <li><code>step.1 v</code> — 파티션 테이블 오류 검증</li>
+        <li><code>step.1 n</code> — 파티션 생성</li>
+        <li><code>step.1 d</code> — 파티션 삭제</li>
+      </ul>
+      <ul>
+        <li>MBR 디스크는 4개만 가능하며 기본 파티션이 이 4개이고, 나머지는 e로 해야함</li>
+        <li>MBR(Master Boot Record)로 최대 2TB까지만</li>
+        <li>GPT(GUID Partition Table)로 최대 18EB까지 지원</li>
+        <li>OS 커널은 MBR과 GPT 모두 관련 라이브러리를 대게 가지고 있으며</li>
+        <li>fdisk 장치경로 후 o -> MBR, g -> GPT</li>
+        <li>fdisk 장치경로 후 p -> 정보 출력 -> disklable type 확인(dos or gpt)</li>
+        <li><code>step.2 p</code> — 파티션 테이블 정보</li>
+        <li><code>step.2 e</code> — 지원하는 파티션 타입</li>
+      </ul>
+    </section>
+
+    <section class="card">
       <h2>du 옵션 정리</h2>
       <ul>
         <li>물리적 사용량, ls -l에서의 크기에서 디렉터리 크기는 하위 파일 미포함임</li>
