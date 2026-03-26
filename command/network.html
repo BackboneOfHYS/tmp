@@ -102,10 +102,19 @@
     <section class="card">
       <h2>🔥 방화벽 (firewalld)</h2>
       <ul>
+        <li>ip, port 검사</li>
         <li><code>firewall-cmd --state</code> — 방화벽 상태</li>
         <li><code>firewall-cmd --list-all</code> — 존 기준 전체 설정</li>
         <li><code>firewall-cmd --list-ports</code> — 열린 포트</li>
         <li><code>firewall-cmd --list-services</code> — 허용 서비스</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>🔥TCPwrapper</h2>
+      <ul>
+        <li>세션, 애플리케이션 계층 작용 직전에? 호스트의 서비스 접속 권한 검사</li>
+        <li><code>host.allow, deny</code></li>
       </ul>
     </section>
 
