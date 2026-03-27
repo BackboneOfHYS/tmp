@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Linux cron 정리</title>
+  <style>
+    :root { --fg:#111; --muted:#666; --bg:#fff; --card:#f7f7f8; --line:#e6e6e9; }
+    body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
+    h1 { font-size: 20px; margin: 0 0 12px; }
+    p  { margin: 0 0 18px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .card h2 { font-size: 15px; margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; line-height: 1.35; }
+    code { background: #fff; border: 1px solid var(--line); padding: 2px 6px; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+    .quick { margin-top: 14px; }
+    pre { margin: 8px 0 0; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: #fff; overflow: auto; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Linux cron 정리</h1>
+
+  <div class="grid">
+    <section class="card">
+      <h2>crontab 옵션</h2>
+      <ul>
+        <li><code>-e</code>예약된 작업 목록 편집</li>
+        <li><code>-l</code>현재 설정된 작업 목록을 확인</li>
+        <li><code>-r</code>현재 설정된 모든 작업을 삭제</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>crontab 설정</h2>
+      <ul>
+        <li><code>분 시 일 월 요일 [명령 또는 스크립트]</code></li>
+        <li>/etc의 cron의 경우 분 시 일 월 요일 [사용자 실행 권한] [명령 또는 스크립트]로 구성됨</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>crontab 설정파일</h2>
+      <ul>
+        <li><code>/var/spool/cron/crontabs</code>일반 사용자가 -e 명령어로 생성한 파일들이 사용자 이름 별로 저장</li>
+        <li>crontab -e 명령으로 사용해야 시스템이 즉시 감지함</li>
+        <li><code>/etc/crontab</code>시스템 전역 크론 설정</li>
+        <li><code>/etc/cron.d/</code>설치된 소프트웨어나 패키지들의 크론 설정</li>
+        <li><code>/etc/cron.hourly, daily, weekly, monthly</code>정해진 주기에 맞춰 실행되며 /etc/crontab이나 anacron에 실행 정의가 되어있음</li>
+        <li><code>cron.allow, deny</code>크론 접근 설정이며 allow 파일이 있으면 해당 파일에 기재된 유저만 cron 설정 가능</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>anacrontab</h2>
+      <ul>
+        <li><code>/etc/anacrontab</code>anacron 설정파일로 실행되지 않은(부팅, 기타 등의 사유로) cron을 실행</li>
+        <li><code>period delay job-identifier command</code>anacron 설정값, 각각 작업주기, 부팅 후 실행 대기시간, 작업고유이름, 명령어</li>
+        <li>anacron은 부팅시, 이후엔 cron에 의해 실행됨</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>
