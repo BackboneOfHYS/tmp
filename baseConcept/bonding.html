@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>bonding concept</title>
+  <style>
+    :root { --fg:#111; --muted:#666; --bg:#fff; --card:#f7f7f8; --line:#e6e6e9; }
+    body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
+    h1 { font-size: 20px; margin: 0 0 12px; }
+    p  { margin: 0 0 18px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .card h2 { font-size: 15px; margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; line-height: 1.35; }
+    code { background: #fff; border: 1px solid var(--line); padding: 2px 6px; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+    .quick { margin-top: 14px; }
+    pre { margin: 8px 0 0; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: #fff; overflow: auto; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>bonding concept</h1>
+
+  <div class="grid">
+    <section class="card">
+      <h2>bonding 기본</h2>
+      <ul>
+        <li>본딩은 물리 nic를 이중화하기 위함</li>
+        <li>본딩이 아니라 nic가 여러개라면 하나의 nic에 개별설정이 가능</li>
+        <li>하지만 여러 nic를 하나의 본딩으로 묶으면 본딩 설정만 가능</li>
+        <li>본딩시 스위치<->서버 간 mac 주소 꼬임이 발생할 수 있음</li>
+        <li>/proc/net/bonding/$con-name 으로 bonding 옵션 출력</li>
+        <li>teamd는 본딩보다 복잡한 설정을 활용할 때 사용</li>
+        <li>nmcli con add type bond con-name bond0 ifname bond0 mode active-backup -> mode 1번</li>
+        <li>nmcli con add type bond con-name bond0 ifname bond0 mode 802.3ad -> mode 4번</li>
+        <li>nmcli con del bond0(bond0=port1)</li>
+        <li>nmcli con show bond0</li>
+        <li>nmcli con add type bond-slave con-name bond-port0 ifname $장치명 master $본딩명</li>
+        <li>nmcli con mod bond0 +bond.option "???"</li>
+        <li>nmcli con mod bond0 +bond.option "miimon=100"</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>actvie-backup</h2>
+      <ul>
+        <li>스위치 몰래 선을 바꾸는 방식</li>
+        <li>nmcli con mod bond0 +bond.option "primary=장치명"으로 최우선 nic 설정 가능</li>
+        <li>해당 모드의 경우 primary nic의 fail over 발생 시 nic mac 꼬임이 발생함 </li>
+        <li>이를 해결하기 위한 방법</li>
+          <ul>
+            <li>nmcli con mod bond0 +bond.option "fail_over_mac=active로 맥주소 전환</li>
+            <li>스위치 설정 or 무차별 모드 on or 주소 변조 차단 해제</li>
+          </ul>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>LACP(Link Aggregation Control Protoco)</h2>
+      <ul>
+        <li>여러 개의 nic or 포트를 하나의 논리 nic, or 포트로 묶어 대역폭 확장, 장애 복구 제공, IEEE 802 3ad 표준 프로토콜</li>
+        <li>스위치는 MAC 주소를 Port-Channel로 묶어서 관리하므로 해당 채널에 속한 맥주소는 통과시킴</li>
+        <li>Active - 상대방이 누구든 먼저 본딩을 제안하는 성격, 서버는 기본 active</li>
+        <li>passive - 상대방의 요청에만 본딩을 구성하는 성격</li>
+        <li>보통 스위치-서버 둘 다 active여야 재기동 등에도 바로 붙음</li>
+        <li>nmcli con mod bond0 +bond.option "mode=4,lacp_rate=fast"</li>
+        <li>mcli connection add type team con-name team0 ifname team0 config '{"runner": {"name": "lacp", "active": true}}'</li>
+    </section>
+  </div>
+</body>
+</html>
