@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>os layer concept</title>
+  <style>
+    :root { --fg:#111; --muted:#666; --bg:#fff; --card:#f7f7f8; --line:#e6e6e9; }
+    body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
+    h1 { font-size: 20px; margin: 0 0 12px; }
+    p  { margin: 0 0 18px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .card h2 { font-size: 15px; margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; line-height: 1.35; }
+    code { background: #fff; border: 1px solid var(--line); padding: 2px 6px; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+    .quick { margin-top: 14px; }
+    pre { margin: 8px 0 0; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: #fff; overflow: auto; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>os layer concept</h1>
+  <div class="grid">
+    <section class="card">
+      <h2>계층 구조</h2>
+      <ul>
+        <li><code>4 Layer - Application</code></li>
+        <li><code>3.5 Layer - glibc</code>Windows system dll과 같은 역할</li>
+        <li><code>3 Layer - system call</code></li>
+        <li><code>2 Layer - Kernel</code></li>
+            <ul>
+                <li><code>mainline</code>리눅스 토발즈(Linus Torvalds)가 관리하는 메인라인 커널, '바닐라 커널'이라고도 함</li>
+                <li><code>RHCK</code>Red Hat Compatible Kernel, 안정성 위주 커널, RHEL과 100% 호환</li>
+                <li><code>UEK</code>Unbreakable Enterprise Kernel, Oracle 개발로 Oracle 제품과 호환성 높음</li>
+            </ul>
+        <li><code>1 Layer - HW</code></li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>

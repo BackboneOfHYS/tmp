@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Linux repo 설정 정리</title>
+  <style>
+    :root { --fg:#111; --muted:#666; --bg:#fff; --card:#f7f7f8; --line:#e6e6e9; }
+    body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
+    h1 { font-size: 20px; margin: 0 0 12px; }
+    p  { margin: 0 0 18px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .card h2 { font-size: 15px; margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; line-height: 1.35; }
+    code { background: #fff; border: 1px solid var(--line); padding: 2px 6px; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+    .quick { margin-top: 14px; }
+    pre { margin: 8px 0 0; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: #fff; overflow: auto; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Linux repo 정리</h1>
+
+  <div class="grid">
+    <section class="card">
+      <h2>기본 개념</h2>
+      <ul>
+        <li><code>/etc/yum.repos.d/*.repo</code>파일 위치</li>
+        <li><code>/etc/yum.conf</code>전역 옵션 설정</li>
+        <li><code>vi /etc/yum.repos.d/myrepo.repo</code>사용자 정의 repo 파일</li>
+        <li>yum은 baseurl을 보고 의존성 검사 등을 수행</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>repo 파일 포맷</h2>
+      <ul>
+        <li><code>[$value]</code>repo 고유 이름</li>
+        <li><code>name=$value</code>별칭</li>
+        <li><code>baseurl=$value</code>repo 서버 및 디렉토리 경로</li>
+        <li><code>gpgkey=$value</code>패키지 검증, 공개키 파일 경로</li>
+        <li><code>gpgcheck=$value</code>패키지 변조 확인 플래그</li>
+        <li><code>enabled=$value</code>활성화 여부</li>
+        <li><code>mirrorlist=$value</code>baseurl 대신 가까운 서버 찾도록 하는 여부</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>rpm 서버 구성 시 참고</h2>
+      <ul>
+        <li>rpm 패키지 포맷 gzip, zstd, xz 확인</li>
+        <li>rpm파일이 사용하는 glibc 버전</li>
+        <li>yum vs dnf</li>
+        <li>공유라이브러리 의존성 확인</li>
+        <li>커널 버전 호환성 확인</li>
+        <li>설치순서가 A->B ok, but B->A X</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>
