@@ -55,7 +55,15 @@
       <h2>🧭 라우팅 / 게이트웨이</h2>
       <ul>
         <li><code>ip route</code> — 라우팅 테이블 (default gateway 확인)</li>
+        <li><code>route add default gw [IP주소] dev [장치명]</code></li>
+        <li><code>route add -net [IP주소] netmask [서브넷] dev [장치명]</code></li>
+        <li><code>route add gw [IP주소] dev [장치명]</code></li>
         <li><code>nmcli device show eth0 | grep GATEWAY</code> — 특정 인터페이스 게이트웨이</li>
+        <li><code>nmclil con mod eth0 ipv4.route-metric [값]</code></li>
+        <li><code>proto kernel</code>해당 라우트가 운영체제 커널에 의해 자동 생성되었음을 의미 </li>
+        <li><code>scope link</code>목적지가 직접 연결되어 스취치를 통해 통신함을 의미</li>
+        <li><code>src [IP주소]</code>해당 네트워크로 패킷을 보낼 때 10.0.2.15로 보낸다는 의미</li>
+        <li><code>metric</code>라우팅 우선순윈</li>
       </ul>
     </section>
 
@@ -125,6 +133,8 @@
         <li><code>nmcli connection show &lt;conn&gt;</code> — 프로파일 상세</li>
         <li><code>nmcli connection up &lt;conn&gt;</code> — 연결 활성화</li>
         <li><code>nmcli connection down &lt;conn&gt;</code> — 연결 비활성화</li>
+        <li><code>nmcli con del &lt;conn&gt;</code>network manager에서 nic에 대한 설정 삭제</li>
+        <li><code>nmcli con add &lt;conn&gt; con-name "nmcli에서 쓰는 별칭" ifname "nic 장치명"</code></li>
       </ul>
     </section>
 
