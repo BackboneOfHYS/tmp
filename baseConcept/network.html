@@ -75,6 +75,77 @@
       </ul>
     </section>
 
+    <section class="card">
+      <h2>패킷 처리 프레임워크 iptables</h2>
+      <ul>
+        <li>라우팅 경로 지정이 아닌 어떻게 처리할 지에 대한 것</li>
+        <li>packet in -> prerouting -> 라우팅 결정 -> forward / input -> post routing -> packet out</li>
+        <li>echo 1 > /proc/sys/net/ipv4/ip_forward - IP 포워딩 켜기</li>
+        <li>필터링(방화벽), filter</li>
+        <li>NAT(주소 변환), nat</li>
+        <li>포워딩(라우팅 제어)</li>
+        <li>MANGLE - 패킷 속성 수정</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>NAT(주소 변환), nat</h2>
+        <ul>
+          <li>IP / Port 변경</li>
+          <li>NAT(SNAT, DNAT, MASQUERADE)</li>
+          <li>PAt는 SNAT, DNAT 둘 다 발생할 수 있음</li>
+          <li>처음 패킷에만 적용되며 이후 conntrack(상태 추적) 처리됨</li>
+          <li>PREROUTING - 전방, 들어오자마자, DNAT</li>
+          <li>POSTROUTING - 후방, 나가기 직전, SNAT, MASQUERADE</li>
+          <li>OUTPUT - 로컬 NAT(로컬 서버에서 직접 만든 패킷)</li>
+          <li>MASQUERADE - 동적 SNAT, 공인 IP 변동에 자동 대응</li>
+          <li>SNAT - 정적 SNAT, 출발지 고정 서버</li>
+          <li>DNAT - 포트포워딩, 목적지IP/포트를 내부 서버로 변경</li>
+          <li>iptables -t nat -A [체인] 조건 -j [타겟]</li>
+          <ul>
+            <li>-t nat - NAT 테이블</li>
+            <li>-A - 규칙 추가</li>
+            <li>-D - 규칙 삭제</li>
+            <li>-L - 조회</li>
+            <li>-n - 숫자로 출력</li>
+            <li>-v - 상세 출력</li>
+            <li>-p tpc/udp - 프로토콜</li>
+            <li>-s - 출발지 IP</li>
+            <li>-d - 목적지 IP</li>
+            <li>--sport - 출발지 포트</li>
+            <li>--dport - 목적지 포트</li>
+            <li>-i - 입력 인터페이스</li>
+            <li>-o - 출력 인터페이스</li>
+            <li>-j MASQUERADE/SNAT/DNAT - 타겟</li>
+          </ul>
+        </ul>
+    </section>
+
+    <section class="card">
+      <h2>포워딩(라우팅 제어), mangle?</h2>
+      <ul>
+        <li>라우팅은 길 안내, 포워딩은 실제 패킷을 보내는 행위</li>
+      </ul>
+    </section>
+    
+    <section class="card">
+      <h2>filter</h2>
+      <ul>
+          <li>INPUT - 내 서버로 들어온 패킷</li>
+          <li>OUTPUT - 로컬에서 생성, 로컬 NAT</li>
+          <li>FORWARD - 남의 패킷 중계</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>MANGLE</h2>
+      <ul>
+          <li>수행 위치는 다양함, 각 목적별로 수행 기대 위치가 다를 수 있기 때문</li>
+          <li>TTL 변경 - 패킷 생존 횟수 조작</li>
+          <li>TOS /DSCP (QoS) - 트래픽 우선순위 설정</li>
+          <li>MARK - 패킷에 라벨붙임, 이후 라우팅에서 사용</li>
+      </ul>
+    </section>
   </div>
 </body>
 </html>
