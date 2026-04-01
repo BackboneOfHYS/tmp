@@ -22,13 +22,23 @@
 </head>
 <body>
   <h1>Linux 기본 명령어</h1>
-
   <div class="grid">
-
     <section class="card">
       <h2>참고사항</h2>
       <ul>
         <li><code>/dev/null</code> — 들어오는 모든 입력 버림</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>sudo, su</h2>
+      <ul>
+        <li><code>su</code> — 계정 전환하되 환경변수 그대로</li>
+        <li><code>su -</code> — 타겟 계정의 환경변수로 환경 초기화와 같이 전환</li>
+        <li><code>sudo su</code> — sudo는 루트권한이 기본으로 들어가므로 root 비밀번호 몰라도 됨</li>
+        <li><code>sudo</code> — sudo는 root권한만 설정되며 $PATH는 초기화되고 환경변수도 일부 초기화됨</li>
+        <li><code>sudo -i</code> — root로 로그인한 것과 동일한 환경으로 처리됨</li>
+        <li><code>sudo -E</code> — 기존 사용자 환경변수를 동일하게 유지하고 싶을 때</li>
       </ul>
     </section>
 
@@ -61,7 +71,6 @@
             <li><code>-Q</code>/etc가 아닌 다른 마운트포인트를 가리킴</li>
           </ul>
         
-
         <li><code>chmod 권한 파일명</code> — 파일 권한속성 변경</li>
         <li><code>chown 소유자:소유그룹 파일명</code> — 파일 소유자, 소유그룹 변경</li>
 
@@ -83,7 +92,6 @@
           <ul>
             <li><code>-a 유저명</code>그룹에 유저 추가</li>
           </ul>
-        
       </ul>
     </section>
     
