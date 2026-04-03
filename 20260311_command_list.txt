@@ -188,3 +188,22 @@ fstab 추가
 ================== 20260313 명령어 모음
 dmidecode -t system
 lspci | grep -E "SATA|SAS|NMVe|RAID"
+
+================= 20260403 명령어 모음
+셸 스크립트 :- 의미
+logger 명령어
+command -v 의미
+>&2, 
+2>&1
+: > 에서 :의 의미
+cat > "$변수명" << '문자'의 의미
+sed 사용법, /^# >>> 어쩌고~ >>> $/,/^# <<< 어쩌고 <<<$/d
+[[ -n "$변수명" ]] || , && 의미
+set 명령 의미, set -- 의미
+trap 사용법, DEBUG 사용법, return 127이 의미가 있는지
+vi s/ s# 동일한 것 기억
+grep -F
+head -1과 head 1차이가 있는지
+
+awk 내부 코드 ~의 의미
+  sub, gsub 함수 의미, 
