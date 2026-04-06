@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>boot concept</title>
+  <style>
+    :root { --fg:#111; --muted:#666; --bg:#fff; --card:#f7f7f8; --line:#e6e6e9; }
+    body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
+    h1 { font-size: 20px; margin: 0 0 12px; }
+    p  { margin: 0 0 18px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .card h2 { font-size: 15px; margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; line-height: 1.35; }
+    code { background: #fff; border: 1px solid var(--line); padding: 2px 6px; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+    .quick { margin-top: 14px; }
+    pre { margin: 8px 0 0; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: #fff; overflow: auto; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>boot concept</h1>
+
+  <div class="grid">
+    <section class="card">
+      <h2>boot 과정에 대하여</h2>
+      <ul>
+        <li>POST(Power On Self Test) 과정 후 BIOS or UEFI 부팅 진행</li>
+        <li><code>BIOS</code>디스크 인식을 USB, SSD, HDD 순으로 하며 이 순으로 부트로더를 찾음(MBR 섹터)</li>
+        <li><code>UEFI</code>모든 디스크를 보고 부트로더 엔트리를 목록화하여 사용자가 선택함(EFI 시스템 파티션의 .efi 파일)</li>
+        <li>부트로더는 GRUB가 대표적이지만 다른 것도 있음</li>
+        <li><code>Windows Boot Manager</code>Windows</li>
+        <li><code>Apple</code>Apple 자체 부팅 시스템</li>
+        <li><code>SysLinux</code>GRUB의 경량버전</li>
+        <li><code>SysLinux, isoLinux</code>설치 USB에서 동작</li>
+        <li>부트로더는 여러 커널을 엔트리 목록으로 하여 사용자가 선택할 수 있도록 함</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>boot time에 대하여</h2>
+      <ul>
+        <li>서버급 PC는 부팅 시 POST 과정이 김</li>
+        <li>Memory Traing -> 메모리 크기가 클 수록 증가, ECC로 더 증가</li>
+        <li>RAID Controller -> RAID카드 별로 컨트롤러(별도 BIOS)로드 및 드라이브 상태 확인</li>
+        <li>스토리지가 온보드(내장)이면 시간 단축, 외장이면 시간 증가</li>
+        <li>Remote Management(IPMI) -> 서버 관리 모듈 초기화, 본체 부팅 전에 부팅</li>
+        <li>PXE BOOT?</li>
+        <li>고성능 NIC, GPU -> 펌웨어 로드 시간 증가</li>
+        <li>Detail check, Quick Boot로 조절 가능</li>
+        <li>BIOS vs UEFI 모드 선택</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>

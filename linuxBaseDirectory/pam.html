@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Linux /etc/pam.d 정리</title>
+  <style>
+    :root { --fg:#111; --muted:#666; --bg:#fff; --card:#f7f7f8; --line:#e6e6e9; }
+    body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
+    h1 { font-size: 20px; margin: 0 0 12px; }
+    p  { margin: 0 0 18px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .card h2 { font-size: 15px; margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; line-height: 1.35; }
+    code { background: #fff; border: 1px solid var(--line); padding: 2px 6px; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+    .quick { margin-top: 14px; }
+    pre { margin: 8px 0 0; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: #fff; overflow: auto; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Linux /etc/pam.d 정리</h1>
+
+  <div class="grid">
+    <section class="card">
+      <h2>기본 개념</h2>
+      <ul>
+        <li>로그인, 인증 방식을 프로그램 별로 정의하는 곳</li>
+        <li>로그인 방식, 2FA 추가(?), 계정 정책 적용 등을 설정 파일로 제어</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>디렉토리 구조</h2>
+      <ul>
+        <li><code>/etc/pam.d/login</code></li>
+        <li><code>/etc/pam.d/sshd</code></li>
+        <li><code>/etc/pam.d/su</code></li>
+        <li><code>/etc/pam.d/sudo</code></li>
+        <li><code>/etc/pam.d/passwd</code></li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>내부 구조</h2>
+      <ul>
+        <li><code>type control module-path arguments</code></li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>type</h2>
+      <ul>
+        <li><code>auth</code>인증</li>
+        <li><code>account</code>계정 상태 확인</li>
+        <li><code>password</code>비밀번호 변경정책</li>
+        <li><code>session</code>로그인 후 처리</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>control</h2>
+      <ul>
+        <li><code>required</code>실패하면 최종 실패(하지만 계속 진행)</li>
+        <li><code>requisite</code>실패하면 즉시 중단</li>
+        <li><code>sufficient</code>성공하면 바로 성공처리</li>
+        <li><code>optional</code>결과 영향 거의 없음</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>module</h2>
+      <ul>
+        <li><code>pam_unix.so</code>기본 로컬 인증</li>
+        <li><code>pam_env.so</code>환경변수 설정</li>
+        <li><code>pam_limits.so</code>리소스 제한</li>
+        <li><code>pam_securetty.so</code>root 로그인 제한</li>
+        <li><code>pam_tally2.so</code>로그인 실패 제한</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>
