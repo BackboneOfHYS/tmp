@@ -24,11 +24,39 @@
   <h1>ntp / chrony 명령어 요약</h1>
   <div class="grid">
     <section class="card">
+        <h2>시간 설정 관련 개념</h2>
+        <ul>
+            <li><code>local time</code></li>
+            <li><code>universal time(UTC)</code></li>
+            <li><code>Real Time Clock(RTC)</code></li>
+            <li><code>RTC in local zn: yes/no</code>RTC가 local itme 기준 O/X</li>
+            <li><code>System clock synchronized: No</code></li>
+            <li><code>NTP service: inactive</code></li>
+            <li>RTC->kernel system clock->Local time</li>
+            <li><code>date -s</code>시간 변경 명령어, kernetl system clock만 변경하므로 하드웨어 동기화 필요</li>
+            <li><code>hwclock --systohcc</code></li>
+            <li><code>hwclock --hctosys</code></li>
+            <li><code>unix epoch</code>시간을 특정 시각 기준으로 epoch로 표현</li>
+        </ul>
+    </section>
+
+    <section class="card">
+        <h2>timedatectl</h2>
+        <ul>
+            <li><code>timedatectl set-ntp false</code></li>
+            <li><code>timedatectl set-time "시각"</code>rtc 동기화도 같이 진행</li>
+            <li><code>timedatectl set-local-rtc 0/1</code>RTC를 UTC 기준/RTC를 Local Time Zone 기준</li>
+        </ul>
+    </section>
+
+    <section class="card">
       <h2>🧪 ntp / chrony 설정</h2>
       <ul>
         <li><code>systemctl start ntpd / chronyd</code> — systemctl 명령으로 ntp / chrony 가동, 중지</li>
         <li><code>/etc/chrony.conf</code> — 설정파일 경로</li>
         <li><code>/etc/ntp.conf</code> — 설정파일 경로</li>
+        <li><code>/etc/systemd/timesyncd.conf</code> — 설정파일 경로(8버전 미만 추정)</li>
+        <li><code>systemctl systemd-timesyncd</code> — 시간동기화 진행</li>
         <li>서버 주소 뒤에 iburst 추가</li>
         <li><code>pool poll.ntp.org iburst</code></li>
         <li><code>server time.bora.net iburst</code></li>

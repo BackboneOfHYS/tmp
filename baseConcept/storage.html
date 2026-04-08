@@ -48,6 +48,7 @@
             <li><code>inode table</code></li>
             <li><code>data blocks</code>direct, single indirect, double indirect, triple indirect가 있다, ext4에서는 start block=100, length-4와 같이 저장</li>
           </ul>
+        <li><code>데이터 접근 구조</code>filename->directory entry->inode->extent->data block</li>
       </ul>
     </section>
 
@@ -72,10 +73,41 @@
     </section>
 
     <section class="card">
-      <h2>data block에 실제 데이터 저장</h2>
+      <h2>data block</h2>
       <ul>
+        <li>실제 데이터 저장</li>
         <li>extent 등장으로 기존 block pointer 방식에서 block 1000~2000(extent 범위 가리킴)와 같이 변경됨</li>
         <li>-> 크기나 내부구조가 아닌 블록 관리 구조의 차이</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Delayed Allocation</h2>
+      <ul>
+        <li>데이터를 바로 디스크에 쓰지 않음, 나중에 한 번에 저장함</li>
+        <li><code>writeback cache</code>메모리, 캐시에 먼저 저장 후 한 번에 디스크에 씀</li>
+        <li><code>transaction batching</code>여러 파일시스템의 저널링 틀내잭션을 그룹화 후 한 번에 처리</li>
+        <li>writeback cache + transaction batching -> journalling batch write -> disk flush</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Multiblock Allocation</h2>
+      <ul>
+        <li>파일 데이터를 한 블록씩 배치하지 않고 큰 덩어리 단위로 나눠 미리 연속 블록 확보</li>
+        <li>이 경우 할당-사용 개념이 나뉘는데 할당된 블록은 다른 개체가 사용불가함</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>journal</h2>
+      <ul>
+        <li>파일시스템 크래시 복구 기능</li>
+        <li>파일시스템 변경작업은 여러개의 메타데이터 변경을 포함하는데 이를 트랜잭션으로 묶음</li>
+        <li>트랜잭션 commit 전에 journal에 기록 먼저하고 이를 write-ahead logging이라고 함</li>
+        <li>이후 트래잭션 coommit이 완료되면 commit 기록</li>
+        <li>트랜잭션 진행 중 크래시 발생하면 commit 기록이 없으므로 이를 기반으로 복구</li>
+        <li>내부 저널링은 파일시스템 내부에 트랜잭션을 기록하며 외부 저널링은 외부 장치에 지정함</li>
       </ul>
     </section>
   </div>

@@ -144,6 +144,8 @@
       <h2>lvm 관련 명령 정리</h2>
       <ul>
         <li><code>pvcreate [장치명]</code> — pv 생성</li>
+        <li><code>pvmove [원본pv] [목적pv]</code> — pv 데이터 이동</li>
+        <li><code>pvmove -n</code>특정 파티션(lv)의 데이터만 이동,이때 컨트롤러 행을 raid가 커버함</li>
         <li><code>pvremove</code> — pv 삭제</li>
         <li><code>vgcreate [vg명] [pv명] [pv명] ...</code> — vg 생성</li>
         <li><code>vgextend [vg명] [장치명]</code> — vg 확장</li>
@@ -152,8 +154,21 @@
         <li><code>lvextend -L [용량] [lv명]</code> — lv 확장</li>
         <li><code>lvreduce -L [용량] [lv명]</code> — lv 축소</li>
         <li><code>lvextend, lvreduce -r</code> — 파일 시스템 확장 자동 수행</li>
+        <li>파일시스템은 자신의 크기를 가지고 있으므로 볼륨 확장시 같이 확장해주어야 함</li>
         <li><code>lvextend, lvreduce -L</code> — 사람이 보기 쉬운 단위</li>
         <li><code>lvremove</code> — lv 삭제</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>fstab</h2>
+      <ul>
+        <li><code>UUID=[$UUID]</code> — 장치식별자 입력, 오기 시 부팅시간 늘어남</li>
+        <li><code>/directory_name</code> — 마운트포인트</li>
+        <li><code>xfs</code>파일시스템</li>
+        <li><code>defaults</code>마운트옵션</li>
+        <li><code>0</code>dump(백업여부)</li>
+        <li><code>0</code>fsck순서, 0은 안 함, 1은 최우선, 2는 그 다음에 검사, 마운트 전 복구를 위함</li>
       </ul>
     </section>
 

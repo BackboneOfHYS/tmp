@@ -123,13 +123,17 @@
     <section class="card">
       <h2>리다이렉션</h2>
       <ul>
+        <li><code>&lt;</code>명령어에 파일을 넣는 개념</li>
+        <li><code>></code>변수(명령어 결과)를 파일에 넣는 개념</li>
         <li><code>&lt;</code> — file input</li>
         <li><code>&lt;&lt;</code> — 여러줄 블록 input</li>
+        <li><code>&lt;&lt; '패턴'</code> — '패턴'이 나올 때까지 입력으로 간주함</li>
         <li><code>&lt;&lt;&lt;</code> — 문자열 input</li>
         <li><code>></code> — 파일 덮어쓰기</li>
         <li><code>>></code> — 파일 이어쓰기</li>
         <li><code>2></code> — stderr 덮어쓰기</li>
         <li><code>&></code> — stdout + stderr</li>
+        <li><code>2>&1</code> — stderr를 출력 장치로 보냄</li>
       </ul>
     </section>
 
@@ -164,6 +168,15 @@
     </section>
 
     <section class="card">
+      <h2>쉘 변수 , 환경 변수, PATH 변수차이</h2>
+      <ul>
+        <li><code>쉘 변수</code>현재 쉘 스크립트(또는 현재 터미널) 안에서만 쓰이는 변수</li>
+        <li><code>환경변수</code>시스템 전역에서 참조되는 변수</li>
+        <li><code>PATH 변수</code>커맨드 경로 저장소</li>
+      </ul>
+    </section>
+
+    <section class="card">
       <h2>쉘 확장 순서</h2>
       <ul>
         <li><code>{1...10}</code> — 단순 문자열 생성기</li>
@@ -177,9 +190,12 @@
     </section>
 
     <section class="card">
-      <h2>쉘 확장 순서</h2>
+      <h2>기타</h2>
       <ul>
         <li><code>:<<'패턴'</code> — 패턴이 나오기 전까지 모든 입력을 무시함</li>
+        <li><code>:</code> — 아무것도 안 함</li>
+        <li><code>${1:-기본값}</code>비어있거나 설정되지 않았을 때 :- 연산자로 변수의 기본값 지정 가능</li>
+        <li><code>set -- 문자열1 문자열2 ...</code>쉘 스크립트에서 받은 파라미터를 재설정함</li>
     </ul>
     </section>
   </div>

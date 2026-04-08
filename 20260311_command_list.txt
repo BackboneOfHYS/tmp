@@ -1,5 +1,3 @@
-==========================
-
 os 초기 설치 때 lvm 구성
 os 하고 나서 다른 장치 인식으로 lvm 구성도 된다
 후자의 경우 다른 lv에 백업해두고 기존 legacy 파티션을 민 다음 lvm을 적용시킬 수 있다.
@@ -7,127 +5,14 @@ os 하고 나서 다른 장치 인식으로 lvm 구성도 된다
 
 백업 명령어는 tar, cp, rsync가 있다.
 
-pvmove로 디스크 교체가 간편하다
-
-근데 pvmove를 못하는 경우가 컨트롤러가 행되면 안 되는데 이걸 raid가 커버한다~
-
-===============
-
-기존 파티션에서 lvm 파티션으로 복사
-
-기존 파티션 umount 진행
-
-기존 파티션 포맷
-mkfs~
-/dev/sda를 pvcraate에 넣기
-
-fstab에서 lvm 반영하기, mount -a로 fstab 정상작동확인
-UUID=xxxx-xxxx /data xfs defaults 0 0
-UUID 마운트포인트 파일시스템 마운트옵션 dump(백업여부) fsck순서(0은 안 함, 1은 최우선, 2는 그 다음 검사, 깨져있으면 마운트 전에 복구)
-fstab은 마운트만 한다! 포맷은 안 함!
-
-lvextend -L +5G </dev/...>
-lvreduce -L +5G </dev/...?
--r 파일시스템 확장 자동 수행
--L 사람이 보기쉬운 단위로 설정
--l extent 단위(pv와 lv의 구성 최소 단위)로 지정, PE(Physical Volume), LE(Logical Extent)는 기본 단위가 4mb
-vgextend vg명 /dev/pvnameW
-lvremove 
-vgremove
-pvremove
-
-파일시스템도 자기 자신이 따로 자신의 크기를 가지고 잇음
-따라서 같이 늘려주어야 됨
-
-
-block group이란? inode와 data를 가까이 배치하기위함 -> seek time 감소
-ex) [inodes][datas] -> [inodes_1][datas_1][inodes_2][datas_2][inodes_3][datas_3]
-block group마다 각자만의 data block을 갖는 것이 아님.
-extent 방식에서 실제 블록 위치 계산은 group_num = block_number / blocks_per_group으로 
-블록 색인을 그룹별 블록 수로 나눈 값으로 접근함
-
-inode란? 파일권한, 크기, 소유자, 타임스탬프, 데이터 위치를 저장하나 파일명은 directory entry에 저장함
-inode 메타데이터에 mode 항목에 파일타입이 정해짐
-inode가 가리키는 extent가 많으면 일반 리스트가 아닌 B-Tree로 확장
-
-data block에 실제 데이터 저장
-extent 등장으로 기존 block pointer 방식에서 block 1000~2000(extent 범위 가리킴)와 같이 변경됨
--> 크기나 내부구조가 아닌 블록 관리 구조의 차이
-
-Delayed Allocation 
-데이터를 바로 디스크에 쓰지 않음, 나중에 한 번에 저장
-writeback cache(메모리(캐시)에 먼저 저장 후 한번에 디스크에 write)
-transaction batching(여러 파일시스템의 저널링 트랜잭션을 그룹화 후 한 번에 처리)
-여러 트랜잭션 메모리에 모음(writeback cache + transaction batching)->journal에 batch write -> disk flush
-
-Multiblock Allocation 파일 데이터를 한 블록씩 배치하지 않고 큰 덩어리 단위로 미리 연속 블록 확보
-이 경우 할당-사용개념이 나뉘는데 할당된 블록은 다른 개체가 사용불가
-
-journal 시스템 크레시 시 복구기능
-파일시스템 변경작업은 여러개의 메타데이터 변경 포함, 이를 트랜잭션으로 묶음
-트랜잭션 commit 전에 journal에 기록 먼저함 이를 write-ahead logging이라고 함
-이후 트랜잭션 commit이 완료되면 commit 기록, 크레시 후 commit된 트랜잭션만 재시도?
-저널링은 내부 저널(파일시스템 내부 block group) 예약, 외부저널(파일 시스템 외부 다른 파일시스템으로 -j device=/dev/sdx로 지정)
-
-
-접근구조 file name -> directory entry -> inode -> extent -> data block
-
-=========== ntp =========
-
-ntp / chrony
-timedatectl set-ntp false
-timedatectl set-time "시각" -> 이는 rtc 동기화도 같이 진행
-timedatectl set-local-rtc 0/1 -> 0은 RTC를 UTC 기준, RTC를 Local time 기준으로 사용
-System clock synchronized: No
-NTP service: inactive
-
-ntp를 먼저 끄고 변경해야됨!
-date -s로 시간변경
-
-ntp 서버 설정시 /etc/systemd/timesyncd.conf 파일 편집 (oracle 8이상에서는 /etc/chrony.conf)
-systemctl systemd-timesyncd가 시간동기화 진행
-
-
-local time -> 현지 시간, timezone 설정에 따라 달라짐
-universal time(UTC) -> 전 세계 공통 기준 시간, 협정 세계시라고 함, 
-Real Time Clock(RTC) -> 하드웨어 장착 시계, OS부팅시 RTC기준으로 시스템 시간 초기화, CMOS 배터리를 사용하므로 PC전원꺼져도 유지
-RTC in local zn: yes-> rtc가 local time 기준, no->rtc가 utc기준
-RTC -> kernel system clock -> Local time
-
-date -s는 kernel system clock만 바꿈, 입력된 변경목표시각을 UTC로 치환 후 관리함
-따라서 hwclock으로 동기화 필요
-hwclock --systohcc 
-hwclock --hctosys
-
-Unix Epoch -> 시간을 특정 시간 기준으로 epoch로 표현
-이 경우 시간 연산이 간편해짐
-
-ntp는 epoch값 조정해줌
-
-============ fstab 실습내용 ==============
-fstab 추가
-부팅되고 무한로딩창 뜸
-그냥 UUID 오탈자임
-
 ================== 20260313 명령어 모음
-dmidecode -t system
+
 lspci | grep -E "SATA|SAS|NMVe|RAID"
 
 ================= 20260403 명령어 모음
-셸 스크립트 :- 의미
-logger 명령어
-command -v 의미
->&2, 
-2>&1
-: > 에서 :의 의미
-cat > "$변수명" << '문자'의 의미
 sed 사용법, /^# >>> 어쩌고~ >>> $/,/^# <<< 어쩌고 <<<$/d
-[[ -n "$변수명" ]] || , && 의미
-set 명령 의미, set -- 의미
-trap 사용법, DEBUG 사용법, return 127이 의미가 있는지
-vi s/ s# 동일한 것 기억
-grep -F
-head -1과 head 1차이가 있는지
+위에 거 스크립트문다시 보기, uninstall 함수에 잇을 거임
 
+trap 사용법, DEBUG 사용법, return 127이 의미가 있는지
 awk 내부 코드 ~의 의미
   sub, gsub 함수 의미, 
