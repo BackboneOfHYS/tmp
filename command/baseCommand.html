@@ -297,7 +297,7 @@
     </section>
 
     <section class="card">
-      <h2>demidecode</h2>
+      <h2>dmidecode</h2>
       <ul>
         <li><code>DMI</code>Desktop Management Interface</li>
         <li><code>SMBIOS</code>System Management BIOS</li>
@@ -422,6 +422,7 @@
       <h2>sed</h2>
       <ul>
         <li>변수 쓸 때는 무조건 큰 따옴표로 묶기</li>
+        <li><code>구분자 패턴 구분자 콤마 구분자 패턴 구분자</code>구역 지정 명령어</li>
         <li><code>sed 's구분자패턴구분자...</code>s 다음에 '/'는 흔한 사용일 뿐 s 다음으로 오는 게 구분자로 지정됨</li>
         <li><code>sed 's/찾을문자/바꿀문자/'</code>한 번만 바꿈</li>
         <li><code>sed 's/찾을문자/바꿀문자/g'</code>전부 바꿈</li>
@@ -429,12 +430,28 @@
         <li><code>sed '3d'</code>n번째 줄 삭제</li>
         <li><code>sed '1,5d'</code>1~5번째 줄 삭제</li>
         <li><code>sed '/패턴/d'</code>'패턴' 포함된 줄 삭제</li>
+        <li><code>sed '/패턴/,/패턴/d</code>패턴~패턴까지 모든 줄 삭제</li>
         <li><code>sed -n '5,10p'</code>5~10번째 줄 출력</li>
         <li><code>sed '2a 패턴'</code>2행 뒤에 패턴 추가, append</li>
         <li><code>sed '2i 패턴'</code>2행 앞에 패턴 추가, insert</li>
         <li><code>sed '2i 패턴'</code>2행 앞에 패턴 추가, insert</li>
         <li><code>sed -i</code>파일을 실제로 수정하는 것, 기본은 수정하지 않고 출력만 함</li>
         <li><code>sed -e</code> 여러 명령 한 번에 -> -e 패턴 -e 패턴 이런 식으로</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>sed 명령</h2>
+      <ul>
+        <li><code>s</code>substitute, 문자열 치환</li>
+        <li><code>d</code>delete, 줄 삭제</li>
+        <li><code>sed -n '5,10p'</code>print, 줄 출력, -n과 같이 쓰임</li>
+        <li><code>sed '/패턴/a 추가할 내용'</code>append, 아래에 추가</li>
+        <li><code>sed '/패턴/i 추가할 내용'</code>insert, 위에 추가</li>
+        <li><code>sed '/패턴/,/패턴/c '바꿀 내용'</code>change, 줄 교체</li>
+        <li><code>sed '10q'</code>quit, 종료</li>
+        <li><code>sed '/패턴/r 파일'</code>read, 파일 읽기</li>
+        <li><code>sed '/패턴/w 파일</code>write, 파일 쓰기</li>
       </ul>
     </section>
   </div>
