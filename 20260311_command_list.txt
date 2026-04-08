@@ -1,30 +1,3 @@
-gpasswd
-
-gpasswd -A <사용자 id> <그룹명>
-gpasswd -a user group
-gpasswd -d user group
-gpasswd group
-
-cp -r
-chmod -R 
-chown -R
-
-tar -xvf <파일명> -C <PATH>
-tar --numeric-owner
-tar --same-owner -> 위험하므로 계정명 재확인 및 다른 계정 안 가르키는지 확인
-			 -> 작동 방식이 cat /etc/passwd해서 uid 찾아서 바꿔치기임
-
-pkill -u <유저명>
-
-보조그룹은 /etc/passwd에 안 보임
-
-tar로 하면 root로 푸는 것과 user로 푸는 것과 차이가 발생
-루트는 uid기준으로 onwer가 바뀜
-일반계정은 자기자신으로 바꿔치기됨
-
-chown은 루트만 가능, quota, 악성코드 소유자 우회가능하기 때문
-
-
 ==========================
 
 os 초기 설치 때 lvm 구성
@@ -39,35 +12,6 @@ pvmove로 디스크 교체가 간편하다
 근데 pvmove를 못하는 경우가 컨트롤러가 행되면 안 되는데 이걸 raid가 커버한다~
 
 ===============
-
-lsblk
-blkid
-
-디스크 추가(vm에서)
-
-lsblk
-blkid
-
-fdisk <dev/???>
-n ->  새 파티션
-p -> primary 파티션 or e -> extended 파티션, MBR 파티션 4개 개수 제한을 우회하는 것, 
-1 -> 파티션 번호
-enter -> 시작 섹터
-enter -> 끝 섹터, +20G(파티션 용량 20G)
-w -> 저장
-
-pvcreate <dev/???>
-pvs
-pvdisplay
-vgcreate  <그룹명> <pv명> <pv명> ...
-vgs
-vgdisplay
-lvcreate -L <용량> -n <lv명> <그룹명>
-
-mkfs.<fs명> <lv명>
-
-mkdir 마운트 포인트
-mount 마운트 포인트
 
 기존 파티션에서 lvm 파티션으로 복사
 
@@ -95,27 +39,6 @@ pvremove
 파일시스템도 자기 자신이 따로 자신의 크기를 가지고 잇음
 따라서 같이 늘려주어야 됨
 
-ext4 vs XFS
-ext는 직렬
-xfs는 병렬
-
-ext = 첫 등장
-ext2 = inode 기반, block group 구조, 빠름, 저널링 x
-ext3 = 저널링 지원
-ext4 = Extent, Delayed allocation, Multiblok allocation, 대용량 지원
-
-
-ext = Extended File System
-
-Disk
-  Superblock -> 파일시스템 메타정보 기록
-  Group Descriptor Table
-  Block Group 0
-    block bitmap -> block별 사용 플래그
-    inode bitmap -> inode번호별 사용 플래그
-    inode table
-    data blocks -> data blocks는 direct, single indirect, double indirect, triple indirect가 있다, ext4에서는 start block=100, length-4와 같이 저장
-    
 
 block group이란? inode와 data를 가까이 배치하기위함 -> seek time 감소
 ex) [inodes][datas] -> [inodes_1][datas_1][inodes_2][datas_2][inodes_3][datas_3]
@@ -131,7 +54,8 @@ data block에 실제 데이터 저장
 extent 등장으로 기존 block pointer 방식에서 block 1000~2000(extent 범위 가리킴)와 같이 변경됨
 -> 크기나 내부구조가 아닌 블록 관리 구조의 차이
 
-Delayed Allocation 데이터를 바로 디스크에 쓰지 않음, 나중에 한 번에 저장
+Delayed Allocation 
+데이터를 바로 디스크에 쓰지 않음, 나중에 한 번에 저장
 writeback cache(메모리(캐시)에 먼저 저장 후 한번에 디스크에 write)
 transaction batching(여러 파일시스템의 저널링 트랜잭션을 그룹화 후 한 번에 처리)
 여러 트랜잭션 메모리에 모음(writeback cache + transaction batching)->journal에 batch write -> disk flush

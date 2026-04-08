@@ -37,11 +37,11 @@
       <ul>
         <li><code>lsblk</code> — 디스크 구조 전체 트리 확인</li>
         <li><code>blkid</code> — UUID 및 파일시스템 타입 확인</li>
-        <li><code>fdisk</code> — 파티션 생성 및 확인</li>
+        <li><code>fdisk [장치명]</code> — 파티션 생성 및 확인</li>
         <li><code>pvcreate</code> — 물리 볼륨 생성</li>
         <li><code>vgcreate</code> — 볼륨 그룹 생성</li>
         <li><code>lvcreate</code> — 논리 볼륨 생성</li>
-        <li><code>mkfs.파일시스템 디바이스경로</code> — 파일시스템 생성</li>
+        <li><code>mkfs.[파일시스템] [디바이스경로]</code> — 파일시스템 생성</li>
         <li><code>mount / findmnt</code> — 마운트 상태 확인</li>
         <li><code>df -h</code> — 파일시스템 사용률 점검</li>
         <li><code>df -P</code> — 출력을 무조건 한 줄로 고정(장치명이 길면 줄바꿈하는 것 제거)</li>
@@ -141,6 +141,23 @@
     </section>
 
     <section class="card">
+      <h2>lvm 관련 명령 정리</h2>
+      <ul>
+        <li><code>pvcreate [장치명]</code> — pv 생성</li>
+        <li><code>pvremove</code> — pv 삭제</li>
+        <li><code>vgcreate [vg명] [pv명] [pv명] ...</code> — vg 생성</li>
+        <li><code>vgextend [vg명] [장치명]</code> — vg 확장</li>
+        <li><code>vgremove</code> — vg 삭제</li>
+        <li><code>lvcreate -L [용량] -n [lv명] [그룹명]</code> — lv 생성</li>
+        <li><code>lvextend -L [용량] [lv명]</code> — lv 확장</li>
+        <li><code>lvreduce -L [용량] [lv명]</code> — lv 축소</li>
+        <li><code>lvextend, lvreduce -r</code> — 파일 시스템 확장 자동 수행</li>
+        <li><code>lvextend, lvreduce -L</code> — 사람이 보기 쉬운 단위</li>
+        <li><code>lvremove</code> — lv 삭제</li>
+      </ul>
+    </section>
+
+    <section class="card">
       <h2>파일시스템 검사 및 복구</h2>
       <ul>
         <li><code>fsck [옵션] [장치명]</code> — 파일 시스템 점검 및 복구</li>
@@ -200,6 +217,8 @@
         <li><code>cat /sys/class/fc_host/host*/port_name</code> — WWN 확인 후 스토리지에 등록해야 디스크 보임</li>
       </ul>
     </section>
+
+    
   </div>
 </body>
 </html>

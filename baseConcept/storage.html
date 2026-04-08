@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>storage concept</title>
+  <style>
+    :root { --fg:#111; --muted:#666; --bg:#fff; --card:#f7f7f8; --line:#e6e6e9; }
+    body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
+    h1 { font-size: 20px; margin: 0 0 12px; }
+    p  { margin: 0 0 18px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .card h2 { font-size: 15px; margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; line-height: 1.35; }
+    code { background: #fff; border: 1px solid var(--line); padding: 2px 6px; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+    .quick { margin-top: 14px; }
+    pre { margin: 8px 0 0; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: #fff; overflow: auto; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>storage concept</h1>
+
+  <div class="grid">
+    <section class="card">
+      <h2>filesystem 관련</h2>
+      <ul>
+        <li><code>ext4</code>직렬</li>
+        <li><code>xfs</code>병렬</li>
+        <li><code>ext</code>파일 시스템 첫 등장, Extended File System</li>
+        <li><code>ext2</code>inode 기반, block group 구조, 빠름, 저널링 X</li>
+        <li><code>ext3</code>저널링 지원</li>
+        <li><code>ext4</code>Extent, Delayed allocation, Multiblock, allocation, 대용량 지원</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>disk 구조</h2>
+      <ul>
+        <li><code>super block</code>파일시스템 메타정보 기록</li>
+        <li><code>group descriptor table</code></li>
+        <li><code>block group N</code>N번째 블록 그룹</li>
+          <ul>
+            <li><code>block bitmap</code>block별 사용 플래그</li>
+            <li><code>inode bitmap</code>inode번호별 사용 플래그</li>
+            <li><code>inode table</code></li>
+            <li><code>data blocks</code>direct, single indirect, double indirect, triple indirect가 있다, ext4에서는 start block=100, length-4와 같이 저장</li>
+          </ul>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>block group이란?</h2>
+      <ul>
+        <li>inode와 data를 가까이 배치하기위함 -> seek time 감소</li>
+        <li>ex) [inodes][datas] -> [inodes_1][datas_1][inodes_2][datas_2][inodes_3][datas_3]</li>
+        <li>block group마다 각자만의 data block을 갖는 것이 아님</li>
+        <li>extent 방식에서 실제 블록 위치 계산은 group_num = block_number / blocks_per_group으로</li>
+        <li>블록 색인을 그룹별 블록 수로 나눈 값으로 접근함</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>inode란?</h2>
+      <ul>
+        <li>inode란? 파일권한, 크기, 소유자, 타임스탬프, 데이터 위치를 저장하나 파일명은 directory entry에 저장함</li>
+        <li>inode 메타데이터에 mode 항목에 파일타입이 정해짐</li>
+        <li>inode가 가리키는 extent가 많으면 일반 리스트가 아닌 B-Tree로 확장</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>data block에 실제 데이터 저장</h2>
+      <ul>
+        <li>extent 등장으로 기존 block pointer 방식에서 block 1000~2000(extent 범위 가리킴)와 같이 변경됨</li>
+        <li>-> 크기나 내부구조가 아닌 블록 관리 구조의 차이</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>

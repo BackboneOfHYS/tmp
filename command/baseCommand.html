@@ -57,7 +57,10 @@
 
         <li><code>mkuser home=?, pgrp=?, groups=?, </code> — 유저 생성(유닉스)</li>
         
-        <li><code>passswd 계정명</code> — 유저 비밀번호 설정</li>
+        <li><code>passwd 계정명</code> — 유저 비밀번호 설정</li>
+          <ul>
+            <li>/etc/passwd에서 보조그룹은 안 보임</li>
+          </ul>
         <li><code>gpasswd [그룹명]</code>— 그룹 비밀번호 설정</li>
           <ul>
             <li><code>-a 유저명</code>유저 추가</li>
@@ -72,7 +75,14 @@
           </ul>
         
         <li><code>chmod 권한 파일명</code> — 파일 권한속성 변경</li>
+          <ul>
+            <li><code>-R</code>하위 디렉토리 전체 적용</li>
+          </ul>
         <li><code>chown 소유자:소유그룹 파일명</code> — 파일 소유자, 소유그룹 변경</li>
+          <ul>
+            <li><code>-R</code>하위 디렉토리 전체 적용</li>
+            <li>root만 실행가능, quota, 악성코드 우회 등의 이유로</li>
+          </ul>
 
         <li><code>usermod</code> — 계정 설정(리눅스)</li>
           <ul>
@@ -172,12 +182,17 @@
     <section class="card">
       <h2>tar</h2>
       <ul>
+        <li><code>mode=user</code>압축 해제 시 파일의 모든 소유주가 자기 자신으로 바뀜</li>
+        <li><code>mode=root</code>압축 해제 시 기존 owner로 바뀜</li>
         <li><code>-v</code> — 출력 보기 </li>
         <li><code>-f</code> — 파일명 지정</li>
         <li><code>-t</code> — 내용물 보기</li>
         <li><code>-c</code> — 새로 묶기</li>
         <li><code>-x</code> — 압축 풀기</li>
         <li><code>-z</code> — 단순 압축</li>
+        <li><code>-C</code> — 압축 풀 때 경로 지정</li>
+        <li><code>--numeric-owner</code> — 무조건 uid 기반</li>
+        <li><code>--same-owner</code> — uid와 소유주를 메타데이터에 같이 기록 후 풀 때 소유주명을 먼저 고려</li>
       </ul>
     </section>
 
@@ -315,6 +330,32 @@
         <li><code>-s </code>연속으로 반복되는 문자를 하나로 압축</li>
         <li><code>-c 'a'</code>지정 문자 세트를 제외한 나머지 전체를 대상</li>
         <li><code>-t </code>첫 번째 세트의 길이를 두 번째 세트 길이에 맞게 자름</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>kill [시그널] [PID]</h2>
+      <ul>
+        <li><code>1 SIGHUP</code>hang up, 프로세스 종료 없이 설정, 파일(config)을 재로드할 때 사용</li>
+        <li><code>2 SIGINT</code>interrupt, 터미널에서 ctrl+c 누를 때 발생하는 신호</li>
+        <li><code>3 SIGQUIT</code>Quit, Ctrl + \와 같으며 프로세스 종료 후 코어 덤프를 생성함</li>
+        <li><code>9 SIGKILL</code>Kill, 강제 종료, 프로세스가 신호를 무시할 수 없으며 즉시 사살</li>
+        <li><code>15 SIGTERM</code>Terminate, 기본값으로 프로세스에게 종료할 시간을 주는 부드러운 권유</li>
+        <li><code>18 SIGCONT</code>Continue, 정지된(stopped) 프로세스를 다시 실행</li>
+        <li><code>19 SIGSTOP</code>Stop, 프로세스를 일시 정지(Ctrl + Z)와 유사</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>pkill [시그널] [옵션] [패턴]</h2>
+      <ul>
+        <li><code>-f</code>프로세스 이름, 전체 실행 경로/인자 검색</li>
+        <li><code>-u</code>특정 사용자가 실행한 프로세스만 타겟팅</li>
+        <li><code>-t</code>특정 tty(터미널)에 연결된 프로세스만 종료</li>
+        <li><code>-n</code>매칭되는 프로세스 중 가장 최근에 실행된 것만 종료</li>
+        <li><code>-o</code>매칭되는 프로세스 중 가장 오래된 것만 종료</li>
+        <li><code>-x</code>패턴이 프로세스 이름과 정확히 일치할 때만 종료</li>
+        <li><code>-v</code>패턴에 매칭되지 않는 프로세스들에 시그널 전송</li>
       </ul>
     </section>
   </div>
