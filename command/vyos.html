@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>vyos concept</title>
+  <style>
+    :root { --fg:#111; --muted:#666; --bg:#fff; --card:#f7f7f8; --line:#e6e6e9; }
+    body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
+    h1 { font-size: 20px; margin: 0 0 12px; }
+    p  { margin: 0 0 18px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .card h2 { font-size: 15px; margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; line-height: 1.35; }
+    code { background: #fff; border: 1px solid var(--line); padding: 2px 6px; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+    .quick { margin-top: 14px; }
+    pre { margin: 8px 0 0; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: #fff; overflow: auto; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>vyos concept</h1>
+  <div class="grid">
+    <section class="card">
+      <h2>기본 출력 명령어</h2>
+      <ul>
+        <li><code>show interfaces</code>: 인터페이스 상태 및 IP 확인</li>
+        <li><code>show configuration</code>: 현재 실행 중인 전체 설정 보기</li>
+        <li><code>show route</code>: 라우팅 테이블 확인</li>
+        <li><code>show log</code>: 시스템 로그 확인</li>
+        <li><code>monitor interface [이름]</code>: 특정 인터페이스 트래픽 실시간 모니터링</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>설정 모드 (Configuration Mode)</h2>
+      <ul>
+        <li><code>set interfaces ethernet eth0 address [IP/마스크]</code>: IP 주소 할당</li>
+        <li><code>set protocols static route [네트워크] next-hop [게이트웨이]</code>: 정적 라우팅 설정</li>
+        <li><code>set service ssh port 22</code>: SSH 서비스 활성화</li>
+        <li><code>set system host-name [이름]</code>: 호스트 이름 설정</li>
+        <li><code>set system login user [ID] authentication plaintext-password [비번]</code>: 사용자 계정 생성</li>
+        <li><code>delete [경로]</code>: 특정 설정 항목 삭제</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>관리 및 도구</h2>
+      <ul>
+        <li><code>reboot</code>: 시스템 재부팅</li>
+        <li><code>poweroff</code>: 시스템 종료</li>
+        <li><code>ping [IP]</code>: 네트워크 연결 확인</li>
+        <li><code>traceroute [IP]</code>: 경로 추적</li>
+        <li><code>show version</code>: VyOS 버전 및 하드웨어 정보 확인</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>방화벽</h2>
+      <ul>
+        <li><code>set firewall name [이름] default-action [drop|accept]</code>: 기본 정책 설정</li>
+        <li><code>set firewall name [이름] rule [번호] action [accept|drop]</code>: 특정 규칙의 동작 지정</li>
+        <li><code>set firewall name [이름] rule [번호] destination port [포트]</code>: 목적지 포트 지정</li>
+        <li><code>set firewall name [이름] rule [번호] protocol [tcp|udp|icmp]</code>: 프로토콜 지정</li>
+        <li><code>set firewall name [이름] rule [번호] source address [IP]</code>: 출발지 주소 지정</li>
+        <li><code>set interfaces ethernet eth0 firewall [in|out|local] name [이름]</code>: 인터페이스에 방화벽 적용</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>NAT</h2>
+      <ul>
+        <li><code>set nat source rule [번호] outbound-interface [인터페이스]</code>: 외부로 나가는 통로 지정</li>
+        <li><code>set nat source rule [번호] source address [내부IP범위]</code>: 변환할 내부 주소 범위</li>
+        <li><code>set nat source rule [번호] translation address masquerade</code>: 외부 인터페이스 IP로 자동 변환</li>
+      </ul>
+      <ul>
+        <li><code>set nat destination rule [번호] inbound-interface [인터페이스]</code>: 들어오는 통로 지정</li>
+        <li><code>set nat destination rule [번호] destination port [외부포트]</code>: 외부에서 접속할 포트</li>
+        <li><code>set nat destination rule [번호] protocol [tcp|udp]</code>: 프로토콜 지정</li>
+        <li><code>set nat destination rule [번호] translation address [내부서버IP]</code>: 전달할 내부 서버 IP</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>기타 기능</h2>
+      <ul>
+        <li><code>VPN</code></li>
+        <li><code>L4</code></li>
+        <li><code>DHCP</code></li>
+        <li><code>DNS</code></li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>

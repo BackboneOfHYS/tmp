@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>signal, status code concept</title>
+  <style>
+    :root { --fg:#111; --muted:#666; --bg:#fff; --card:#f7f7f8; --line:#e6e6e9; }
+    body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
+    h1 { font-size: 20px; margin: 0 0 12px; }
+    p  { margin: 0 0 18px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .card h2 { font-size: 15px; margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; line-height: 1.35; }
+    code { background: #fff; border: 1px solid var(--line); padding: 2px 6px; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+    .quick { margin-top: 14px; }
+    pre { margin: 8px 0 0; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: #fff; overflow: auto; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>signal, status code concept</h1>
+  <div class="grid">
+    <section class="card">
+      <h2>signal이란?</h2>
+      <ul>
+        <li>OS가 해당 프로세스에게 정해진 번호의 신호를 보냄</li>
+        <li>signal을 받은 프로세스는 아래 세 가지 중 한 가지 행동을 함</li>
+        <ul>
+            <li><code>기본 동작</code>OS가 정해준 기본 설정대로 행동</li>
+            <li><code>무시</code>시그널을 못 본 척하고 자기 할 일을 계속 함</li>
+            <li><code>가로채기</code>시그널이 오면 미리준비한 코드 실행(catch, trap)</li>
+        </ul>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>언제 사용하는지</h2>
+      <ul>
+        <li>사용자 개입</li>
+        <li>시스템/커널 경고</li>
+        <li>관리자 서버 제어</li>
+        <li>프로세스끼리 통신</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>signal 종류</h2>
+      <ul>
+        <li><code>SIGHUP (1)</code> 터미널 종료 (Hangup)</li>
+        <li><code>SIGINT (2)</code> 인터럽트 (Ctrl+C)</li>
+        <li><code>SIGQUIT (3)</code> 터미널 종료 (Ctrl+)</li>
+        <li><code>SIGILL (4)</code> 잘못된 명령어</li>
+        <li><code>SIGTRAP (5)</code> 디버그 트랩</li>
+        <li><code>SIGABRT (6)</code> 프로세스 중단 (Abort)</li>
+        <li><code>SIGBUS (7)</code> 버스 에러 (잘못된 메모리 접근)</li>
+        <li><code>SIGFPE (8)</code> 산술 연산 오류 (0으로 나누기 등)</li>
+        <li><code>SIGKILL (9)</code> 강제 종료 (가로채기/무시 불가)</li>
+        <li><code>SIGUSR1 (10)</code> 사용자 정의 시그널 1</li>
+        <li><code>SIGSEGV (11)</code> 세그먼테이션 폴트 (메모리 침범)</li>
+        <li><code>SIGUSR2 (12)</code> 사용자 정의 시그널 2</li>
+        <li><code>SIGPIPE (13)</code> 파이프 끊김 (데이터 받을 프로세스가 없음)</li>
+        <li><code>SIGALRM (14)</code> 알람 타이머 종료</li>
+        <li><code>SIGTERM (15)</code> 종료 요청 (Terminate)</li>
+        <li><code>SIGSTKFLT (16)</code> 스택 결함</li>
+        <li><code>SIGCHLD (17)</code> 자식 프로세스 상태 변경 (종료 등)</li>
+        <li><code>SIGCONT (18)</code> 멈춘 프로세스 재개</li>
+        <li><code>SIGSTOP (19)</code> 일시 정지 (가로채기/무시 불가)</li>
+        <li><code>SIGTSTP (20)</code> 사용자의 일시 정지 (Ctrl+Z)</li>
+        <li><code>SIGTTIN (21)</code> 백그라운드 프로세스가 입력을 읽으려 함</li>
+        <li><code>SIGTTOU (22)</code> 백그라운드 프로세스가 출력을 하려 함</li>
+        <li><code>SIGURG (23)</code> 소켓의 긴급 데이터(Out-of-band) 도착</li>
+        <li><code>SIGXCPU (24)</code> CPU 시간 제한 초과</li>
+        <li><code>SIGXFSZ (25)</code> 파일 크기 제한 초과</li>
+        <li><code>SIGVTALRM (26)</code> 가상 타이머 종료</li>
+        <li><code>SIGPROF (27)</code> 프로파일링 타이머 종료</li>
+        <li><code>SIGWINCH (28)</code> 터미널 윈도우 크기 변경</li>
+        <li><code>SIGIO (29)</code> 입출력 가능 상태</li>
+        <li><code>SIGPWR (30)</code> 전원 부족/장애 발생</li>
+        <li><code>SIGSYS (31)</code> 잘못된 시스템 콜 호출</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>종료 상태 코드</h2>
+      <ul>
+        <li><code>success (0)</code>성공적 실행</li>
+        <li><code>general error (1)</code>일반적인 에러 (가장 흔함)</li>
+        <li><code>command invoked cannot execute (126)</code>명령어를 찾았으나 실행 권한 없음</li>
+        <li><code>command not found (127)</code>명령어 자체가 존재하지 않음($PATH에 없음)</li>
+        <li><code>fatal error signal "n"(128+n)</code>시그널 n에 의해 종료됨</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>

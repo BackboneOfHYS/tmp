@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>signal concept</title>
+  <title>awk concept</title>
   <style>
     :root { --fg:#111; --muted:#666; --bg:#fff; --card:#f7f7f8; --line:#e6e6e9; }
     body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
@@ -21,13 +21,28 @@
   </style>
 </head>
 <body>
-  <h1>signal concept</h1>
+  <h1>awk concept</h1>
   <div class="grid">
     <section class="card">
-      <h2>signal이란?</h2>
+      <h2>awk 기본 내부 함수 정리</h2>
       <ul>
-        <li></li>
-      </ul>
+        <li><code>gsub</code>: 전체 문자열 치환</li>
+        <li><code>sub</code>: 첫 번째 문자열 치환</li>
+        <li><code>split</code>: 문자열 분리 (배열 저장)</li>
+        <li><code>index</code>: 문자열 위치 찾기</li>
+        <li><code>length</code>: 문자열 길이 반환</li>
+        <li><code>substr</code>: 문자열 부분 추출</li>
+        <li><code>match</code>: 정규식 일치 여부 확인</li>
+        <li><code>tolower</code>: 소문자 변환</li>
+        <li><code>toupper</code>: 대문자 변환</li>
+        <li><code>sprintf</code>: 형식 지정 문자열 생성</li>
+        <li><code>int</code>: 정수 변환</li>
+        <li><code>sqrt</code>: 제곱근 계산</li>
+        <li><code>rand</code>: 난수 생성</li>
+        <li><code>systime</code>: 시스템 시간 확인</li>
+        <li><code>strftime</code>: 날짜 형식 변환</li>
+        <li><code>system</code>: 외부 명령어 실행</li>
+       </ul>
     </section>
   </div>
 </body>

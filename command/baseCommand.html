@@ -454,6 +454,37 @@
         <li><code>sed '/패턴/w 파일</code>write, 파일 쓰기</li>
       </ul>
     </section>
+
+    <section class="card">
+      <h2>sed 명령</h2>
+      <ul>
+        <li><code>s</code>substitute, 문자열 치환</li>
+        <li><code>d</code>delete, 줄 삭제</li>
+        <li><code>sed -n '5,10p'</code>print, 줄 출력, -n과 같이 쓰임</li>
+        <li><code>sed '/패턴/a 추가할 내용'</code>append, 아래에 추가</li>
+        <li><code>sed '/패턴/i 추가할 내용'</code>insert, 위에 추가</li>
+        <li><code>sed '/패턴/,/패턴/c '바꿀 내용'</code>change, 줄 교체</li>
+        <li><code>sed '10q'</code>quit, 종료</li>
+        <li><code>sed '/패턴/r 파일'</code>read, 파일 읽기</li>
+        <li><code>sed '/패턴/w 파일</code>write, 파일 쓰기</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>rsync 명령</h2>
+      <ul>
+        <li>증분백업 명령, </li>
+        <li><code>rsync [옵션] [원본] [목적지]</code>기본 사용법</li>
+        <li><code>-a</code>모든 옵션 적용</li>
+        <li><code>-v</code>진행상황 출력</li>
+        <li><code>-z</code>전송 중 데이터 압축으로 대역폭 절약</li>
+        <li><code>-h</code>Human-readable</li>
+        <li><code>-r</code>하위 디렉토리 재귀 복사</li>
+        <li><code>--delete</code>원본에 없는 파일이 목적지에 있다면 삭제</li>
+        <li><code>--progress</code>진행률, 속도 실시간 출력</li>
+        <li><code>-n</code>실행하지 않고 테스트만 진행</li>
+      </ul>
+    </section>
   </div>
 </body>
 </html>
