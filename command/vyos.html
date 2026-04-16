@@ -28,6 +28,14 @@
       <ul>
         <li><code>show interfaces</code>: 인터페이스 상태 및 IP 확인</li>
         <li><code>show configuration</code>: 현재 실행 중인 전체 설정 보기</li>
+        <li><code>show configuration nat</code>: NAT 설정 확인</li>
+        <li><code>show configuration firewall</code></li>
+        <li><code>show configuration commands firewall</code>: 방화벽 규칙 트리 구조로 보기</li>
+        <li><code>show nat source translations</code>: 실시간 변환 현황 확인</li>
+        <li><code>show nat destination translations</code>: 실시간 변환 현황 확인</li>
+        <li><code>show nat source statistics</code>: 규칙별 통계 확인</li>
+        <li><code>show firewall name &lt;정책이름> statistics</code>: 특정 방화벽 장책 상세 통계 확인</li>
+        <li><code>show firewall summary</code>: 요약된 방화벽 정보 확인</li>
         <li><code>show route</code>: 라우팅 테이블 확인</li>
         <li><code>show log</code>: 시스템 로그 확인</li>
         <li><code>monitor interface [이름]</code>: 특정 인터페이스 트래픽 실시간 모니터링</li>
@@ -71,6 +79,7 @@
 
     <section class="card">
       <h2>NAT</h2>
+      <li>NAT 설정에서 rule은 정책(Rule Set)의 rule과 다름</li>
       <ul>
         <li><code>set nat source rule [번호] outbound-interface [인터페이스]</code>: 외부로 나가는 통로 지정</li>
         <li><code>set nat source rule [번호] source address [내부IP범위]</code>: 변환할 내부 주소 범위</li>

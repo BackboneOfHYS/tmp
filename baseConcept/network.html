@@ -156,6 +156,43 @@
           <li><code>AP session</code> - 세션의 연결 유지와 처리 담당</li>
       </ul>
     </section>
+
+    <section class="card">
+      <h2>firewall</h2>
+      <ul>
+          <li>하나의 인터페이스(eth0, eth1, ...)에는 IN, OUT, LOCAL 세 방향으로의 정책(Ruleset)을 설정할 수 있다</li>
+          <li>정책 안에는 rule $NUMBER 로 규칙(Rule)을 설정할 수 있으며 낮은 숫자부터 우선적용된다</li>
+          <li>하나의 인터페이스의 각각의 방향에는 오로지 하나의 정책만 설정할 수 있다</li>
+          <li>개별 트래픽 유형(상태, state)</li>
+            <ul>
+              <li><code>Established</code> - 이미 연결이 수립된 상태</li>
+              <li><code>Related</code> - 연관된 연결</li>
+              <li><code>New</code> - 새로운 연결 시도, 세션 테이블에 없는, 명시하지 않으면 기본으로 적용됨</li>
+              <li><code>Invalid</code> - 유효하지 않은 상태, 문맥에 맞지 않거나 손상된 패킷, 정체불명패킷</li>
+            </ul>
+          <li>패킷 처리 방식(action)</li>
+            <ul>
+              <li><code>accept</code> - 허용</li>
+              <li><code>drop</code> - 응답없이 차단</li>
+              <li><code>reject</code> - 차단 후 "거부됨" 메시지 응답</li>
+            </ul>
+          <li>프로토콜(protocol)</li>
+          <li>정책 적용 대상 주소/포트</li>
+            <ul>
+              <li><code>source</code> - 출발지</li>
+              <li><code>destination</code> - 목적지</li>
+              <li><code>group</code> - 그룹</li>
+            </ul>
+          <li>기타</li>
+            <ul>
+              <li><code>log</code></li>
+              <li><code>description</code></li>
+              <li><code>disable</code></li>
+              <li><code>time</code></li>
+              <li><code>icmp</code></li>
+            </ul>
+      </ul>
+    </section>
   </div>
 </body>
 </html>
