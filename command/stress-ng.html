@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>stress-ng using method</title>
+  <style>
+    :root { --fg:#111; --muted:#666; --bg:#fff; --card:#f7f7f8; --line:#e6e6e9; }
+    body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
+    h1 { font-size: 20px; margin: 0 0 12px; }
+    p  { margin: 0 0 18px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .card h2 { font-size: 15px; margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 6px 0; line-height: 1.35; }
+    code { background: #fff; border: 1px solid var(--line); padding: 2px 6px; border-radius: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+    .quick { margin-top: 14px; }
+    pre { margin: 8px 0 0; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: #fff; overflow: auto; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>stress-ng option</h1>
+  <div class="grid">
+    <section class="card">
+      <h2>기본 출력 명령어</h2>
+      <ul>
+        <li><code>stress-ng --cpu N --timeout 60s</code>: N이 0이면 사용가능한 최대 코어수</li>
+        <li><code>stress-ng --cpu-load N</code>: CPU 사용률 N%으로 유지</li>
+        <li><code>stress-ng --vm N1 --vm-bytes N2 --timeout 60s</code>: N1개의 워커 프로세스, 워커당 N2(ex 1G)만큼 메모리 점유 </li>
+        <li><code>stress-ng --hdd N1 --hdd-opts [wr-seq | wr-rnd] --timeout 30s</code>: N1개의 워커 프로세스 디스크 쓰기 작업</li>
+        <li><code>streess-ng --hdd N1 --hdd-opts [wr-seq | wr-rnd | rd-seq | rd-rnd]</code>wr-seq->순차 쓰기, wr-rnd->랜덤 위치 쓰기, rd->읽기</li>
+        <li><code>stress-ng --io N1 --timeout 60s</code>: N1개의 워커가 시스템 콜 부하,</li>
+      </ul>
+    </section>
+
+    <h2>cpu options</h2>
+    <ul>
+        <li><code>--cpu [N]</code>: CPU 부하를 생성할 워커(프로세스)의 개수를 지정합니다.</li>
+        <ul>
+            <li><code>0</code>: 시스템 내의 모든 온라인 CPU 코어 수만큼 워커를 자동으로 생성합니다.</li>
+            <li><code>N</code>: 사용자가 지정한 N개의 워커를 생성합니다.</li>
+        </ul>   
+
+        <li><code>--cpu-method [method]</code>: CPU가 수행할 연산 알고리즘을 선택하여 부하의 성격을 결정합니다.</li>
+        <ul>
+            <li><code>all</code>: 지원하는 모든 연산 방식을 순차적으로 돌아가며 실행합니다.</li>
+            <li><code>matrixprod</code>: 행렬 곱셈을 수행합니다. 연산 유닛(ALU)과 캐시 메모리를 동시에 강하게 압박합니다.</li>
+            <li><code>fft</code>: 고속 푸리에 변환을 수행하며 부동 소수점(FPU) 연산 능력을 집중적으로 테스트합니다.</li>
+            <li><code>prime</code>: 소수를 찾습니다. 연산뿐만 아니라 CPU의 분기 예측(Branch Prediction) 성능을 확인하는 데 좋습니다.</li>
+            <li><code>bitops</code>: 비트 단위 연산을 수행하여 논리 회로 계통에 부하를 줍니다.</li>
+            <li><code>idct</code>: 이산 코사인 변환을 수행하여 멀티미디어 처리 능력을 시뮬레이션합니다.</li>
+        </ul>
+
+        <li><code>--cpu-load [P]</code>: 각 워커가 CPU를 사용하는 점유율을 P%로 고정합니다.</li>
+        <ul>
+            <li><code>1-99</code>: 특정 퍼센트만큼만 로드를 유지하여, 시스템이 완전히 멈추지 않은 상태에서의 안정성을 테스트합니다.</li>
+            <li><code>100</code>: (기본값) 가용 가능한 모든 자원을 투입하여 최대 부하를 발생시킵니다.</li>
+        </ul>
+
+        <li><code>--cpu-load-slice [S]</code>: CPU 로드를 조절하기 위해 연산과 휴식을 반복하는 시간 조각(ms)을 설정합니다.</li>
+        <ul>
+            <li><code>양수(ms)</code>: 값이 작을수록 더 촘촘하게 부하와 휴식을 교차하여 미세한 발열 및 전력 변화를 유도합니다.</li>
+        </ul>
+        
+        <li><code>--taskset [list]</code>: 생성된 워커들이 특정 CPU 코어에서만 실행되도록 고정(Affinity)합니다.</li>
+        <ul>
+            <li><code>0,1</code>: 0번과 1번 코어만 사용하여 부하를 발생시킵니다. 특정 코어의 불량이 의심될 때 유용합니다.</li>
+        </ul>
+        
+        <li><code>--sched [policy]</code>: 워커 프로세스의 커널 스케줄링 정책을 강제로 지정합니다.</li>
+        <ul>
+            <li><code>fifo</code> / <code>rr</code>: 실시간 우선순위 정책으로, 다른 프로세스보다 우선적으로 CPU를 점유하게 만듭니다.</li>
+            <li><code>batch</code>: CPU를 많이 사용하는 백그라운드 작업 모드로 동작하게 합니다.</li>
+            <li><code>idle</code>: 시스템에 다른 작업이 없을 때만 실행되는 최하위 우선순위로 설정합니다.</li>
+        </ul>
+
+        <li><code>--cpu-ops [N]</code>: 각 워커가 수행할 연산 루프의 횟수를 지정합니다.</li>
+        <ul>
+            <li><code>N</code>: 정해진 횟수만큼 연산을 마치면 워커가 자동으로 종료되므로, 정확한 작업량 기반 테스트가 가능합니다.</li>
+        </ul>
+    </ul>
+  </div>
+</body>
+</html>
