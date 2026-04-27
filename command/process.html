@@ -56,10 +56,58 @@
     <section class="card">
       <h2>ps</h2>
       <ul>
+        <li>유닉스, BSD 스타일 등으로 나뉨</li>
         <li><code>-e</code> — 모든 프로세스 출력, -A와 동일</li>
         <li><code>-f</code> — 상세 정보 풀 포맷으로 출력</li>
+        <li><code>-a</code> — 터미널과 연관된 모든 사용자 프로세스</li>
+        <li><code>-u [사용자]</code> — 사용자 중심의 상세 출력</li>
+        <li><code>-x</code> — 터미널이 없는(데몬 등) 프로세스까지 포함</li>
+        <li><code>-C [명령어]</code> — 실행 파일의 이름을 기준으로 검색</li>
+        <li><code>-p [PID]</code> — 특정 PID를 가진 프로세스 출력</li>
+        <li><code>-F</code> — -f보다 더 상세한 정보 출력</li>
+        <li><code>-l</code> — 긴 포맷으로 출력</li>
+        <li><code>-o [출력항목]</code> — 출력할 항목 직접 지정</li>
+        <li><code>--sort=-mem</code> — mem 사용량 기준 정렬, -가 있으므로 역정렬</li>
+        <li>출력항목</li>
+        <ul>
+          <li><code>UID / USER</code> — 프로세스를 실행한 사용자 계정</li>
+          <li><code>PID</code> — 프로세스 고유 ID</li>
+          <li><code>PPID</code> — 부모 프로세스 ID</li>
+          <li><code>%CPU/%MEM</code> — CPU 및 물리적 메모리 백분 사용률</li>
+          <li><code>VSZ / RSS</code> — 가상 메모리 / 실제 사용 중인 메모리 크기(KB)</li>
+          <li><code>STAT</code> — 프로세스 상태</li>
+          <li><code>STIME / START</code> — 프로세스가 시작된 시간</li>
+          <li><code>TIME</code> — 총 CPU 사용 시간</li>
+          <li><code>COMMAND</code> — 실행된 명령어 이름 또는 경로</li>
+        </ul>
       </ul>
     </section>
+
+    <section class="card">
+      <h2>pgrep</h2>
+      <ul>
+        <li><code>-f</code> — Full Command Line, 실행 시 사용한 전체 경로와 인자까지 포함하여 검색</li>
+        <li><code>-u</code> — 특정 사용자가 실행한 프로세스</li>
+        <li><code>-g</code> — 특정 그룹이 실행한 프로세스</li>
+        <li><code>-t</code> — 터미널에서 실행중인 프로세스</li>
+        <li><code>-x</code> — 패턴이 이름과 정확히 일치할 때</li>
+        <li><code>-l</code> — PID와 프로세스 이름 출력</li>
+        <li><code>-a</code> — PID와 함께 전체 실행 경로 및 인자 출력</li>
+        <li><code>-c</code> — 조건에 맞는 프로세스 개수만 출력</li>
+        <li><code>-n</code> — 가장 최근 실행된 것</li>
+        <li><code>-o</code> — 가장 오래된 것</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>kill / pkill</h2>
+      <ul>
+        <li><code>kill [PID]</code> — PID로 프로세스 종료</li>
+        <li><code>pkill [옵션]</code> — pgrep과 옵션 거의 동일</li>
+      </ul>
+    </section>
+
+    systemctl list-units --type=service --state=?? --all
   </div>
 </body>
 </html>
