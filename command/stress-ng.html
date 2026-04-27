@@ -88,7 +88,7 @@
       <h2>vm options</h2>
       <ul>
         <li><code>stress-ng --vm N1 --vm-bytes N2 --vm-keep</code>: 워커 수, 워커가 점유할 메모리 크기(1G, 60%), 할당 메모리 해제 여부</li>
-        <h3>메모리 할당/해제 기본 동작 과정, 시스템콜 증가 관점에서</h3>
+        <li>메모리 할당/해제 기본 동작 과정, 시스템콜 증가 관점에서</li>
         <ul>
           <li>mmap/malloc - 할당 요청</li>
           <li>Memory Writing - 실제 쓰기 수행, Page Fault 발생으로 실제 RAM 할당 발생</li>
