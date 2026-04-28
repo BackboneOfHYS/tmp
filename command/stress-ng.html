@@ -87,7 +87,7 @@
     <section class="card">
       <h2>vm options</h2>
       <ul>
-        <li><code>stress-ng --vm N1 --vm-bytes N2 --vm-keep</code>: 워커 수, 워커가 점유할 메모리 크기(1G, 60%), 할당 메모리 해제 여부</li>
+        <li><code>stress-ng --vm N1 --vm-bytes N2 --vm-keep</code>: 워커 수, 워커가 점유할 메모리 크기(1G, 60%), 할당 메모리 해제 여부(명시하면 반환 x)</li>
         <li>메모리 할당/해제 기본 동작 과정, 시스템콜 증가 관점에서</li>
         <ul>
           <li>mmap/malloc - 할당 요청</li>
@@ -107,6 +107,33 @@
           <li><code>zero-one</code>: </li>
           <li><code>prentice</code>: </li>
         </ul>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>disk normal command / options</h2>
+      <ul>
+        <li><code>stress-ng --hdd 2</code>: 일반 파일로 디스크 r/w 수행</li>
+        <li><code>stress-ng --hdd-opts</code>: r/w 방식 결정</li>
+        <ul>
+          <li><code>wr-seq</code>: 순차 쓰기</li>
+          <li><code>rd-seq</code>: 순차 읽기</li>
+        </ul>
+        <li><code>stress-ng --hdd-bytes 10G</code>: 파일 크기 제한</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>disk sync command / options</h2>
+      <ul>
+        <li><code>stress-ng --io 4</code>: 시스템콜로 커널이 디스크를 보게 만듬(?)</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>disk 고성능/직접 io command / options</h2>
+      <ul>
+        <li><code>stress-ng --aiolio 2</code>: AIO(Async) 지원 환경에서 고성능 스토리지 압박</li>
       </ul>
     </section>
   </div>
