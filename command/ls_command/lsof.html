@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Linux awk 명령어 정리</title>
+  <title>Linux lsof 명령어 정리</title>
   <style>
     :root { --fg:#111; --muted:#666; --bg:#fff; --card:#f7f7f8; --line:#e6e6e9; }
     body { margin: 24px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--fg); background: var(--bg); }
@@ -21,19 +21,23 @@
   </style>
 </head>
 <body>
-  <h1>Linux awk 명령어 정리</h1>
+  <h1>Linux lsof 명령어 정리</h1>
 
   <div class="grid">
-
+    <h3>lsof는 기본 명령어가 아님</h3>
     <section class="card">
-      <h2>awk 옵션</h2>
-      <ul>
-        <li><code>-F</code>열 구분자 설정</li>
-        <li><code>awk '$n >= 100 {print $n}' 파일경로</code></li>
-        <li><code>awk '{ sum += 3 } | END { print " ", sum }</code></li>
-        <li><code>-v</code>외부 변수를 awk 내부로 전달할 때 사용</li>
-        <li><code>'변수 == 값 { }'</code>조건에 맞는 행동</li>
-      </ul>
+      <h2>lsof 옵션</h2>
+        <ul>
+            <li><code>lsof [경로]</code>: 기본 조회</li>
+            <li><code>lsof +D [경로]</code>: 디렉토리 내의 파일을 연 프로세스 조회</li>
+            <li><code>lsof -u [사용자명]</code>: 사용자명 기준 조회</li>
+            <li><code>lsof -u ^[사용자명]</code>: 특정 사용자 제외한 모든 사용자가 열고 있는 파일</li>
+            <li><code>lsof -i</code>: 네트워크 연결 확인</li>
+            <li><code>lsof -i :[포트번호]</code>: 특정 포트를 사용중인 프로세스</li>
+            <li><code>lsof -i [tcp|udp]</code>: tcp 또는 udp 연결 확인</li>
+            <li><code>lsof -p [PID]</code>: PID가 열고 있는 파일</li>
+            <li><code>lsof -a</code>: 옵션의 모든 것을 and조건으로 바꿈, 기본은 or조건임</li>
+        </ul>
     </section>
   </div>
 </body>

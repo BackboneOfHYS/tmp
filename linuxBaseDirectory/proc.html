@@ -65,6 +65,16 @@
         <li><code>/vm</code></li>
         <li><code>/kernel</code>커널, 컴파일, 배포판 정보</li>
     </section>
+
+    <section class="card">
+      <h2>/proc/sys/vm/drop_caches 구조</h2>
+      <ul>
+        <li><code>cat 1 > /proc/sys/vm/drop_caches</code>: 페이지 캐시 비우기</li>
+        <li><code>cat 2 > /proc/sys/vm/drop_caches</code>: 디렉토리 엔트리, 아이노드 비우기</li>
+        <li><code>cat 3 > /proc/sys/vm/drop_caches</code>: 1+2=3</li>
+    </section>
+
+    
   </div>
 </body>
 </html>
