@@ -75,3 +75,14 @@
 - /etc/systcl.conf, /etc/security/limits.conf 복습
 - pmap -x, -X, -XX 실습
 - 시스템 성능 엔지니어링 명령어 설치 여부 확인
+- cpu 챕터 들어감, 기본
+
+# 20260509 1900~2030
+- VM과 호스트 PC ssh 통신 안 되는 거 NAT 게이트웨이 연결 문제로 판단 후 재설정하여 해결, NAT -> NAT 네트워크 변경 후 할당
+- cron 입력 양식 분 시 일 월 요일 명령
+- 호스트명 바꾸는 법
+- ssh-keygen -t rsa, ~/.ssh/authorized_keys
+- watch -n 1 '명령' <- 실시간 탐지?
+- /proc/[PID]/mem, /proc/[PID]/maps 이 두개 덤프
+- ulimit -c unlimited, gcore로 코어 덤프
+- dd if=/proc/[PID]/mem bs=1 skip=$((0x00400000)) count=4096 of=mem_chunk.bin
