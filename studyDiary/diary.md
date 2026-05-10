@@ -86,3 +86,40 @@
 - /proc/[PID]/mem, /proc/[PID]/maps 이 두개 덤프
 - ulimit -c unlimited, gcore로 코어 덤프
 - dd if=/proc/[PID]/mem bs=1 skip=$((0x00400000)) count=4096 of=mem_chunk.bin
+
+# 20260510 1030~1120
+- crontab 작동 확인
+- 프로세스 서비스로 등록해보기
+- NAT 내부->인터넷 통신 안 되어 NAT 새로 만들고, gt 확인 후 수정 후 통신 확인
+- /etc/security/limits.conf maxlogins 실습, 진짜 로그인 거부됨
+- 이따가 메모리 제한 걸어두고 stress-ng 실습하기
+
+# 20260510 1900~2000
+- 사용자 프로세스를 제한하게 되면, 사용자로 접속되는 ssh 프로세스도 막힘
+- 기본 프로세스가, SSH 접속했을 때, tty 하나, session하나, 배쉬 쉘 하나, sftp-server 하나로 붙음
+- grubby --default-kernel, 기본 부팅 커널 확인
+- grubby --info=ALL, 모든 커널 항목 나열
+- grubby --set-default /boot/vmlinuz-3.10.0-xxx.el7.x86_64 기본 커널 영구 변경
+- grubby --set-default-index=0 기본 커널 영구 변경(인덱스로)
+- grubby --update-kernel=ALL --args="quiet splash" 커널 인자 추가
+- grubby --update-kernel=ALL --remove-args="rhgb" 커널 인자 삭제
+- BLS(Boot Loader Specification) 커널 파일 개별 관리, 부팅메뉴 자동구성
+- grub2-mkconfig
+- grubby
+- vmlinuz-<버전>: 실제 실행 가능한 압축된 커널 바이너리 파일입니다.
+- initrd.img-<버전>: 부팅 시 하드웨어를 인식하고 마운트하기 위해 필요한 임시 루트 파일 시스템입니다.
+- config-<버전>: 해당 커널을 빌드할 때 사용된 옵션 설정 파일입니다.
+- System.map-<버전>: 커널의 심볼 주소 테이블입니다.
+- 추가로 커널 내부에서 사용하는 모듈(Drivers) 파일들은 다음 경로에 저장됩니다:
+- /lib/modules/<커널버전>/
+- 기본 부팅 커널 변경 진행
+- GRUB 부팅 메뉴판을 최신 상태로 새로고침하는 도구
+- dnf install kernel-버전-릴리스.아키텍처 로 설치
+- 이후 grub2-mkconfig로 추가해주고 재부팅
+- reboot 옵션
+  - -f 강제 재부팅
+  - -w 재부팅 로그만 남김
+  - -n 디스크 동기화 수행 안 함
+  - -d wtmp 파일 로그 안 남김
+  - -h ??...
+- reboot 후 첫 커널 선택화면에서 추가된 것 확인
