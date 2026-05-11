@@ -123,3 +123,18 @@
   - -d wtmp 파일 로그 안 남김
   - -h ??...
 - reboot 후 첫 커널 선택화면에서 추가된 것 확인
+
+# 20260511 0700~0800
+- 서버 리부트 진행
+- cat /proc/cpuinfo, lscpu로 cpu 정보 출력
+- 프로세스안에 많은 코어가 있고, 그 코어마다 멀티스레드가 활성화되어있으면
+- 코어*멀티스레드 값이 os가 보는 논리 CPU단위임
+
+# 20260512 0700~0800
+- sudo dnf install -y java-[버전]-openjdk java-[버전]-openjdk-devel
+- dnf makecache && dnf install -y jenkins
+- cd /var/lib/jenkins/secrets/initialAdminPassword (비밀번호 초기화)
+- cd /var/lib/jenkins/users/
+- 그냥 서비스 재기동하면 initialAdminPassword 초기화됨
+- 웹 콘솔도 loginerror 페이지 말고 그냥 ip:port로 접속하면 됨
+- /var/lib/jenkins/config.xml에서 securityrealm 부분 제거하고 진행함
