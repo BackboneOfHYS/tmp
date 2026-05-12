@@ -130,6 +130,24 @@
 - 프로세스안에 많은 코어가 있고, 그 코어마다 멀티스레드가 활성화되어있으면
 - 코어*멀티스레드 값이 os가 보는 논리 CPU단위임
 
+# 20260511 2000~2200
+- ext-rtr-01 ssh 관련 이슈
+- systemctl stop ssh.socket
+- systemctl stop ssh.service
+- sudo ss | grep :22, pid로 킬한 후
+- systemctl restart ssh.socket
+- /etc/ssh/sshd_config passwordauthentication yes 설정
+-  vyos 방화벽 22포트 오픈으로 정상 확인
+- 접속까진 했는데, 22만 열고 내외부 통신이 막힘, ping 등
+- 방화벽 확인 후 이상없는 것을 보고 nat 확인하여 해결
+-  내외부 통신에는 nat로 열면 related establish로 연관된 건 연결이 되기에 icmp했다고 갑자기 dnf가 되거나 하진 않는다.
+
+- jenkins는 웹 콘솔 기반
+- 따라서 jenkins repo curl로 받아쥬고
+- java  버전 맞춰서 설정해주면 됨
+- alternatives --config java로 자바 버전 선택해주기
+- jenkins 띄우고  curl 테스트, int-rtr-01에서 멈춤
+
 # 20260512 0700~0800
 - sudo dnf install -y java-[버전]-openjdk java-[버전]-openjdk-devel
 - dnf makecache && dnf install -y jenkins
@@ -138,3 +156,18 @@
 - 그냥 서비스 재기동하면 initialAdminPassword 초기화됨
 - 웹 콘솔도 loginerror 페이지 말고 그냥 ip:port로 접속하면 됨
 - /var/lib/jenkins/config.xml에서 securityrealm 부분 제거하고 진행함
+
+# 20260512 2030~2200
+- 디스크 붙여주고, 파일 시스템까지 확장
+- 가상디스크 붙이고, fdisk /dev/sda, lvm 타입 확인하고
+- n눌러서 신규 파티션 만들고
+- p랑 e가 잇는데, 보통 p로 하고
+- 시작지점이랑 끝지점 정하고 (전부 기본값, enter)
+- w로 저장
+- pvcreate /dev/sda1
+- vgextend [vg명] [장치명]
+- lvextend -r -L +10G /dev/mapper/vg명-lv명
+- dnat 설정해주고
+- ssh.socket 안 되는 거 재기동으로 해결
+- jenkins 웹 콘솔 출력 이상한 거 jenkins 서비스 재기동으로 해결
+- 그 방화벽에서 외부-LOCAL-내부 적용햇는데 안 되면 외부-내부도 고려하기
