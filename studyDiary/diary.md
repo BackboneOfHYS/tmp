@@ -214,3 +214,13 @@
 
 # 20260515 1240
 - 모르는 단어 MPIO< PowerPath
+
+# 20260516 1600~1640
+- AI자동화 솔루션
+- DB, AI서버(ollama), 서비스(docker), 
+- db-> workbench->vm db 연결
+- ollama, docker는 설정파일만 던지는 거로
+- 서비스는 EMR 하나랑 증권서버 하나
+- DB는 하나에 다 때려박는걸로
+- ollama 서버 하나
+
