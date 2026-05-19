@@ -233,3 +233,11 @@
 - 명령(숫자) 이 구조에서 숫자는 페이지 순번을 의미함
 - reboot -h 옵션은 원래 없음
 - shutdown -r now가 적당한 것으로 보임...
+
+# 20260520 0730~0800
+- ssh 서버 설치가 되어있었음, Get-Service sshd
+- 기동 후 접속하니 됨, Start-Service sshd
+- 특정 도메인으로 통신이 안 되는 것 같으면(dnf install하는데 repo서버 로드가 안 된다고 뜸)
+- 해당 도메인과 IP 각각으로 ping을쏴보면 됨, 그럼 dns문제인지, 네트워크 문제인지 알 수 있음
+- 근데도? dnf makecahe할 때 jenkins 레포가 안 되어서, 이건 레포 설정이나 레포서버 경로 문제일 수 잇음
+- 그래서 /etc/yum.repos.d/jenkins.repo수정함
