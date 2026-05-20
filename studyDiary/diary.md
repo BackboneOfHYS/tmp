@@ -241,3 +241,11 @@
 - 해당 도메인과 IP 각각으로 ping을쏴보면 됨, 그럼 dns문제인지, 네트워크 문제인지 알 수 있음
 - 근데도? dnf makecahe할 때 jenkins 레포가 안 되어서, 이건 레포 설정이나 레포서버 경로 문제일 수 잇음
 - 그래서 /etc/yum.repos.d/jenkins.repo수정함
+
+# 20260521 0730~0800
+- nmcli con mod 하고 up, down하고 변경값 확인하기
+- locale -a로 지원되는 거 확인하고, locale로 현재 세션의 locale 확인하기, 
+- export LANG=??로 하면 locale값이 바뀜
+- .bashrc는 bash run command로 세션이 시작될때 실행되는 파일임
+- dnf update, dnf install -y language-pack-ko, locale-gen ko_KR.UTF-8
+- 기본 터미널에서는 한글출력이 안 됨, 콘솔 프로그램에서 보면 출력됨!
