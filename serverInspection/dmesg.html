@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>dmesg 사용법</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f4f6f8;
+      line-height: 1.6;
+      color: #1f2a37;
+    }
+    h1, h2, h3 { color: #2c3e50; }
+    .section {
+      background: #ffffff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    code {
+      background: #eef2f7;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.95em;
+    }
+    pre {
+      background: #eef2f7;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+    ul { margin-left: 20px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #e5e7eb;
+      padding: 8px;
+      text-align: left;
+    }
+    th { background-color: #f9fafb; }
+  </style>
+</head>
+<body>
+
+<h1>dmesg</h1>
+
+<div class="section">
+  <h2>알람 레벨 정리</h2>
+  <ul>
+    <li>0 emerg(Emergency) 시스템을 사용할 수 없는 상태</li>
+    <li>1 alert(Alert) 즉각적인 조치 필요</li>
+    <li>2 crit(Critical) 심각한 오류가 발생한 상태</li>
+    <li>3 err(Error) 일반적인 에러 발생, 작동 가능</li>
+    <li>4 warn(Warning) 주의 필요, 잠재적 문제, 당장 조치 X</li>
+    <li>5 notice(Notice) 에러 X, 보안/관리상 중요</li>
+    <li>6 info(Infomation) 일반 정보</li>
+    <li>7 debug(Debug) 개발 및 디버깅용</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>옵션 정리</h2>
+
+  <ul>
+    <li>-T : 시간 출력</li>
+    <li>-l [알람 레벨]+ : 할당된 알람 레벨 이상의 레벨만 출력</li>
+
+  </ul>
+</div>
+
+</body>
+</html>
